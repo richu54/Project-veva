@@ -1,0 +1,172 @@
+/* navigation bar start ------------------------------------------------------------------------------- */
+
+@media screen and (max-width: 1433px){
+    .catagories-drop{
+        font-size: 18px;
+    }
+    .div_acc {
+        position: relative;
+        left: 70%;
+        top: -55px;
+    }
+    
+}
+
+@media screen and (max-width: 1316px){
+    .catagories-drop{
+        font-size: 17px;
+    }
+    .div_acc {
+        position: relative;
+        left: 68%;
+        top: -55px;
+    }
+}
+
+@media screen and (max-width: 1249px){
+    .catagories-drop{
+        font-size: 16px;
+    }
+    .div_acc {
+        position: relative;
+        left: 66%;
+        top: -55px;
+    }
+  
+}
+
+/* navigation bar start ------------------------------------------------------------------------------- */
+
+/* carousal start ------------------------------------------------------------------------------------- */
+
+@media screen and (max-width: 1024px) {
+    .carousel-control-prev, .carousel-control-next {
+        width: 40px;
+        height: 40px;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container-fluid2 img {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carousel-control-prev, .carousel-control-next {
+        width: 30px;
+        height: 30px;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .carousel-control-prev, .carousel-control-next {
+        width: 20px;
+        height: 20px;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        width: 15px;
+        height: 15px;
+    }
+    .container-fluid2 img {
+        height: 180px;
+    }
+}
+
+/* carousal end --------------------------------------------------------------------------------------- */
+
+/* card start ----------------------------------------------------------------------------------------- */
+
+@media screen and (min-width: 320px){
+    .card {
+        margin-left: 15px;
+    }
+}
+
+@media screen and (min-width: 375px){
+    .card {
+        margin-left: 45px;
+    }
+    .card_a1 {
+        margin-left: 30px;
+    }
+}
+
+@media screen and (min-width: 390px){
+    .card {
+        margin-left: 50px;
+    }
+}
+
+@media screen and (min-width: 412px){
+    .card {
+        
+        margin-left: 60px;
+    }
+    .card_a1 {
+        margin-left: 50px;
+    }
+}
+
+@media screen and (min-width: 414px){
+    .card {
+        
+        margin-left: 60px;
+    }
+    .card_a1 {
+        margin-left: 50px;
+    }
+}
+
+@media screen and (min-width: 425px){
+    .card {
+        margin-left: 70px;
+    }
+    .card_a1 {
+        margin-left: 55px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .card {
+        margin-left: 35px;
+    }
+    .card_a1 {
+        margin-left: 25px;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .card {
+        margin-left: 15px;
+    }
+    .card_a1 {
+        margin-left: 5px;
+    }
+}
+
+@media screen and (min-width: 1280px){
+    .card {
+        margin-left: 0px;
+    }
+    .card_a1 {
+        margin-left: 0px;
+    }
+}
+
+@media screen and (min-width: 1440px){
+    .card {
+        margin-left: 25px;
+    }
+    .card_a1 {
+        margin-left: 10px;
+    }
+}
