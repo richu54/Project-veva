@@ -196,54 +196,57 @@ button:active {
 
 /* account section */
 
-.div_acc {
+.div_accounts {
     width: 200px;
     background-color: #182d09;
     padding: 0;
     margin: 0;
-    position: relative;
-    left: 72%;
-    top: -55px;
     filter: drop-shadow(0 5px 10px black);
+    position: absolute;
+    top: 10%;
+    right: 16%;
+    z-index: 1000;
+    height: auto;
 }
 
-.div_acc ul {
+.div_accounts ul {
     display: none;
 }
 
-.div_acc ul li {
+.div_accounts ul li {
     list-style-type: none;
-    border: 1px solid #F7E7CE;
     height: 45px;
     text-align: center;
     color: white;
+    margin-top: 10px;
 }
 
-.div_acc ul li:hover{
+.div_accounts ul li:hover{
     background-color: orange;
     border: 1px solid #182d09;
 }
 
 /* mobile view drop-down menu */
 
-.drop-menu-mob-view {
+ .drop-down-sm-view{
     background-color: #182d09;
     width: 250px;
-    float: right;
-    position: relative;
-    top: -45px;
-    z-index: -2;
     filter: drop-shadow(0 0 15px black);
+    position: absolute;
+    right: 0;
+    top: 80px;
+    z-index: 1000;
 }
 
-.drop-menu-mob-view ul {
+.ul-mob-drop {
     display: none;
+    height: 540px;
 }
 
 .drop-menu-mob-2 {
     list-style-type: none;
     height: 48px;
-    border: 1px solid #F7E7CE;
+    border: 1px solid black;
     text-align: center;
     font-size: 19px;
 }
@@ -252,14 +255,67 @@ button:active {
     background-color: orange;
 }
 
-.drop-user-greet{
-    background-color: #182d09;
-    list-style-type: none;
-    height: 48px;
-    border: 1px solid #F7E7CE;
-    text-align: center;
-    font-size: 19px;
+ /* navigation bar end ---------------------------------------------------------------------------------------- */
+
+ /* carousal start -------------------------------------------------------------------------------------------- */
+
+ .hero-carousel {
+    height: 85vh;
+    min-height: 400px;
+    max-height: 640px;
+    filter: drop-shadow(0 0 10px black);
 }
 
+.carousel-item {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease-in-out;
+}
 
- /* navigation bar end ---------------------------------------------------------------------------------------- */
+.carousel-caption {
+    bottom: 25%;
+    text-align: left;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    transition: opacity 0.5s ease;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+    z-index: 1000;
+}
+
+.hero-btn {
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.hero-btn-primary {
+    background-color: #182d09;
+    border-color: #F7E7CE;
+    color: white;
+}
+
+.hero-btn-primary:hover {
+    background-color: orange;
+    color: black;
+    border-color: #F7E7CE;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease;
+}

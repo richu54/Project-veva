@@ -4,10 +4,10 @@
     .catagories-drop{
         font-size: 18px;
     }
-    .div_acc {
-        position: relative;
-        left: 70%;
-        top: -55px;
+    .div_accounts {
+        position: absolute;
+        top: 10%;
+        right: 16%;
     }
     
 }
@@ -16,10 +16,10 @@
     .catagories-drop{
         font-size: 17px;
     }
-    .div_acc {
-        position: relative;
-        left: 68%;
-        top: -55px;
+    .div_accounts {
+        position: absolute;
+        top: 10%;
+        right: 16%;
     }
 }
 
@@ -27,10 +27,10 @@
     .catagories-drop{
         font-size: 16px;
     }
-    .div_acc {
-        position: relative;
-        left: 66%;
-        top: -55px;
+    .div_accounts {
+        position: absolute;
+        top: 10%;
+        right: 16%;
     }
   
 }
@@ -39,45 +39,62 @@
 
 /* carousal start ------------------------------------------------------------------------------------- */
 
-@media screen and (max-width: 1024px) {
-    .carousel-control-prev, .carousel-control-next {
-        width: 40px;
-        height: 40px;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        width: 25px;
-        height: 25px;
-    }
-}
-
-@media screen and (max-width: 1024px) {
-    .container-fluid2 img {
-        height: 400px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-@media screen and (max-width: 768px) {
-    .carousel-control-prev, .carousel-control-next {
-        width: 30px;
-        height: 30px;
+@media (max-width: 768px) {
+    .hero-carousel {
+        height: 60vh;
+        min-height: 400px;
     }
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        width: 20px;
-        height: 20px;
+    
+    .carousel-caption {
+        bottom: 15%;
+        padding: 15px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+    
+    .hero-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
     }
 }
 
-@media screen and (max-width: 425px) {
-    .carousel-control-prev, .carousel-control-next {
-        width: 20px;
-        height: 20px;
+@media (max-width: 576px) {
+    .hero-carousel {
+        height: 50vh;
+        min-height: 350px;
     }
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        width: 15px;
-        height: 15px;
+    
+    .carousel-caption {
+        bottom: 10%;
+        padding: 10px;
     }
-    .container-fluid2 img {
-        height: 180px;
+    
+    .hero-title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 15px;
     }
 }
 
@@ -85,88 +102,3 @@
 
 /* card start ----------------------------------------------------------------------------------------- */
 
-@media screen and (min-width: 320px){
-    .card {
-        margin-left: 15px;
-    }
-}
-
-@media screen and (min-width: 375px){
-    .card {
-        margin-left: 45px;
-    }
-    .card_a1 {
-        margin-left: 30px;
-    }
-}
-
-@media screen and (min-width: 390px){
-    .card {
-        margin-left: 50px;
-    }
-}
-
-@media screen and (min-width: 412px){
-    .card {
-        
-        margin-left: 60px;
-    }
-    .card_a1 {
-        margin-left: 50px;
-    }
-}
-
-@media screen and (min-width: 414px){
-    .card {
-        
-        margin-left: 60px;
-    }
-    .card_a1 {
-        margin-left: 50px;
-    }
-}
-
-@media screen and (min-width: 425px){
-    .card {
-        margin-left: 70px;
-    }
-    .card_a1 {
-        margin-left: 55px;
-    }
-}
-
-@media screen and (min-width: 768px){
-    .card {
-        margin-left: 35px;
-    }
-    .card_a1 {
-        margin-left: 25px;
-    }
-}
-
-@media screen and (min-width: 1024px){
-    .card {
-        margin-left: 15px;
-    }
-    .card_a1 {
-        margin-left: 5px;
-    }
-}
-
-@media screen and (min-width: 1280px){
-    .card {
-        margin-left: 0px;
-    }
-    .card_a1 {
-        margin-left: 0px;
-    }
-}
-
-@media screen and (min-width: 1440px){
-    .card {
-        margin-left: 25px;
-    }
-    .card_a1 {
-        margin-left: 10px;
-    }
-}
