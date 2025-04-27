@@ -4,8 +4,15 @@
     box-sizing: border-box;
 }
 body{
+    font-family: 'Poppins', sans-serif;
     background-color: #F7E7CE;
 }
+
+.cal-sans-regular {
+    font-family: "Cal Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 
 /* navigation bar start ---------------------------------------------------------------------------------- */
 
@@ -180,7 +187,7 @@ button:active {
 
 .catagories-drop{
     color: white;
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .catagories-drop:hover{
@@ -319,3 +326,97 @@ button:active {
     margin-bottom: 30px;
     animation: fadeInUp 1s ease;
 }
+
+ /* category card start ----------------------------------------------------------------------------------------- */
+
+
+ .category-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.271);
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.645);
+}
+
+.ctgry-card-heading {
+    font-size: 50px;
+    color: #182d09;
+    font-family: "Cal Sans", sans-serif;
+}
+
+.category-img {
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.category-card:hover .category-img {
+    transform: scale(1.05);
+}
+
+.category-body {
+    background: white;
+}
+
+.category-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.category-count {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.btn-explore {
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.btn-explore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+.card-btn {
+    background: #182d09;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-btn:hover {
+    background: orange;
+    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2s ease-out, transform 0.6s ease-out;
+}
+  
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+ /* category card end ------------------------------------------------------------------------------------------- */
+
