@@ -155,3 +155,19 @@ window.addEventListener('scroll', () => {
 });
 
 // Category card end ---------------------------------------------------------------------------------------
+
+// About Us start ------------------------------------------------------------------------------------------
+
+$(document).ready(function() {
+  $(window).scroll(function() {
+      var scrollTop = $(this).scrollTop();
+      var aboutUsOffset = $('#aboutUs').offset().top;
+
+      if (scrollTop + $(window).height() > aboutUsOffset) {
+          $('.about-us').addClass('visible');
+      }
+  });
+});
+
+
+// About Us end --------------------------------------------------------------------------------------------

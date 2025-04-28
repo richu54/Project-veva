@@ -8,13 +8,13 @@ body{
     background-color: #F7E7CE;
 }
 
-.cal-sans-regular {
-    font-family: "Cal Sans", sans-serif;
-    font-weight: 400;
+.playwrite-au-sa {
+    font-family: "Playwrite AU SA", cursive;
+    font-optical-sizing: auto;
     font-style: normal;
   }
 
-/* navigation bar start ---------------------------------------------------------------------------------- */
+/* navigation bar start --------------------------------------------------------------------------------------- */
 
 .container-fluid{
     padding: 0;
@@ -420,3 +420,89 @@ button:active {
 
  /* category card end ------------------------------------------------------------------------------------------- */
 
+ /* About Us start ---------------------------------------------------------------------------------------------- */
+
+ .about-us {
+    display: flex;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.gallery {
+    transform: translateX(-100%);
+    transition: transform 1s ease;
+}
+
+.text-content {
+    transform: translateX(100%);
+    transition: transform 1s ease;
+}
+
+.about-us.visible {
+    opacity: 1;
+}
+
+.about-us.visible .gallery {
+    transform: translateX(0);
+}
+
+.about-us.visible .text-content {
+    transform: translateX(0);
+}
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-gallery {
+    margin: 5px;
+    width: 100%;
+    max-width: 300px;
+    transition: transform 0.3s;
+    border: 4px solid #182d09;
+}
+
+.image-gallery2 {
+    margin: 5px;
+    width: 100%;
+    max-width: 610px;
+    transition: transform 0.3s;
+    border: 4px solid #182d09;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.05);
+}
+
+.text-content {
+    padding: 20px;
+}
+
+.text-content h1 {
+    font-family: "Cal Sans", sans-serif;
+}
+
+.text-content p {
+    font-family: "Playwrite AU SA", cursive;
+}
+
+.about-btn {
+    background-color: #182d09;
+    color: white;
+    border-radius: 20px;
+}
+
+.about-btn:hover {
+    background-color: orange;
+    color: black;
+}
+
+ /* About Us end ------------------------------------------------------------------------------------------------ */
