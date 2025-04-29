@@ -33,87 +33,47 @@ $(document).ready(function(){
 
 $(document).ready(function() {
   const carousel = new bootstrap.Carousel('#heroCarousel', {
-      interval: 5000, 
-      pause: "hover", 
+      interval: 5000,
+      pause: "hover",
       wrap: true
   });
-  
+
   let slideInterval;
+
   const startCarousel = () => {
-      slideInterval = setInterval(() => {
-          carousel.next();
-      }, 5000);
+      slideInterval = setInterval(() => carousel.next(), 5000);
   };
-  
-  const stopCarousel = () => {
-      clearInterval(slideInterval);
-  };
-  
+
+  const stopCarousel = () => clearInterval(slideInterval);
+
   startCarousel();
-  
-  $('#heroCarousel').hover(
-      function() {
-          stopCarousel();
-      },
-      function() {
-          startCarousel();
-      }
-  );
-  
-  $(document).on('show.bs.modal', function () {
-      stopCarousel();
-  });
-  
-  $(document).on('hidden.bs.modal', function () {
-      startCarousel();
-  });
-  
-  $('#heroCarousel').on('slide.bs.carousel', function () {
-      $('.carousel-caption').css('opacity', 0);
-  });
-  
-  $('#heroCarousel').on('slid.bs.carousel', function () {
-      $('.carousel-caption').css('opacity', 1);
-      $('.hero-title, .hero-subtitle').css('animation', 'none');
-      setTimeout(() => {
-          $('.hero-title, .hero-subtitle').css('animation', 'fadeInUp 0.8s ease');
-      }, 10);
-  });
-  
-  function adjustCarouselHeight() {
-      var windowHeight = $(window).height();
-      var navHeight = $('nav').outerHeight() || 0;
-      
-      if ($(window).width() < 768) {
-          $('.hero-carousel').css('height', (windowHeight - navHeight) + 'px');
-      } else {
-          $('.hero-carousel').css('height', '');
-      }
-  }
-  
+
+  $('#heroCarousel').hover(stopCarousel, startCarousel);
+  $(document).on('show.bs.modal', stopCarousel).on('hidden.bs.modal', startCarousel);
+
+  $('#heroCarousel').on('slide.bs.carousel', () => $('.carousel-caption').css('opacity', 0))
+                   .on('slid.bs.carousel', () => {
+                       $('.carousel-caption').css('opacity', 1);
+                       $('.hero-title, .hero-subtitle').css('animation', 'none');
+                       setTimeout(() => $('.hero-title, .hero-subtitle').css('animation', 'fadeInUp 0.8s ease'), 10);
+                   });
+
+  const adjustCarouselHeight = () => {
+      const height = $(window).height() - ($('nav').outerHeight() || 0);
+      $('.hero-carousel').css('height', $(window).width() < 768 ? height + 'px' : '');
+  };
+
   adjustCarouselHeight();
   $(window).resize(adjustCarouselHeight);
-  
+
   let touchStartX = 0;
-  let touchEndX = 0;
-  
-  $('#heroCarousel').on('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-  });
-  
-  $('#heroCarousel').on('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-  });
-  
-  function handleSwipe() {
-      if (touchEndX < touchStartX - 50) {
-          carousel.next();
-      }
-      if (touchEndX > touchStartX + 50) {
-          carousel.prev();
-      }
-  }
+
+  $('#heroCarousel').on('touchstart', e => touchStartX = e.changedTouches[0].screenX)
+                   .on('touchend', e => {
+                       const touchEndX = e.changedTouches[0].screenX;
+                       if (touchEndX < touchStartX - 50) carousel.next();
+                       if (touchEndX > touchStartX + 50) carousel.prev();
+                   });
 });
 
 // Carousal end --------------------------------------------------------------------------------------------
@@ -156,18 +116,5 @@ window.addEventListener('scroll', () => {
 
 // Category card end ---------------------------------------------------------------------------------------
 
-// About Us start ------------------------------------------------------------------------------------------
-
-$(document).ready(function() {
-  $(window).scroll(function() {
-      var scrollTop = $(this).scrollTop();
-      var aboutUsOffset = $('#aboutUs').offset().top;
-
-      if (scrollTop + $(window).height() > aboutUsOffset) {
-          $('.about-us').addClass('visible');
-      }
-  });
-});
 
 
-// About Us end --------------------------------------------------------------------------------------------
