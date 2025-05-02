@@ -142,4 +142,20 @@
 /* carousal end --------------------------------------------------------------------------------------- */
 
 
+@media (max-width: 375px) {
 
+    .signup-in-input {
+        width: 280px;
+        margin-left: 20px;
+        border: 1px solid #182d09;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .signup-in-input {
+        width: 262px;
+        margin-left: 0;
+        border: 1px solid #182d09;
+    }
+}

@@ -10,4 +10,7 @@ urlpatterns = [
     path('',include('admin_app.urls')),
     path('',include('user_app.urls')),
     path('',views.index),
+    path('signup',views.signup,name='signup'),
+    path('signup_otp',views.signup_otp,name='signup_otp'),
+    path('home',views.home),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

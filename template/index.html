@@ -2,6 +2,10 @@
 
 {% include 'header.html' %}
 
+{% if signup_success %}
+    <div id="signup-success" data-success="Signup successful!"></div>
+{% endif %}
+
 <!-- carousal start --------------------------------------------------------------------------------------------------------->
 
 
@@ -219,7 +223,7 @@
 <!-- About us start --------------------------------------------------------------------------------------------------------->
 
 <div class="container my-5 fade-in">
-    <div class="row about-us" id="aboutUs"> 
+    <div class="row aboutus"> 
         <div class="col-md-6 gallery">
             <div class="div-gallery">
                 <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z3JvY2VyeXxlbnwwfHwwfHx8MA%3D%3D" alt="Grocery Shop 1" class="image-gallery">

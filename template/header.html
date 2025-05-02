@@ -13,8 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Playwrite+AU+SA:wght@100..400&display=swap" rel="stylesheet">
-    
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
 <body>
     <!-- navigation bar start --------------------------------------------------------------------------------------------->
@@ -24,7 +23,7 @@
             <div class="col col-sm-12 co-md-6 col-lg-4 col xl-3 w-100 d-flex">
 
                 <span class="img_navbar-a">
-                    <a href="#" class="">
+                    <a href="home" class="">
                         <img class="img_navbar " src="{% static 'images/VEVA_logo-removebg-preview.png' %}" alt="img">
                     </a>
                 </span>
@@ -55,8 +54,10 @@
                 </div>
 
                 <div class="div_button_nav me-xl-3 d-none d-xl-block d-lg-block">
-                    <button  class="btn-nav">Login</button>
-                    <button  class="btn_nav2">Sign Up</button>
+                    <a href=""><button  class="btn-nav">Login</button></a>
+                    <a href="signup"><button  class="btn_nav2">Sign Up</button></a>
+                    
+                    
                 </div>
 
     <!-- search icon for sm -->
@@ -145,7 +146,7 @@
                 <a class="dropdown-item text-white" href="#">My Profile</a>
             </li>
             <li class="pt-2 drop-menu-mob-2">
-                <a class="dropdown-item text-white" href="#">Signup</a>
+                <a class="dropdown-item text-white" href="signup">Signup</a>
             </li>
             <li class="pt-2 drop-menu-mob-2">
                 <a class="dropdown-item text-white" href="#">Login</a>
