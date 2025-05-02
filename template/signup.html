@@ -20,16 +20,16 @@
             <form action="#" method="POST" onsubmit="return validation()">
                 {% csrf_token %}
                 <div class="form-group">
-                    <input type="email" class="form-control mt-4 signup-in-input" id="u_email" name="Email" placeholder="Email">
+                    <input type="email" class="form-control mt-4 signup-in-input" id="u_email" name="Email" placeholder="Email" autocomplete="email">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control mt-3 signup-in-input" id="u_pass" name="Password" placeholder="Password">
+                    <input type="password" class="form-control mt-3 signup-in-input" id="u_pass" name="Password" placeholder="Password" autocomplete="new-password">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control mt-4 signup-in-input" id="u_name" name="Name" placeholder="Name">
+                    <input type="text" class="form-control mt-4 signup-in-input" id="u_name" name="Name" placeholder="Name" autocomplete="name">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control mt-4 signup-in-input" name="Mobile" id="u_mobile" placeholder="Mobile">
+                    <input type="number" class="form-control mt-4 signup-in-input" name="Mobile" id="u_mobile" placeholder="Mobile" autocomplete="tel">
                 </div>
                 <center>
                     <button type="submit" class="btn sign-btn mt-3 mb-2">Signup</button>

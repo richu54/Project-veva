@@ -31,50 +31,52 @@ $(document).ready(function(){
 
 // Carousal start ------------------------------------------------------------------------------------------
 
-$(document).ready(function() {
-  const carousel = new bootstrap.Carousel('#heroCarousel', {
-      interval: 5000,
-      pause: "hover",
-      wrap: true
-  });
+const carouselEl = document.querySelector('#heroCarousel');
+if (carouselEl) {
+    const carousel = new bootstrap.Carousel(carouselEl, {
+        interval: 5000,
+        pause: "hover",
+        wrap: true
+    });
 
-  let slideInterval;
+    let slideInterval;
 
-  const startCarousel = () => {
-      slideInterval = setInterval(() => carousel.next(), 5000);
-  };
+    const startCarousel = () => {
+        slideInterval = setInterval(() => carousel.next(), 5000);
+    };
 
-  const stopCarousel = () => clearInterval(slideInterval);
+    const stopCarousel = () => clearInterval(slideInterval);
 
-  startCarousel();
+    startCarousel();
 
-  $('#heroCarousel').hover(stopCarousel, startCarousel);
-  $(document).on('show.bs.modal', stopCarousel).on('hidden.bs.modal', startCarousel);
+    $('#heroCarousel').hover(stopCarousel, startCarousel);
+    $(document).on('show.bs.modal', stopCarousel).on('hidden.bs.modal', startCarousel);
 
-  $('#heroCarousel').on('slide.bs.carousel', () => $('.carousel-caption').css('opacity', 0))
-                   .on('slid.bs.carousel', () => {
-                       $('.carousel-caption').css('opacity', 1);
-                       $('.hero-title, .hero-subtitle').css('animation', 'none');
-                       setTimeout(() => $('.hero-title, .hero-subtitle').css('animation', 'fadeInUp 0.8s ease'), 10);
-                   });
+    $('#heroCarousel')
+      .on('slide.bs.carousel', () => $('.carousel-caption').css('opacity', 0))
+      .on('slid.bs.carousel', () => {
+        $('.carousel-caption').css('opacity', 1);
+        $('.hero-title, .hero-subtitle').css('animation', 'none');
+        setTimeout(() => $('.hero-title, .hero-subtitle').css('animation', 'fadeInUp 0.8s ease'), 10);
+      });
 
-  const adjustCarouselHeight = () => {
-      const height = $(window).height() - ($('nav').outerHeight() || 0);
-      $('.hero-carousel').css('height', $(window).width() < 768 ? height + 'px' : '');
-  };
+    const adjustCarouselHeight = () => {
+        const height = $(window).height() - ($('nav').outerHeight() || 0);
+        $('.hero-carousel').css('height', $(window).width() < 768 ? height + 'px' : '');
+    };
 
-  adjustCarouselHeight();
-  $(window).resize(adjustCarouselHeight);
+    adjustCarouselHeight();
+    $(window).resize(adjustCarouselHeight);
 
-  let touchStartX = 0;
+    let touchStartX = 0;
 
-  $('#heroCarousel').on('touchstart', e => touchStartX = e.changedTouches[0].screenX)
-                   .on('touchend', e => {
-                       const touchEndX = e.changedTouches[0].screenX;
-                       if (touchEndX < touchStartX - 50) carousel.next();
-                       if (touchEndX > touchStartX + 50) carousel.prev();
-                   });
-});
+    $('#heroCarousel').on('touchstart', e => touchStartX = e.changedTouches[0].screenX)
+                     .on('touchend', e => {
+                         const touchEndX = e.changedTouches[0].screenX;
+                         if (touchEndX < touchStartX - 50) carousel.next();
+                         if (touchEndX > touchStartX + 50) carousel.prev();
+                     });
+}
 
 // Carousal end --------------------------------------------------------------------------------------------
 
