@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.hashers import make_password
 from .models import user_register
 import random
 
@@ -25,7 +24,7 @@ def signup(request):
 
         request.session['signup_data'] = {
             'email': email,
-            'password': make_password(password),
+            'password': password,
             'name': name,
             'mobile': mobile,
             'otp': otp
@@ -66,3 +65,32 @@ def signup_otp(request):
             })
 
     return redirect('signup')
+
+def login(request):
+    useremail = request.POST.get('Email')
+    userpass = request.POST.get('Password')
+
+    if useremail == 'rinshad@gmail.com' and userpass == '7654321':
+        request.session['email'] = useremail
+        request.session['admin'] = 'admin'
+        return render(request,'index.html',{'status':'Admin login Successful'})
+    
+    elif user_register.objects.filter(user_email=useremail,user_password=userpass).exists():
+        userdetails = user_register.objects.get(user_email=request.POST['Email'],user_password=userpass)
+        if userdetails.user_password == request.POST['Password']:
+            request.session['uid'] = userdetails.id
+            request.session['uname'] = userdetails.user_name
+            request.session['uemail'] = userdetails.user_email
+            request.session['utel'] = userdetails.user_mobile
+            request.session['user'] = 'user'
+            return render(request,'index.html',{'status':'User login Successful'})
+    else :
+        return render(request,'login.html',{'error':'User login Failed'})
+    
+
+def logout(request):
+    session_keys = list(request.session.keys())
+    for key in session_keys:
+        del request.session[key]
+    return redirect(index)
+    

@@ -263,7 +263,26 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-
 // Signup end ----------------------------------------------------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', function () {
+  const notyf = new Notyf();
+
+  const errorDiv = document.getElementById('error-message');
+  if (errorDiv) {
+      const errorMessage = errorDiv.getAttribute('data-error');
+      if (errorMessage) {
+          notyf.error(errorMessage);
+      }
+  }
+
+  const successDiv = document.getElementById('success-message');
+  if (successDiv) {
+      const successMessage = successDiv.getAttribute('data-success');
+      if (successMessage) {
+          notyf.success(successMessage);
+      }
+  }
+});
 
 

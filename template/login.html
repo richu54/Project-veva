@@ -1,0 +1,32 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+<section>
+
+    <h2 class="text-center Sign-head mb-3">Login</h2>
+    
+    <div id="login_signup" class="container d-flex justify-content-center mb-5">
+        <div class="card shadow signup-in backdrop">
+            <div class="card-body">
+                <form action="#" method="POST" onsubmit="return validation()">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="email" class="form-control mt-4 signup-in-input" id="u_email" name="Email" placeholder="Email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control mt-3 signup-in-input" id="u_pass" name="Password" placeholder="Password" autocomplete="new-password">
+                    </div>
+                    <center>
+                        <button type="submit" class="btn sign-btn mt-3 mb-2">Login</button>
+                    </center>
+                </form>
+                <p class="text-center mt-3"><a href="#" class="text-decoration-none">Forgot Password</a></p>
+            </div>
+        </div>
+    </div>
+    
+    </section>
+    
+
+{% include 'footer.html' %}

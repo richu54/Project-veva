@@ -2,8 +2,20 @@
 
 {% include 'header.html' %}
 
+<!-- signup alert -->
+
 {% if signup_success %}
     <div id="signup-success" data-success="Signup successful!"></div>
+{% endif %}
+
+<!-- login alert -->
+
+{% if error %}
+  <div id="error-message" data-error="{{ error }}"></div>
+{% endif %}
+
+{% if status %}
+  <div id="success-message" data-success="{{ status }}"></div>
 {% endif %}
 
 <!-- carousal start --------------------------------------------------------------------------------------------------------->
