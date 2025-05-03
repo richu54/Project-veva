@@ -10,12 +10,8 @@
 
 <!-- login alert -->
 
-{% if error %}
-  <div id="error-message" data-error="{{ error }}"></div>
-{% endif %}
-
 {% if status %}
-  <div id="success-message" data-success="{{ status }}"></div>
+  <div id="login-success" data-success="{{ status }}"></div>
 {% endif %}
 
 <!-- carousal start --------------------------------------------------------------------------------------------------------->

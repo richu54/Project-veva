@@ -9,10 +9,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('admin_app.urls')),
     path('',include('user_app.urls')),
-    path('',views.index),
+    path('',views.index,name='index'),
     path('signup',views.signup,name='signup'),
     path('signup_otp',views.signup_otp,name='signup_otp'),
-    path('home',views.home),
-    path('login',views.login),
-    path('logout',views.logout)
+    path('home',views.home,name='home'),
+    path('login',views.login,name='login'),
+    path('logout',views.logout),
+    path('reset_pass_step1',views.reset_pass_step1,name='reset_pass_step1'),
+    path('reset_pass_step2',views.reset_pass_step2,name='reset_pass_step2'),
+    path('reset_pass_step3',views.reset_pass_step3,name='reset_pass_step3'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

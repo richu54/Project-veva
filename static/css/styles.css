@@ -141,27 +141,27 @@ button:active {
     border-color: #F7E7CE;
 }
 
- .btn-nav:hover {
+.btn-nav:hover {
    background-color: #0a2014;
    background-position: right center;
    color: white;
    text-decoration: none;
- }
- .svg_drop_nav {
+}
+.svg_drop_nav {
     width: 50px;
     height: 50px;
     margin-top: 15px;
     color: white;
- }
- .svg_search-div{
+}
+.svg_search-div{
     display: none;
- }
- .svg_search-icon {
+}
+.svg_search-icon {
     width: 30px;
     height: 25px;
     margin-top: 25px;
     color: white;
- }
+}
 .div_navdrop img {
     filter: drop-shadow(0px 0px 5px black);
     width: 100%;
@@ -649,5 +649,42 @@ button:active {
     }
 }
 
+/* Reset password OTP */
+
+.reset-otp-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    animation: fadeIn 0.6s ease-in-out;
+}
+  
+.reset-otp-box {
+    background: #007bff;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.5s ease-in-out;
+}
+  
+.reset-otp-box.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+  
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* Signup & Login end ------------------------------------------------------------------------------------------- */

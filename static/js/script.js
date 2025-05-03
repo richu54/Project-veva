@@ -232,14 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
   const notyf = new Notyf();
 
-  const errorDiv = document.getElementById('error-message');
-  if (errorDiv) {
-      const errorMessage = errorDiv.getAttribute('data-error');
-      if (errorMessage) {
-          notyf.error(errorMessage);
-      }
-  }
-
   const successDiv = document.getElementById('signup-success');
   if (successDiv) {
       const successMessage = successDiv.getAttribute('data-success');
@@ -254,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
   const notyf = new Notyf();
 
-  const errorDiv = document.getElementById('error-message');
+  const errorDiv = document.getElementById('otp_error');
   if (errorDiv) {
       const errorMessage = errorDiv.getAttribute('data-error');
       if (errorMessage) {
@@ -265,10 +257,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Signup end ----------------------------------------------------------------------------------------------
 
+// Login start ---------------------------------------------------------------------------------------------
+
+// login alert
+
 document.addEventListener('DOMContentLoaded', function () {
   const notyf = new Notyf();
 
-  const errorDiv = document.getElementById('error-message');
+  const errorDiv = document.getElementById('login-error');
   if (errorDiv) {
       const errorMessage = errorDiv.getAttribute('data-error');
       if (errorMessage) {
@@ -276,13 +272,75 @@ document.addEventListener('DOMContentLoaded', function () {
       }
   }
 
-  const successDiv = document.getElementById('success-message');
+  const successDiv = document.getElementById('login-success');
   if (successDiv) {
       const successMessage = successDiv.getAttribute('data-success');
       if (successMessage) {
           notyf.success(successMessage);
       }
   }
+});
+
+// Reset password email not valid
+
+document.addEventListener('DOMContentLoaded', function () {
+  const resetErrorDiv = document.getElementById('reset-error-message');
+  if (resetErrorDiv) {
+      const errorMessage = resetErrorDiv.getAttribute('data-error');
+      if (errorMessage) {
+          new Notyf().error(errorMessage);
+      }
+  }
+});
+
+// reset password OTP
+
+window.addEventListener('DOMContentLoaded', () => {
+  const otpContainer = document.getElementById('reset-otp-container');
+  if (otpContainer) {
+      const otpBox = otpContainer.querySelector('.reset-otp-box');
+
+      // Delay OTP appearance (simulate "sending")
+      setTimeout(() => {
+          otpContainer.classList.remove('d-none');
+          setTimeout(() => otpBox.classList.add('show'), 100);
+
+          // Auto-dismiss after 7 seconds
+          setTimeout(() => {
+              otpBox.classList.remove('show');
+              setTimeout(() => {
+                  otpContainer.remove();
+              }, 600);
+          }, 7000);
+      }, 2000); // 2-second delay
+  }
+});
+
+// reset OTP error
+
+// 
+document.addEventListener('DOMContentLoaded', function () {
+  const errorDiv = document.getElementById('reset-error');
+  if (errorDiv) {
+      const errorMessage = errorDiv.getAttribute('data-error');
+      if (errorMessage) {
+          const notyf = new Notyf();
+          notyf.error(errorMessage);
+      }
+  }
+});
+
+// Reset password successful
+
+document.addEventListener('DOMContentLoaded', function () {
+  const notyf = new Notyf();
+  document.querySelectorAll('.alert.alert-success').forEach(function (alert) {
+      const message = alert.textContent.trim();
+      if (message) {
+          notyf.success(message);
+          alert.remove();
+      }
+  });
 });
 
 

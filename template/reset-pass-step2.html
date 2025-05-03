@@ -2,9 +2,10 @@
 
 {% include 'header.html' %}
 
+
 {% if otp %}
-<div id="otp-container" class="otp-toast d-none">
-    <div class="otp-box shadow">
+<div id="reset-otp-container" class="reset-otp-toast d-none">
+    <div class="reset-otp-box shadow">
         <p class="mb-1"><strong>OTP Sent Successfully</strong></p>
         <p class="mb-0">Your demo OTP is <strong>{{ otp }}</strong>.</p>
     </div>
@@ -12,21 +13,21 @@
 {% endif %}
 
 {% if error %}
-    <div id="otp_error" data-error="{{ error }}"></div>
+<div id="reset-error" data-error="{{ error }}"></div>
 {% endif %}
 
 
 <section>
 
-    <h2 class="text-center Sign-head mb-3">OTP Verification</h2>
+    <h2 class="text-center Sign-head mb-3">Enter OTP</h2>
     
     <div id="login_signup" class="container d-flex justify-content-center mb-5">
         <div class="card shadow signup-in backdrop">
             <div class="card-body">
-                <form action="{% url 'signup_otp' %}" method="POST">
+                <form action="{% url 'reset_pass_step2' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="number" class="form-control mt-4 signup-in-input" id="signup_otp" name="signup-otp" placeholder="Enter OTP">                    </div>
+                        <input type="number" class="form-control mt-4 signup-in-input" id="reset_otp" name="reset_otp" placeholder="OTP"></div>
                     <center>
                         <button type="submit" class="btn sign-btn mt-3 mb-2">Verify</button>
                     </center>
