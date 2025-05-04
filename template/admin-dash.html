@@ -1,0 +1,122 @@
+{% load static %}
+
+{% include 'admin-header.html' %}
+
+{% csrf_token %}
+
+<!-- <h1 class="fw-bold text-center heading mt-1 ">ADMIN PANEL</h1> -->
+
+<div class="d-flex"> 
+    <!-- Sidebar -->
+    <aside id="sidebar" class="text-white sidebar">
+      <div class="d-flex justify-content-between align-items-center p-3 border-bottom border-secondary"> 
+        <span class="fs-5"></span>
+        <button id="sidebarToggle" class="btn btn-sm btn-outline-light toggle-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+              </svg>
+        </button>
+      </div>
+      <ul class="nav flex-column p-3">
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#dashboard"><i class="bi bi-speedometer2"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#users"><i class="bi bi-person-circle"></i> <span>Manage Users</span></a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#products"><i class="bi bi-box"></i> <span>Products</span></a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#sales"><i class="bi bi-graph-up"></i> <span>Sales</span></a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#finance"><i class="bi bi-wallet2"></i> <span>Finance</span></a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#reports"><i class="bi bi-bar-chart-line"></i> <span>Reports</span></a>
+        </li>
+      </ul>
+    </aside>
+  
+    <!-- Main Content -->
+    <main id="mainContent" class="main-content p-4">
+      <h2 id="dashboard" class="mb-4">Company Dashboard</h2>
+  
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-3">
+          <div class="card text-bg-primary">
+            <div class="card-body">
+              <h5 class="card-title">Active Users</h5>
+              <p class="card-text fs-4">2,345</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="card text-bg-success">
+            <div class="card-body">
+              <h5 class="card-title">Total Products</h5>
+              <p class="card-text fs-4">1,024</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="card text-bg-warning">
+            <div class="card-body">
+              <h5 class="card-title">Sales This Month</h5>
+              <p class="card-text fs-4">₹1.2M</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="card text-bg-danger">
+            <div class="card-body">
+              <h5 class="card-title">Pending Reports</h5>
+              <p class="card-text fs-4">12</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+   
+      <section id="users" class="mt-5">
+        <h4 class="mb-3">Manage Users</h4>
+        <div class="card shadow-sm border-0">
+          <div class="card-body manageuser-card d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+              <i class="bi bi-people fs-1 text-white"></i>
+              <div>
+                <h5 class="mb-1 text-white">User Management</h5>
+                <p class="mb-0 text-secondary">View, edit, block, or search users in the system.</p>
+              </div>
+            </div>
+            <a href="/manage_user"  class="btn btn-outlines">Go to Manage Users</a>
+          </div>
+        </div>
+      </section>
+      
+  
+      <section id="products" class="mt-5">
+        <h4>Manage Products</h4>
+        <p>Control inventory and product data.</p>
+      </section>
+  
+      <section id="sales" class="mt-5">
+        <h4>Sales Overview</h4>
+        <p>Analyze sales trends and targets.</p>
+      </section>
+  
+      <section id="finance" class="mt-5">
+        <h4>Finance Management</h4>
+        <p>Track budgets, income, and expenses.</p>
+      </section>
+  
+      <section id="reports" class="mt-5">
+        <h4>Reports</h4>
+        <p>Generate and download analytics reports.</p>
+      </section>
+    </main>
+  </div>
+
+
+{% include 'admin-footer.html' %}

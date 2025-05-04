@@ -1,0 +1,55 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viva - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/medias.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    
+    <div class="container-fluid navbar-admin w-100">
+        <div class="row m-0">
+            <div class="col col-sm-12 co-md-6 col-lg-4 col xl-3 w-100 d-flex">
+
+                <!-- logo section -->
+
+                <div class="logo-admin">
+                    <a href="/admin_dash" class="text-decoration-none"><h1 class="text-white ms-5 mt-3"> VEVA</h1></a>
+                </div>
+
+                <div class="ms-auto me-5">
+                    <p class="fw-bold fs-3 mt-3 Panel-name">admin panel</p>
+                </div>
+
+                <!-- login, signup and logout -->
+
+                <div class="ms-auto mt-3">
+                    {% if request.session.admin %}
+
+                    <a href="logout"><button  class="btn_nav-admin2 btn-nav-admin bg-danger me-3">Logout</button></a>
+
+                    {% elif request.session.uid %}
+
+                    <a href="logout"><button  class="btn_nav-admin2 btn-nav-admin bg-danger me-3">Logout</button></a>
+
+                    {% else %}
+
+                    <a href="login"><button  class="btn-nav-admin btn-nav-admin me-3">Login</button></a>
+                    <a href="signup"><button  class="btn_nav2-admin btn-nav-admin me-3">Sign Up</button></a>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+

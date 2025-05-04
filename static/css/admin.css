@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #F7E7CE;
+    overflow-x: hidden;
+}
+
+/* admin header start -------------------------------------------------------------------------------------------------------*/
+
+.logo-admin h1 {
+    font-weight: bold;
+}
+
+.heading {
+    color: #182d09;
+}
+
+.btn-nav-admin {
+    height: 40px;
+    width: 100px;
+    border-radius: 30px;
+    color: white;
+}
+
+.navbar-admin {
+    background: linear-gradient(to top, #182d09, #182d09, #182d09, #223d0f, #2d4e12);
+    height: 80px;
+}
+
+.btn_nav-admin2 {
+    background-color: black;
+    border-color: #F7E7CE;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16),0 3px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: 0.3s ease all;
+    z-index: 1;
+    text-align: center;
+}
+.btn_nav-admin2:hover, .btn_nav-admin2:focus {
+    background-color: #09182d;
+    color: #F7E7CE;
+    
+}
+.btn_nav-admin2:hover::before, .btn_nav-admin2:focus::before {
+    transition: 0.5s ease all;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+button:active {
+    transform: scale(0.9);
+}
+.btn-nav-admin1 {
+    background-color: #416d0b;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    border-radius: 10px;
+    color: black;
+    border-color: #F7E7CE;
+}
+
+.btn-nav-admin1:hover {
+   background-color: #0a2014;
+   background-position: right center;
+   color: white;
+   text-decoration: none;
+}
+
+/* admin header end ---------------------------------------------------------------------------------------------------------*/
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    transition: width 0.3s ease;
+    background-color: #182d09;
+    color: white;
+}
+
+.sidebar ul li:hover {
+    background-color: orange;
+}
+  
+.sidebar.collapsed {
+    width: 70px;
+}
+  
+.sidebar.collapsed .nav-link span {
+    display: none;
+}
+  
+.sidebar .nav-link {
+    white-space: nowrap;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+  
+.main-content {
+    /* margin-left: 250px; */
+    transition: margin-left 0.3s ease;
+    width: 100%;
+}
+  
+.main-content.collapsed {
+    margin-left: 20px;
+}
+
+.Panel-name {
+    color: orange;
+}
+
+.card .bi {
+    font-size: 2rem;
+}
+
+.manageuser-card {
+    background-color: #182d09;
+    color: white;
+}
+
+.btn-outlines {
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+}
+
+.btn-outlines:hover {
+    background-color: orange;
+    color: white;
+}
+
+/* manage user --------------------------------------------------------------------------------------------------------------*/
+
+table th, table td {
+    vertical-align: middle;
+}
+
+.search-btn {
+    background-color: orange;
+    color: white;
+}
+
+.search-btn:hover {
+    background-color: orange;
+    color: black;
+}
+
+.manage-user-search {
+    margin-left: 420px;
+    width: 300px;
+}

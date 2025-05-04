@@ -1,0 +1,38 @@
+{% load static %}
+
+{% include 'admin-header.html' %}
+
+<section>
+
+    <h2 class="text-center Sign-head mb-5 mt-5 fw-bold">User Details Update</h2>
+    <a href="/manage_user" class="btn-admin btn btn-success ms-5" style="position: absolute;top: 12%;">Back</a>
+    
+    <div id="login_signup" class="container d-flex justify-content-center mb-5">
+        <div class="card shadow signup-in backdrop">
+            <div class="card-body">
+                <form action="user_updates/{{res.id}}" method="POST" onsubmit="return validation()">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="email" class="form-control mt-4 signup-in-input" value="{{res.user_email}}" name="Email" id="u_email" placeholder="Email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control mt-3 signup-in-input" value="{{res.user_password}}" name="Password" id="u_pass" placeholder="Password" autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control mt-4 signup-in-input" value="{{res.user_name}}" name="Name" id="u_name" placeholder="Name" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control mt-4 signup-in-input" value="{{res.user_mobile}}" name="Mobile" id="u_mobile" placeholder="Mobile" autocomplete="tel">
+                    </div>
+                    <center>
+                        <button type="submit" class="btn sign-btn mt-3 mb-2">Update</button>
+                    </center>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+     
+</section>
+
+{% include 'admin-footer.html' %}
