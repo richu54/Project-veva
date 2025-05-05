@@ -10,4 +10,5 @@ urlpatterns = [
     path('user_update/<int:id>',views.user_update,name='user_update'),
     path('user_update/user_updates/<int:id>',views.user_updates,name='user_updates'),
     path('search_user',views.search_user,name='search_user'),
+    path('filter_user',views.filter_user,name='filter_user')
 ]
