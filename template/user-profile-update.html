@@ -1,15 +1,16 @@
 {% load static %}
 
-{% include 'admin-header.html' %}
+{% include 'header.html' %}
 
 <section>
 
     <h2 class="text-center Sign-head mb-5 mt-5 fw-bold">User Details Update</h2>
     
+    
     <div id="login_signup" class="container d-flex justify-content-center mb-5">
         <div class="card shadow signup-in backdrop">
             <div class="card-body">
-                <form action="user_updates/{{res.id}}" method="POST" onsubmit="return validation()">
+                <form action="user_profile_updates/{{res.id}}" method="POST" onsubmit="return validation()">
                     {% csrf_token %}
                     <div class="form-group">
                         <input type="email" class="form-control mt-4 signup-in-input" value="{{res.user_email}}" name="Email" id="u_email" placeholder="Email" autocomplete="email">
@@ -32,12 +33,10 @@
         </div>
     </div>
 
-    
+    <div class="d-none d-xl-block d-lg-block d-md-block" style="position: absolute;top: 20%; left: 0;">
+        <a href="/user_account" class="btn-admin btn btn-success ms-5 mb-5">Back</a>
+    </div>
      
 </section>
 
-<div class="d-none d-xl-block d-lg-block d-md-block" style="position: absolute;top: 20%; left: 0;">
-    <a href="/user_account" class="btn-admin btn btn-success ms-5 mb-5">Back</a>
-</div>
-
-{% include 'admin-footer.html' %}
+{% include 'footer.html' %}

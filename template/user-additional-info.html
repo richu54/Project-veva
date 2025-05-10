@@ -1,0 +1,61 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+<section>
+
+    <h2 class="text-center Sign-head mt-5 fw-bold">User Details Update</h2>
+    <p class="text-center text-muted mb-5 mt-4">Empty fields are saved as null upon each update</p>
+    
+    <div id="login_signup" class="container d-flex justify-content-center mb-5">
+        <div class="card shadow signup-in backdrop">
+            <div class="card-body">
+                <form action="additional_info" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control mt-4 signup-in-input" value="{{req.user_address}}" name="address" placeholder="Address" autocomplete="address-level1">
+                    </div>
+                    <div class="form-group mt-4">
+                        <select class="signup-in-input rounded ps-2" name="state" required style="height: 37px;">
+                            <option>Select State</option>
+                            <option value="Kerala" {% if req.user_state == "Kerala" %}selected{% endif %}>Kerala</option>
+                            <option value="Tamil Nadu" {% if req.user_state == "Tamil Nadu" %}selected{% endif %}>Tamil Nadu</option>
+                            <option value="Karnataka" {% if req.user_state == "Karnataka" %}selected{% endif %}>Karnataka</option>
+                            <option value="Telangana" {% if req.user_state == "Telangana" %}selected{% endif %}>Telangana</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control mt-4 signup-in-input" value="{{req.user_pincode}}" name="postal_code" placeholder="Postal_code" autocomplete="postal-code">
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control mt-4 signup-in-input" value="{{req.user_dob}}" name="dob" placeholder="DPB" autocomplete="bday-day">
+                    </div>
+                    <div class="form-group">
+                            <div class="gender-title ms-5 mt-4 text-secondary">Select Gender</div>
+                            <div class="gender-options ms-5">
+                              <label class="gender-option" for="male">
+                                <input type="radio" id="male" name="usergender" value="male" {% if req.gender == "male" %}checked{% endif %} />
+                                <span class="custom-radio">Male</span>
+                              </label>
+                              <label class="gender-option" for="female">
+                                <input type="radio" id="female" name="usergender" value="female" {% if req.gender == "female" %}checked{% endif %} />
+                                <span class="custom-radio">Female</span>
+                              </label>
+                            </div>
+                    </div>
+                    <center>
+                        <button type="submit" class="btn sign-btn mt-3 mb-2">Update</button>
+                    </center>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="d-none d-xl-block d-lg-block d-md-block" style="position: absolute;top: 20%; left: 0;">
+        <a href="/user_account" class="btn-admin btn btn-success ms-5 mb-5">Back</a>
+    </div>
+
+     
+</section>
+
+{% include 'footer.html' %}

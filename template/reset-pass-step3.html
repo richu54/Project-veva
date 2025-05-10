@@ -12,7 +12,7 @@
                 <form action="{% url 'reset_pass_step3' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="password" class="form-control mt-4 signup-in-input" id="reset_pass" name="reset_pass" placeholder="Reset Password"></div>
+                        <input type="password" class="form-control mt-4 signup-in-input" id="reset_pass" name="reset_pass" placeholder="Reset Password (Length: 6-8)"></div>
                     <center>
                         <button type="submit" class="btn sign-btn mt-3 mb-2">Verify</button>
                     </center>

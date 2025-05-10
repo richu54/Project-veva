@@ -688,3 +688,86 @@ button:active {
 }
 
 /* Signup & Login end ------------------------------------------------------------------------------------------- */
+
+/* User account start ------------------------------------------------------------------------------------------- */
+
+.forest-green {
+    color: #182d09;
+}
+
+.user-btn {
+    background-color: #182d09;
+}
+
+.user-btn:hover {
+    background-color: orange;
+}
+
+.user_acc_options {
+    color: #182d09;
+}
+
+.user_acc_options:hover {
+    color: orange;
+}
+
+.user-p {
+    border: 1px solid rgba(128, 128, 128, 0.366);
+    background-color: white;
+    height: 38px;
+    border-radius: 8px;
+    padding-top: 7px;
+}
+
+/* User account end --------------------------------------------------------------------------------------------- */
+
+/* additional info ~ gender */
+
+.gender-container {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    max-width: 300px;
+    width: 100%;
+}
+
+.gender-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.gender-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-radio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 37px;
+    width: 80px;
+    border: 2px solid #bbb;
+    border-radius: 30px;
+    background-color: #f5f7fa;
+    font-weight: 600;
+    color: #555;
+    transition: all 0.3s ease;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.gender-option:hover .custom-radio {
+    border-color: #182d09;
+    color: #182d09;
+    background-color: #e6f0fd;
+}
+
+.gender-option input[type="radio"]:checked + .custom-radio {
+    border-color: #182d09;
+    background-color: #182d09;
+    color: white;
+}

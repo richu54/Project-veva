@@ -11,12 +11,7 @@ $(document).ready(function() {
 
 //   acount drop-down
 
-$(document).ready(function() {
-    $("#account-droptrigger").click(function() {
-      $("#dropdown-account").slideToggle(500); 
-      $(".dropdown-icon2").toggleClass("fa-chevron-down fa-chevron-up");
-    });
-  });
+
 
 
 //   mobile view dropdown
