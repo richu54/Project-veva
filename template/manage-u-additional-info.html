@@ -1,0 +1,86 @@
+{% load static %}
+
+{% include 'admin-header.html' %}
+
+<div class="alert-container">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+
+<h1 class="text-center mt-4 mb-4 heading">Additional Info</h1>
+
+<div class="container py-4">
+    <div class="card shadow-sm p-4">
+      <div class="d-flex flex-column flex-md-row align-items-center mb-3">
+        <div>
+          {% if res %}
+          <p class="mb-0 text-muted">User ID: #{{ res.id }}</p>
+          {% else %}
+          <p class="mb-0 text-muted">User ID: # N/A</p>
+          {% endif %}
+        </div>
+      </div>
+  
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label text-muted">Address :</label>
+          {% if res %}
+          <div class="fw-bold">{{res.user_address}}</div>
+          {% else %}
+          <div>N/A</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label text-muted">State :</label>
+          {% if res %}
+          <div class="fw-bold">{{res.user_state}}</div>
+          {% else %}
+          <div>N/A</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label text-muted">Pincode :</label>
+          {% if res %}
+          <div class="fw-bold">{{res.user_pincode}}</div>
+          {% else %}
+          <div>N/A</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label text-muted">DOB :</label>
+          {% if res %}
+          <div class="fw-bold">{{res.user_dob}}</div>
+          {% else %}
+          <div>N/A</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <label class="form-label text-muted">Gender :</label>
+          {% if res %}
+          <div class="fw-bold">{{res.gender}}</div>
+          {% else %}
+          <div>N/A</div>
+          {% endif %}
+          </div>
+      </div>
+  
+      <div class="mt-4 d-flex justify-content-between">
+        {% if res %}
+        <a href="{% url 'manage_u_info_update' id=res.id %}" class="btn btn-primary">Edit</a>
+        {% endif %}
+        {% if res %}
+        <a href="{% url 'delete_addi_info' id=res.id %}" class="btn btn-outline-danger">Delete</a>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="d-none d-xl-block d-lg-block d-md-block" style="position: absolute;top: 15%; left: 0;">
+    <a href="/manage_user" class="btn-admin btn btn-success ms-5 mb-5">Back</a>
+</div>
+
+{% include 'admin-footer.html' %}

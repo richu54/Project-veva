@@ -1,0 +1,62 @@
+{% load static %}
+
+{% include 'admin-header.html' %}
+
+<section>
+
+    <h2 class="text-center Sign-head mt-5 fw-bold">User Details Update</h2>
+    <p class="text-center text-muted mb-5 mt-4">Empty fields are saved as null upon each update</p>
+    
+    <div id="login_signup" class="container d-flex justify-content-center mb-5">
+        <div class="card shadow signup-in backdrop">
+            <div class="card-body">
+                <form action="manage_u_info_updates/{{res.id}}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control mt-4 signup-in-input" value="{{res.user_address}}" name="address" placeholder="Address" autocomplete="address-level1">
+                    </div>
+                    <div class="form-group mt-4">
+                        <select class="signup-in-input rounded ps-2" name="state" required style="height: 37px;">
+                            <option>Select State</option>
+                            <option value="Kerala" {% if res.user_state == "Kerala" %}selected{% endif %}>Kerala</option>
+                            <option value="Tamil Nadu" {% if res.user_state == "Tamil Nadu" %}selected{% endif %}>Tamil Nadu</option>
+                            <option value="Karnataka" {% if res.user_state == "Karnataka" %}selected{% endif %}>Karnataka</option>
+                            <option value="Telangana" {% if res.user_state == "Telangana" %}selected{% endif %}>Telangana</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control mt-4 signup-in-input" name="postal_code" value="{{res.user_pincode}}" placeholder="Postal_code" autocomplete="postal-code">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="mt-2 ms-5 text-secondary">Select DOB</label>
+                        <input type="date" class="form-control mt-1 signup-in-input" value="{{ res.user_dob|date:'Y-m-d' }}" name="dob" autocomplete="bday-day">
+                    </div>
+                    <div class="form-group">
+                            <div class="gender-title ms-5 mt-3 text-secondary">Select Gender</div>
+                            <div class="gender-options ms-5">
+                              <label class="gender-option" for="male">
+                                <input type="radio" id="male" name="usergender" value="male" {% if res.gender == "male" %}checked{% endif %}/>
+                                <span class="custom-radio">Male</span>
+                              </label>
+                              <label class="gender-option" for="female">
+                                <input type="radio" id="female" name="usergender" value="female" {% if res.gender == "female" %}checked{% endif %}/>
+                                <span class="custom-radio">Female</span>
+                              </label>
+                            </div>
+                    </div>
+                    <center>
+                        <button type="submit" class="btn sign-btn mt-3 mb-2">Update</button>
+                    </center>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="d-none d-xl-block d-lg-block d-md-block" style="position: absolute;top: 15%; left: 0;">
+        <a href="/manage_user" class="btn-admin btn btn-success ms-5 mb-5">Back</a>
+    </div>
+
+     
+</section>
+
+{% include 'admin-footer.html' %}

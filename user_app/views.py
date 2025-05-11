@@ -15,10 +15,7 @@ def user_account(request):
         data = user_register.objects.get(pk=user_id)
         data_2 = additional_info.objects.filter(id=user_id).first()
         
-        return render(request, 'user-account.html', {
-            'res': data, 
-            'reg': data_2
-        })
+        return render(request, 'user-account.html', {'res': data,'reg': data_2})
         
     except user_register.DoesNotExist:
         messages.error(request, "User account not found")

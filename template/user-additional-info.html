@@ -13,32 +13,32 @@
                 <form action="additional_info" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control mt-4 signup-in-input" value="{{req.user_address}}" name="address" placeholder="Address" autocomplete="address-level1">
+                        <input type="text" class="form-control mt-4 signup-in-input" name="address" placeholder="Address" autocomplete="address-level1">
                     </div>
                     <div class="form-group mt-4">
                         <select class="signup-in-input rounded ps-2" name="state" required style="height: 37px;">
                             <option>Select State</option>
-                            <option value="Kerala" {% if req.user_state == "Kerala" %}selected{% endif %}>Kerala</option>
-                            <option value="Tamil Nadu" {% if req.user_state == "Tamil Nadu" %}selected{% endif %}>Tamil Nadu</option>
-                            <option value="Karnataka" {% if req.user_state == "Karnataka" %}selected{% endif %}>Karnataka</option>
-                            <option value="Telangana" {% if req.user_state == "Telangana" %}selected{% endif %}>Telangana</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Telangana">Telangana</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control mt-4 signup-in-input" value="{{req.user_pincode}}" name="postal_code" placeholder="Postal_code" autocomplete="postal-code">
+                        <input type="number" class="form-control mt-4 signup-in-input" name="postal_code" placeholder="Postal_code" autocomplete="postal-code">
                     </div>
                     <div class="form-group">
-                        <input type="date" class="form-control mt-4 signup-in-input" value="{{req.user_dob}}" name="dob" placeholder="DPB" autocomplete="bday-day">
+                        <input type="date" class="form-control mt-4 signup-in-input" name="dob" placeholder="DPB" autocomplete="bday-day">
                     </div>
                     <div class="form-group">
                             <div class="gender-title ms-5 mt-4 text-secondary">Select Gender</div>
                             <div class="gender-options ms-5">
                               <label class="gender-option" for="male">
-                                <input type="radio" id="male" name="usergender" value="male" {% if req.gender == "male" %}checked{% endif %} />
+                                <input type="radio" id="male" name="usergender" value="male"/>
                                 <span class="custom-radio">Male</span>
                               </label>
                               <label class="gender-option" for="female">
-                                <input type="radio" id="female" name="usergender" value="female" {% if req.gender == "female" %}checked{% endif %} />
+                                <input type="radio" id="female" name="usergender" value="female"/>
                                 <span class="custom-radio">Female</span>
                               </label>
                             </div>
