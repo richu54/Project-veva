@@ -493,6 +493,7 @@ button:active {
     background-color: #182d09;
     color: white;
     padding-top: 40px;
+    border-top: 2px solid #F7E7CE;
 }
 
 .footer a {
@@ -771,3 +772,117 @@ button:active {
     background-color: #182d09;
     color: white;
 }
+
+/* product browsing start --------------------------------------------------------------------------------------- */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    transition: width 0.2s;
+    background-color: #182d09;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+  
+.sidebar.collapsed .nav-link span,
+.sidebar.collapsed strong {
+    display: none;
+}
+
+.nav-link i {
+    font-size: 1.2rem;
+}  
+  
+.sidebar .nav-link {
+    padding: 10px;
+    white-space: nowrap;
+}
+  
+.sidebar .nav-link:hover {
+    background-color: orange;
+    color: black;
+}
+  
+.content {
+    min-height: 100vh;
+    overflow: hidden;
+    padding-left: 0px; 
+    transition: padding 0.3s ease;
+}
+
+.sidebar.collapsed ~ .content {
+    padding-left: 0px;
+}
+
+/* card */
+
+.product-card {
+    max-width: 250px;
+}
+
+.product-card.small {
+    max-width: 150px;
+    max-height: 80px;
+}
+
+.product-image-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+  
+.product-image {
+    transition: transform 0.3s ease;
+    max-width: 210px;
+    max-height: 100%;
+    margin-left: 15px;
+    object-fit: contain;
+}
+  
+.product-card:hover .product-image {
+    transform: scale(1.03);
+}
+
+/* add to cart */
+
+.add-to-cart-btn {
+    border: 2px solid #182d09;
+    border-radius: 10px;
+    height: 33px;
+    text-decoration: none;
+    color: #182d09;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #182d09;
+    color: white;
+}
+
+/* Whishlist */
+
+.wishlist-btn {
+    background: transparent;
+    padding: 6px 9px;
+}
+
+/* product browsing end ----------------------------------------------------------------------------------------- */
+
+/* product detailes start --------------------------------------------------------------------------------------- */
+
+.product-image-2 {
+    max-width: 500px;
+}
+
+.add-to-cart-btn-2 {
+    border: 2px solid #182d09;
+    border-radius: 10px;
+    height: 50px;
+    text-decoration: none;
+    color: white;
+    background-color: #182d09;
+}
+
+/* product detailes end ----------------------------------------------------------------------------------------- */

@@ -9,11 +9,6 @@ $(document).ready(function() {
     });
   });
 
-//   acount drop-down
-
-
-
-
 //   mobile view dropdown
 
 $(document).ready(function(){
@@ -193,19 +188,17 @@ window.addEventListener('DOMContentLoaded', () => {
   if (otpContainer) {
       const otpBox = otpContainer.querySelector('.otp-box');
 
-      // Delay OTP appearance (simulate "sending")
       setTimeout(() => {
           otpContainer.classList.remove('d-none');
           setTimeout(() => otpBox.classList.add('show'), 100);
 
-          // Auto-dismiss after 7 seconds
           setTimeout(() => {
               otpBox.classList.remove('show');
               setTimeout(() => {
                   otpContainer.remove();
               }, 600);
           }, 7000);
-      }, 2000); // 2-second delay
+      }, 2000);
   }
 });
 
@@ -216,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (errorDiv) {
       const errorMessage = errorDiv.getAttribute('data-error');
       if (errorMessage) {
-          const notyf = new Notyf();  // Assuming Notyf is already loaded
+          const notyf = new Notyf(); 
           notyf.error(errorMessage);
       }
   }
@@ -253,6 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Signup end ----------------------------------------------------------------------------------------------
 
 // Login start ---------------------------------------------------------------------------------------------
+
 
 // login alert
 
@@ -295,19 +289,17 @@ window.addEventListener('DOMContentLoaded', () => {
   if (otpContainer) {
       const otpBox = otpContainer.querySelector('.reset-otp-box');
 
-      // Delay OTP appearance (simulate "sending")
       setTimeout(() => {
           otpContainer.classList.remove('d-none');
           setTimeout(() => otpBox.classList.add('show'), 100);
 
-          // Auto-dismiss after 7 seconds
           setTimeout(() => {
               otpBox.classList.remove('show');
               setTimeout(() => {
                   otpContainer.remove();
               }, 600);
           }, 7000);
-      }, 2000); // 2-second delay
+      }, 2000);
   }
 });
 
@@ -338,4 +330,222 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+// product browsing start ----------------------------------------------------------------------------------
+
+
+document.getElementById('sidebarToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+});
+
+const categorySections = document.querySelectorAll('.category-section');
+
+
+document.querySelectorAll('[data-category]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const category = link.getAttribute('data-category');
+    
+    categorySections.forEach(section => section.classList.add('d-none'));
+
+    const target = document.getElementById(`section-${category}`);
+    if (target) target.classList.remove('d-none');
+  });
+});
+
+// category redirect
+
+document.addEventListener("DOMContentLoaded", function () {
+  const hash = window.location.hash;
+
+  if (hash.startsWith("#section-")) {
+      document.querySelectorAll(".category-section").forEach(section => {
+          section.classList.add("d-none");
+      });
+
+      const target = document.querySelector(hash);
+      if (target) {
+          target.classList.remove("d-none");
+      }
+  }
+});
+
+//whishlist
+
+function toggleWishlist(el) {
+  const svg = el.querySelector('svg');
+  const isFilled = svg.classList.contains('bi-heart-fill');
+
+  if (isFilled) {
+
+    // unfilled heart with default color
+    
+    el.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+           class="bi bi-heart" viewBox="0 0 16 16">
+        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 
+                 1.4 3.053c-.523 1.023-.641 2.5.314 
+                 4.385.92 1.815 2.834 3.989 6.286 
+                 6.357 3.452-2.368 5.365-4.542 
+                 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 
+                 10.4.28 8.717 2.01zM8 15C-7.333 4.868 
+                 3.279-3.04 7.824 1.143q.09.083.176.171a3 
+                 3 0 0 1 .176-.17C12.72-3.042 23.333 
+                 4.867 8 15"/>
+      </svg>
+    `;
+  } else {
+
+    // red filled heart
+
+    el.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red"
+           class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 
+                 23.534 4.735 8 15-7.534 4.736 
+                 3.562-3.248 8 1.314"/>
+      </svg>
+    `;
+  }
+}
+
+// add to cart
+
+function addToCart(productId) {
+  const container = document.getElementById(`cart-btn-container-${productId}`);
+  let count = 1;
+
+  container.innerHTML = `
+    <div style="border: 1px solid #182d09;" class="d-flex align-items-center justify-content-between rounded  w-100">
+      <button style="background-color: #182d09; color: white;" class="btn btn-sm btn-light fw-bold" onclick="decreaseCount(${productId})">-</button>
+      <span id="cart-count-${productId}" class="fw-bold">${count}</span>
+      <button style="background-color: #182d09; color: white;" class="btn btn-sm btn-light fw-bold" onclick="increaseCount(${productId})">+</button>
+    </div>
+  `;
+}
+
+function increaseCount(productId) {
+  const countSpan = document.getElementById(`cart-count-${productId}`);
+  let count = parseInt(countSpan.textContent);
+  count++;
+  countSpan.textContent = count;
+}
+
+function decreaseCount(productId) {
+  const countSpan = document.getElementById(`cart-count-${productId}`);
+  let count = parseInt(countSpan.textContent);
+
+  if (count > 1) {
+    count--;
+    countSpan.textContent = count;
+  } else {
+
+    // change to orginal add button goes count 0
+
+    const container = document.getElementById(`cart-btn-container-${productId}`);
+    container.innerHTML = `
+      <a href="javascript:void(0)" class="w-100 add-to-cart-btn d-flex justify-content-between align-items-center" onclick="addToCart(${productId})">
+        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+        <span class="add-to-cart-span">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+          </svg>
+        </span>
+      </a>
+    `;
+  }
+}
+
+
+// product browsing end ------------------------------------------------------------------------------------
+
+// product detailes start ----------------------------------------------------------------------------------
+
+// add-to-cart
+
+function addToCart2(productId) {
+  const container = document.getElementById(`cart-btn-container-${productId}`);
+  let count = 1;
+
+  container.innerHTML = `
+    <div style="border: 1px solid #182d09; height: 50px;" class="d-flex align-items-center justify-content-between rounded-3 cart w-75">
+      <button style="background-color: #182d09; color: white;" class="btn btn-sm btn-light rounded-3 fw-bold h-100 w-25 fs-5" onclick="decreaseCount2(${productId})">-</button>
+      <span id="cart-count-${productId}" class="fw-bold fs-5">${count}</span>
+      <button style="background-color: #182d09; color: white;" class="btn btn-sm btn-light rounded-3 fw-bold h-100 w-25 fs-5" onclick="increaseCount2(${productId})">+</button>
+    </div>
+  `;
+}
+
+function increaseCount2(productId) {
+  const countSpan = document.getElementById(`cart-count-${productId}`);
+  let count = parseInt(countSpan.textContent);
+  count++;
+  countSpan.textContent = count;
+}
+
+function decreaseCount2(productId) {
+  const countSpan = document.getElementById(`cart-count-${productId}`);
+  let count = parseInt(countSpan.textContent);
+
+  if (count > 1) {
+    count--;
+    countSpan.textContent = count;
+  } else {
+
+    // change to orginal add button goes count 0
+
+    const container = document.getElementById(`cart-btn-container-${productId}`);
+    container.innerHTML = `
+      <a href="javascript:void(0)" class="w-75 add-to-cart-btn-2 d-flex justify-content-between align-items-center cart" onclick="addToCart2(${productId})">
+        <span class="ms-2 fs-4" style="margin-top: 0px;">Add</span>
+        <span class="" style="margin-top: 0px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+          </svg>
+        </span>
+      </a>
+    `;
+  }
+}
+
+//whishlist in cart
+
+function toggleWishlist_cart(el) {
+  const svg = el.querySelector('svg');
+  const isFilled = svg.classList.contains('bi-heart-fill');
+
+  if (isFilled) {
+
+    // unfilled heart
+
+    el.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+           class="bi bi-heart mt-2 mb-2 text-danger" viewBox="0 0 16 16">
+        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 
+                 1.4 3.053c-.523 1.023-.641 2.5.314 
+                 4.385.92 1.815 2.834 3.989 6.286 
+                 6.357 3.452-2.368 5.365-4.542 
+                 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 
+                 10.4.28 8.717 2.01zM8 15C-7.333 4.868 
+                 3.279-3.04 7.824 1.143q.09.083.176.171a3 
+                 3 0 0 1 .176-.17C12.72-3.042 23.333 
+                 4.867 8 15"/>
+      </svg>
+    `;
+    
+  } else {
+
+    // red filled heart
+
+    el.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red"
+           class="bi bi-heart-fill mt-2 mb-2" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 
+                 23.534 4.735 8 15-7.534 4.736 
+                 3.562-3.248 8 1.314"/>
+      </svg>
+    `;
+  }
+}
+
+// product detailes end ------------------------------------------------------------------------------------
 

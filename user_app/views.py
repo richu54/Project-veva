@@ -55,3 +55,10 @@ def addi_info(request):
         return redirect(user_account)
     
     return render(request,'user-additional-info.html')
+
+
+def product_browsing(request):
+    return render(request,'product_browsing.html')
+
+def product_detailes(request):
+    return render(request,'product-detailes.html')

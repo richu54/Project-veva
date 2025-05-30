@@ -1,0 +1,67 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+<div class="container mt-4">
+    <div class="row">
+      
+      <div class="col-md-5">
+        <div class="product-image-2 p-3 text-center">
+          <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="img-fluid rounded-4" alt="Product">
+        </div>
+      </div>
+  
+      <div class="col-md-7 mt-4 ">
+
+        <span class="text-dark pd" onclick="toggleWishlist_cart(this)" style="cursor:pointer; background: transparent;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart mb-2 mt-2 text-danger" viewBox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+          </svg>
+        </span>
+
+        <h4 class="mb-2 pd">Product Name</h4> 
+        <p class="text-muted pd"><strong>Example Brand</strong></p>
+        <p class="text-muted pd">Pack Size: <strong>500g</strong></p>
+        <h5 class="text-success mb-3 pd">₹ 199 <small class="text-muted text-decoration-line-through ms-2">₹ 249</small> <span class="badge bg-success ms-2">20% OFF</span></h5>
+  
+  
+        <!-- Add to Cart -->
+      
+        <div id="cart-btn-container-1">
+            <a href="#" class="w-75 add-to-cart-btn-2 d-flex justify-content-between cart" onclick="addToCart2(1)">
+              <span class="ms-2 fs-4" style="margin-top: 5px;">Add</span>
+              <span class="" style="margin-top: 10px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+  
+        <div class="mt-4">
+          <p><strong>Delivery:</strong> Usually delivered in 1-2 days</p>
+          <p><strong>Return Policy:</strong> 7-day return applicable</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Description -->
+     
+    <div class="row mt-5">
+      <div class="col-12 w-100b">
+        <h3 class="fw-bold">Description</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor massa, nec semper lorem quam in massa.</p>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-12 w-100">
+        <h3 class="fw-bold">Product Info</h3>
+        <p>Lorem ipsum dolor sit amet</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% include 'footer.html' %}

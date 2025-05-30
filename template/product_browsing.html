@@ -1,0 +1,618 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+<div class="d-flex">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar text-white collapsed">
+      <div class="p-3 d-flex justify-content-between align-items-center border-bottom border-secondary">
+        <button id="sidebarToggle" class="btn btn-sm btn-outline-light">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+              </svg>
+        </button>
+        <strong class="me-auto ps-3">Categories</strong>
+      </div>
+      <ul class="nav flex-column p-2">
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="all">
+            <i class="bi bi-grid ms-2"></i> <span class="ms-2">All</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="fresh">
+            <i class="bi bi-basket ms-2"></i> <span class="ms-2">Fresh Products</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="dairy">
+            <i class="bi bi-egg-fried ms-2"></i> <span class="ms-2">Dairy & Eggs</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="meat">
+            <i class="bi bi-droplet-half ms-2"></i> <span class="ms-2">Meat & Seafood</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="pantry">
+            <i class="bi bi-box-seam ms-2"></i> <span class="ms-2">Pantry</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="frozen">
+            <i class="bi bi-snow ms-2"></i> <span class="ms-2">Frozen Products</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="snacks">
+            <i class="bi bi-cup-straw ms-2"></i> <span class="ms-2">Snacks & Bakery</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="drinks">
+            <i class="bi bi-cup ms-2"></i> <span class="ms-2">Drinks</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white d-flex align-items-center" href="#" data-category="homeware">
+            <i class="bi bi-house-door ms-2"></i> <span class="ms-2">Homeware</span>
+          </a>
+        </li>
+      </ul>
+      
+    </aside>
+  
+    <main class="content w-100">
+        <div id="categoryContent" class="row g-4 p-0 m-0 products">
+          
+          <!-- All Products (Default Visible) -->
+
+          <div id="section-all" class="category-section">
+            <h4 class="text-muted ms-2">All Products</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="{% url 'product_detailes' %}" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+
+          </div>
+        </div>
+      
+          <!-- Fresh Products -->
+
+          <div id="section-fresh" class="category-section d-none">
+            <h4 class="text-muted ms-2">Fresh Products</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="#" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+
+          </div>
+        </div>
+      
+          <!-- Dairy -->
+           
+          <div id="section-dairy" class="category-section d-none">
+            <h4 class="text-muted ms-2">Dairy & Eggs</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="#" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+
+          </div>
+        </div>
+      
+          <!-- Meat & Seafood -->
+
+          <div id="section-meat" class="category-section d-none">
+            <h4 class="text-muted ms-2">Meat & Seafood</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="#" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+
+          </div>
+        </div>
+
+          <!-- Pantry -->
+
+          <div id="section-pantry" class="category-section d-none">
+            <h4 class="text-muted ms-2">Pantry</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="#" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+
+          </div>
+        </div>
+
+          <!-- Frozen Products -->
+
+          <div id="section-frozen" class="category-section d-none">
+            <h4 class="text-muted ms-2">Frozen Products</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="#" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+
+          </div>
+        </div>
+
+          <!-- Snacks & Bakery -->
+
+          <div id="section-snacks" class="category-section d-none">
+            <h4 class="text-muted ms-2">Snacks & Bakery</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="#" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+
+          </div>
+        </div>
+
+          <!-- Drinks -->
+
+          <div id="section-drinks" class="category-section d-none">
+            <h4 class="text-muted ms-2">Drinks</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="#" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+
+          </div>
+        </div>
+
+          <!-- Homeware -->
+
+          <div id="section-homeware" class="category-section d-none">
+            <h4 class="text-muted ms-2">Homeware</h4>
+            <div class="row">
+
+            <!-- card -->
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
+              <div class="card product-card border-0 shadow-sm h-100 position-relative">
+                
+                <span class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)" style="cursor:pointer;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                  </svg>
+                </span>
+            
+                <a href="#" class="text-decoration-none text-dark">
+                  <div class="product-image-wrapper">
+                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                  </div>
+            
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
+
+                  <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
+            
+                  <div class="card-body">
+                    <p class="text-muted mb-1">Local</p>
+                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text text-success fw-semibold">₹149.00</p>
+                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                    </div>
+            
+                    <div id="cart-btn-container-1">
+                      <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                        <span class="add-to-cart-span" style="margin-top: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+            
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- card -->
+            
+          </div>
+        </div>
+      
+        </div>
+      </main>
+      
+  
+</div>
+
+
+{% include 'footer.html' %}
+
+
+<!-- <div class="container">
+  <div class="row d-flex">
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col">
+
+      <div class="card product-card border-0 shadow-sm h-100">
+        <a href="#" class="text-decoration-none text-dark">
+
+          <a href="javascript:void(0);" class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+            </svg>
+          </a>
+
+          <div class="product-image-wrapper">
+            <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+          </div>
+
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3">
+
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3">
+
+          <div class="card-body">
+            <p class="text-muted mb-1">Local</p>
+            <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+            <div class="d-flex justify-content-between">
+              <p class="card-text text-success fw-semibold">₹149.00</p> <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+            </div>
+
+            <div id="cart-btn-container-1">
+              <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                <span class="ms-2 add-to-cart-span" style="margin-top: 3px;">Add</span>
+                <span class="add-to-cart-span" style="margin-top: 2px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+
+          </div>
+        </a>
+      </div>
+    </div> -->
