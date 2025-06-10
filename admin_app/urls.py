@@ -1,6 +1,7 @@
 
-from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path('delete_addi_info/<int:id>',views.delete_addi_info,name='delete_addi_info'),
     path('manage_u_info_update/<int:id>',views.manage_u_info_update,name='manage_u_info_update'),
     path('manage_u_info_update/manage_u_info_updates/<int:id>',views.manage_u_info_updates,name='manage_u_info_updates'),
-]
+    path('add_product',views.add_products),
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

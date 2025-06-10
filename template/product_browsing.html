@@ -75,6 +75,8 @@
 
             <!-- card -->
 
+            {% for i in all_products %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -84,9 +86,9 @@
                   </svg>
                 </span>
             
-                <a href="{% url 'product_detailes' %}" class="text-decoration-none text-dark">
+                <a href="{% url 'product_detailes' id=i.id %}" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -94,11 +96,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -118,6 +120,8 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
 
           </div>
         </div>
@@ -130,6 +134,10 @@
 
             <!-- card -->
 
+            {% if Fresh_Products %}
+
+            {% for i in Fresh_Products %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -141,7 +149,7 @@
             
                 <a href="#" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -149,11 +157,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -173,6 +181,11 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
+            {% else %}
+            <p class="ms-2">No products available</p>
+            {% endif %}
 
           </div>
         </div>
@@ -185,6 +198,9 @@
 
             <!-- card -->
 
+            {% if Dairy_Eggs %}
+            {% for i in Dairy_Eggs %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -196,7 +212,7 @@
             
                 <a href="#" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -204,11 +220,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -228,6 +244,12 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
+            {% else %}
+            <p class="ms-2">No products available</p>
+            {% endif %}
+
 
           </div>
         </div>
@@ -240,6 +262,9 @@
 
             <!-- card -->
 
+            {% if Meat_Seafood %}
+            {% for i in Meat_Seafood %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -251,7 +276,7 @@
             
                 <a href="#" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -259,11 +284,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -283,6 +308,11 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
+            {% else %}
+            <p class="ms-2">No products available</p>
+            {% endif %}
 
           </div>
         </div>
@@ -295,6 +325,9 @@
 
             <!-- card -->
 
+            {% if Pantry %}
+            {% for i in Pantry %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -306,7 +339,7 @@
             
                 <a href="#" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -314,11 +347,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -338,6 +371,11 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
+            {% else %}
+            <p class="ms-2">No products available</p>
+            {% endif %}
 
           </div>
         </div>
@@ -350,6 +388,9 @@
 
             <!-- card -->
 
+            {% if Frozen_Products %}
+            {% for i in Frozen_Products %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -361,7 +402,7 @@
             
                 <a href="#" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -369,11 +410,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -393,6 +434,11 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
+            {% else %}
+            <p class="ms-2">No products available</p>
+            {% endif %}
 
           </div>
         </div>
@@ -405,6 +451,9 @@
 
             <!-- card -->
 
+            {% if Snacks_Bakery %}
+            {% for i in Snacks_Bakery %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -416,7 +465,7 @@
             
                 <a href="#" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -424,11 +473,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -448,6 +497,11 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
+            {% else %}
+            <p class="ms-2">No products available</p>
+            {% endif %}
 
           </div>
         </div>
@@ -460,6 +514,9 @@
 
             <!-- card -->
 
+            {% if Drinks %}
+            {% for i in Drinks %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -471,7 +528,7 @@
             
                 <a href="#" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -479,11 +536,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -503,6 +560,11 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
+            {% else %}
+            <p class="ms-2">No products available</p>
+            {% endif %}
 
           </div>
         </div>
@@ -515,6 +577,9 @@
 
             <!-- card -->
 
+            {% if Homeware %}
+            {% for i in Homeware %}
+
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col category-dairy">
               <div class="card product-card border-0 shadow-sm h-100 position-relative">
                 
@@ -526,7 +591,7 @@
             
                 <a href="#" class="text-decoration-none text-dark">
                   <div class="product-image-wrapper">
-                    <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
+                    <img src="../media/{{i.product_image}}" class="card-img-top product-image mt-2" alt="Product Image">
                   </div>
             
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3" alt="Veg" width="20" height="20" class="ms-3"> -->
@@ -534,11 +599,11 @@
                   <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3"> -->
             
                   <div class="card-body">
-                    <p class="text-muted mb-1">Local</p>
-                    <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
+                    <p class="text-muted mb-1">{{i.product_brand}}</p>
+                    <h6 class="card-title mb-1">{{i.product_name}}</h6>
                     <div class="d-flex justify-content-between">
-                      <p class="card-text text-success fw-semibold">₹149.00</p>
-                      <del class="text-muted"><span class="text-danger">₹162.00</span></del>
+                      <p class="card-text text-success fw-semibold">₹{{i.product_offer_price}}.00</p>
+                      <del class="text-muted"><span class="text-danger">₹{{i.product_price}}.00</span></del>
                     </div>
             
                     <div id="cart-btn-container-1">
@@ -558,6 +623,11 @@
             </div>
 
             <!-- card -->
+
+            {% endfor %}
+            {% else %}
+            <p class="ms-2">No products available</p>
+            {% endif %}
             
           </div>
         </div>
@@ -572,47 +642,3 @@
 {% include 'footer.html' %}
 
 
-<!-- <div class="container">
-  <div class="row d-flex">
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-col">
-
-      <div class="card product-card border-0 shadow-sm h-100">
-        <a href="#" class="text-decoration-none text-dark">
-
-          <a href="javascript:void(0);" class="wishlist-btn text-dark rounded-circle position-absolute top-0 end-0 m-2 z-2" onclick="toggleWishlist(this)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-            </svg>
-          </a>
-
-          <div class="product-image-wrapper">
-            <img src="https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg" class="card-img-top product-image mt-2" alt="Product Image">
-          </div>
-
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/120px-Veg_symbol.svg.png?20131205102827" alt="Veg" width="20" height="20" class="ms-3">
-
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/800px-Non_veg_symbol.svg.png" alt="Non-Veg" width="20" height="20" class="ms-3">
-
-          <div class="card-body">
-            <p class="text-muted mb-1">Local</p>
-            <h6 class="card-title mb-1">Fresh Apple 1 Kg</h6>
-            <div class="d-flex justify-content-between">
-              <p class="card-text text-success fw-semibold">₹149.00</p> <del class="text-muted"><span class="text-danger">₹162.00</span></del>
-            </div>
-
-            <div id="cart-btn-container-1">
-              <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
-                <span class="ms-2 add-to-cart-span" style="margin-top: 3px;">Add</span>
-                <span class="add-to-cart-span" style="margin-top: 2px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                  </svg>
-                </span>
-              </a>
-            </div>
-
-          </div>
-        </a>
-      </div>
-    </div> -->

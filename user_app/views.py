@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from veva.models import user_register
 from .models import additional_info
 from django.contrib import messages
+from admin_app.models import add_product
 
 # Create your views here.
 
@@ -58,7 +59,32 @@ def addi_info(request):
 
 
 def product_browsing(request):
-    return render(request,'product_browsing.html')
 
-def product_detailes(request):
-    return render(request,'product-detailes.html')
+    all_products = add_product.objects.all()
+
+    fresh_products = add_product.objects.filter(product_category = 'Fresh_Products')
+    dairy_eggs = add_product.objects.filter(product_category = 'Dairy_Eggs')
+    meat_seafood = add_product.objects.filter(product_category = 'Meat_Seafood')
+    pantry = add_product.objects.filter(product_category = 'Pantry')
+    frozen_products = add_product.objects.filter(product_category = 'Frozen_Products')
+    snacks_bakery = add_product.objects.filter(product_category = 'Snacks_Bakery')
+    drinks = add_product.objects.filter(product_category = 'Drinks')
+    homeware = add_product.objects.filter(product_category = 'Homeware')
+
+    data = {
+        'all_products' : all_products,
+        'Fresh_Products' : fresh_products,
+        'Dairy_Eggs' : dairy_eggs,
+        'Meat_Seafood' : meat_seafood,
+        'Pantry' : pantry,
+        'Frozen_Products' : frozen_products,
+        'Snacks_Bakery' : snacks_bakery,
+        'Drinks' : drinks,
+        'homeware' : homeware,
+    }
+
+    return render(request,'product_browsing.html', data)
+
+def product_detailes(request,id):
+    data = add_product.objects.get(pk=id)
+    return render(request,'product-detailes.html',{'res':data})

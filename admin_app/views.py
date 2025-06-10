@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.utils.dateparse import parse_date
 from datetime import datetime, time
 from django.contrib import messages
+from .models import add_product
 
 # Create your views here.
 
@@ -105,3 +106,21 @@ def manage_u_info_updates(request,id):
         return redirect(manage_user)
     
     return render(request,'manage-u-info-update.html')
+
+def add_products(request):
+    if request.method == "POST":
+        product_image = request.FILES.get("product_image")
+        product_invoice = request.POST.get("product_invoice")
+        product_name = request.POST.get("product_name")
+        product_description = request.POST.get("product_description")
+        product_brand = request.POST.get("product_brand")
+        product_price = request.POST.get("product_price")
+        product_offer_price = request.POST.get("product_offer_price")
+        product_size = request.POST.get("product_size")
+        product_offer = request.POST.get("product_offer")
+        product_category = request.POST.get("product_category")
+
+        data = add_product(product_image=product_image,product_invoice=product_invoice,product_name=product_name,product_description=product_description,product_brand=product_brand,product_price=product_price,product_offer_price=product_offer_price,product_size=product_size,product_offer=product_offer,product_category=product_category)
+        data.save()
+
+    return render(request,'add-products.html')

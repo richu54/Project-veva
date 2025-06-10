@@ -9,5 +9,5 @@ urlpatterns = [
     path('user_profile_update/user_profile_updates/<int:id>',views.user_profile_updates,name='user_profile_updates'),
     path('additional_info',views.addi_info),
     path('product_browsing',views.product_browsing,name='product_browsing'),
-    path('product_detailes',views.product_detailes,name='product_detailes'),
+    path('product_detailes/<int:id>',views.product_detailes,name='product_detailes'),
 ]

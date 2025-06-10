@@ -1,0 +1,41 @@
+{% load static %}
+
+{% include 'admin-header.html' %}
+
+<div class="container my-5">
+    <div class="form-section w-100">
+      <h1 class="mb-4 fs-2 text-center fw-bold" style="color: #182d09;">Add New Product</h1>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+      <center>
+        <div class="w-75 pt-4 pb-4 rounded-3 shadow add-product">
+            <label class="fw-bold" style="margin-right: 116px;">Product Image : </label>
+            <input type="file" class="w-50 ps-2 mb-2 rounded bg-white" name="product_image"> <br>
+            <input type="text" class="w-75 ps-2 rounded mb-2" placeholder="Invoice" name="product_invoice">
+            <input type="text" class="w-75 ps-2 rounded mb-2" placeholder="Product Name" name="product_name">
+            <input type="text" class="w-75 ps-2 rounded mb-2" placeholder="Product Description" name="product_description">
+            <input type="text" class="w-75 ps-2 rounded mb-2" placeholder="Product Brand" name="product_brand">
+            <input type="number" class="w-75 ps-2 rounded mb-2" placeholder="Orginal Price" name="product_price">
+            <input type="number" class="w-75 ps-2 rounded mb-2" placeholder="Offer Price" name="product_offer_price">
+            <input type="text" class="w-75 ps-2 rounded mb-2" placeholder="Product Size" name="product_size"> 
+            <input type="text" class="w-75 ps-2 rounded mb-2" placeholder="Offer %" name="product_offer"> <br>
+            <select class="w-75 ps-2 rounded mb-2 border-dark" name="product_category" style="height: 32px;">
+              <option value="">Select Category</option>
+              <option value="Fresh_Products">Fresh Products</option>
+              <option value="Dairy_Eggs">Dairy & Eggs</option>
+              <option value="Meat_Seafood">Meat & Seafood</option>
+              <option value="Pantry">Pantry</option>
+              <option value="Frozen_Products">Frozen Products</option>
+              <option value="Snacks_Bakery">Snacks & Bakery</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Homeware">Homeware</option>
+            </select> <br>
+            <input type="submit" value="Submit" class="ps-3 pe-3 rounded text-white" style="background-color: #182d09;">
+        </div>
+      </center>
+  
+      </form>
+    </div>
+  </div>
+
+{% include 'admin-footer.html' %}

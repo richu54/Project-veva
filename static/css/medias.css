@@ -310,9 +310,16 @@
 
  @media screen and (max-width: 430px){
     .pd{
-        margin-left: 10px;
+        margin-left: 20px;
     }
     .cart{
-        margin-left: 30px;
+        margin-left: 20px;
+    }
+    .pd-info {
+        margin-left: 20px;
+    }
+    .pd-des {
+        margin-left: 20px;
+        margin-right: 20px;
     }
  }

@@ -519,7 +519,7 @@ function toggleWishlist_cart(el) {
 
     el.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-           class="bi bi-heart mt-2 mb-2 text-danger" viewBox="0 0 16 16">
+           class="bi bi-heart mt-2 mb-5 text-danger" viewBox="0 0 16 16">
         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 
                  1.4 3.053c-.523 1.023-.641 2.5.314 
                  4.385.92 1.815 2.834 3.989 6.286 
@@ -538,7 +538,7 @@ function toggleWishlist_cart(el) {
 
     el.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red"
-           class="bi bi-heart-fill mt-2 mb-2" viewBox="0 0 16 16">
+           class="bi bi-heart-fill mt-2 mb-5" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 
                  23.534 4.735 8 15-7.534 4.736 
                  3.562-3.248 8 1.314"/>
