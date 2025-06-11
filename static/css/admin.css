@@ -143,6 +143,7 @@ button:active {
 
 table th, table td {
     vertical-align: middle;
+    white-space: nowrap;
 }
 
 /* search */

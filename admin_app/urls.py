@@ -17,4 +17,10 @@ urlpatterns = [
     path('manage_u_info_update/<int:id>',views.manage_u_info_update,name='manage_u_info_update'),
     path('manage_u_info_update/manage_u_info_updates/<int:id>',views.manage_u_info_updates,name='manage_u_info_updates'),
     path('add_product',views.add_products),
+    path('manage_products',views.manage_products,name='manage_products'),
+    path('search_product',views.search_product,name='search_product'),
+    path('filter_product',views.filter_product,name='filter_product'),
+    path('update_product/<int:id>',views.update_product,name='update_product'),
+    path('update_product/updates_product/<int:id>',views.updates_product,name='updates_product'),
+    path('delete_product/<int:id>',views.delete_product,name='delete_product'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

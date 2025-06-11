@@ -46,7 +46,8 @@
           <input type="date" name="reg_date" id="reg_date" class="form-control">
         </div>
         <div class="col-12 mt-3">
-          <button type="submit" class="btn w-100" style="background-color: orange;">Apply Filters</button>
+          <button type="submit" class="btn w-100 mb-3" style="background-color: orange;">Apply Filters</button>
+          <a href="{% url 'filter_user' %}" type="submit" class="btn w-100 bg-danger text-white">Reset</a>
         </div>
       </form>
     </div>
@@ -86,7 +87,7 @@
                   </svg>
                 </a>
                 <a href="{% url 'user_update' id=i.id %}" class="btn btn-sm btn-outline-success"><i class="bi bi-pencil-square"></i> Edit</a>
-                <a href="{% url 'user_delete' id=i.id %}" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Delete</a>
+                <a href="{% url 'user_delete' id=i.id %}" class="btn btn-sm btn-outline-danger delete-btn2" data-url="{% url 'user_delete' id=i.id %}"><i class="bi bi-trash"></i> Delete</a>
             </td>
           </tr>
           {% endfor %}
