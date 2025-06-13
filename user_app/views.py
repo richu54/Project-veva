@@ -3,6 +3,7 @@ from veva.models import user_register
 from .models import additional_info
 from django.contrib import messages
 from admin_app.models import add_product
+from django.db.models import Q
 
 # Create your views here.
 
@@ -60,7 +61,18 @@ def addi_info(request):
 
 def product_browsing(request):
 
+    query = request.GET.get("query", "").strip()
+
     all_products = add_product.objects.all()
+
+    if query:
+        all_products = all_products.filter(
+            Q(product_invoice__icontains=query) |
+            Q(product_name__icontains=query) |
+            Q(product_description__icontains=query) |
+            Q(product_brand__icontains=query) |
+            Q(product_category__icontains=query.replace(" ", "_"))  # handle spaces vs underscores
+        )
 
     fresh_products = add_product.objects.filter(product_category = 'Fresh_Products')
     dairy_eggs = add_product.objects.filter(product_category = 'Dairy_Eggs')
@@ -80,7 +92,7 @@ def product_browsing(request):
         'Frozen_Products' : frozen_products,
         'Snacks_Bakery' : snacks_bakery,
         'Drinks' : drinks,
-        'homeware' : homeware,
+        'Homeware' : homeware,
     }
 
     return render(request,'product_browsing.html', data)
@@ -88,3 +100,4 @@ def product_browsing(request):
 def product_detailes(request,id):
     data = add_product.objects.get(pk=id)
     return render(request,'product-detailes.html',{'res':data})
+

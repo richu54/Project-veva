@@ -455,6 +455,18 @@ function decreaseCount(productId) {
   }
 }
 
+// clear products from search
+
+$(document).ready(function () {
+  const $searchInput = $('input[name="query"]');
+  const $searchForm = $searchInput.closest('form');
+
+  $searchInput.on('input', function () {
+    if ($(this).val().trim() === '') {
+      $searchForm.submit();  
+    }
+  });
+});
 
 // product browsing end ------------------------------------------------------------------------------------
 
