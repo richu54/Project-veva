@@ -900,3 +900,28 @@ button:active {
 }
 
 /* product detailes end ----------------------------------------------------------------------------------------- */
+
+/* Wishlist page start ------------------------------------------------------------------------------------------ */
+
+.wishlist-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.wishlist-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+  
+.wishlist-img-wrapper {
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+.wishlist-img-wrapper img {
+    transition: transform .3s ease;
+    width: 100px;
+    height: 110px;
+}
+  .wishlist-card:hover img {
+    transform: scale(1.06);
+}
+
+/* Wishlist page end -------------------------------------------------------------------------------------------- */

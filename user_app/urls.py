@@ -10,4 +10,6 @@ urlpatterns = [
     path('additional_info',views.addi_info),
     path('product_browsing',views.product_browsing,name='product_browsing'),
     path('product_detailes/<int:id>',views.product_detailes,name='product_detailes'),
+    path('wishlist',views.wishlist,name='wishlist'),
+    path('delete-wishlist/', views.delete_wishlist, name='delete_wishlist'),
 ]

@@ -371,41 +371,141 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //whishlist
 
-function toggleWishlist(el) {
-  const svg = el.querySelector('svg');
-  const isFilled = svg.classList.contains('bi-heart-fill');
+// function toggleWishlist(el) {
+//   const svg = el.querySelector('svg');
+//   const isFilled = svg.classList.contains('bi-heart-fill');
 
-  if (isFilled) {
+//   if (isFilled) {
 
-    // unfilled heart with default color
+//     // unfilled heart with default color
     
-    el.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-           class="bi bi-heart" viewBox="0 0 16 16">
-        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 
-                 1.4 3.053c-.523 1.023-.641 2.5.314 
-                 4.385.92 1.815 2.834 3.989 6.286 
-                 6.357 3.452-2.368 5.365-4.542 
-                 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 
-                 10.4.28 8.717 2.01zM8 15C-7.333 4.868 
-                 3.279-3.04 7.824 1.143q.09.083.176.171a3 
-                 3 0 0 1 .176-.17C12.72-3.042 23.333 
-                 4.867 8 15"/>
-      </svg>
-    `;
-  } else {
+//     el.innerHTML = `
+//       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+//            class="bi bi-heart" viewBox="0 0 16 16">
+//         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 
+//                  1.4 3.053c-.523 1.023-.641 2.5.314 
+//                  4.385.92 1.815 2.834 3.989 6.286 
+//                  6.357 3.452-2.368 5.365-4.542 
+//                  6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 
+//                  10.4.28 8.717 2.01zM8 15C-7.333 4.868 
+//                  3.279-3.04 7.824 1.143q.09.083.176.171a3 
+//                  3 0 0 1 .176-.17C12.72-3.042 23.333 
+//                  4.867 8 15"/>
+//       </svg>
+//     `;
+//   } else {
 
-    // red filled heart
+//     // red filled heart
 
-    el.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red"
-           class="bi bi-heart-fill" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 
-                 23.534 4.735 8 15-7.534 4.736 
-                 3.562-3.248 8 1.314"/>
-      </svg>
-    `;
+//     el.innerHTML = `
+//       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red"
+//            class="bi bi-heart-fill" viewBox="0 0 16 16">
+//         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 
+//                  23.534 4.735 8 15-7.534 4.736 
+//                  3.562-3.248 8 1.314"/>
+//       </svg>
+//     `;
+//   }
+// }
+
+function toggleWishlist(el) {
+  const productId = el.getAttribute("data-product-id");
+  const url = el.getAttribute("data-url");
+  const notyf = new Notyf({ duration: 2000, position: { x: 'right', y: 'bottom' } });
+
+  fetch(`${url}?product_id=${productId}`)
+    .then(res => {
+      if (res.status === 401) {
+        notyf.error('Please login to use the wishlist.');
+        return null;
+      }
+      return res.json();
+    })
+    .then(data => {
+      if (!data) return;
+
+      if (data.status === "added") {
+        // show filled heart
+        el.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red"
+               class="bi bi-heart-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 
+                  23.534 4.735 8 15-7.534 4.736 
+                  3.562-3.248 8 1.314"/>
+          </svg>`;
+        notyf.success('Added to wishlist');
+      } else if (data.status === "removed") {
+        // show empty heart
+        el.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+               class="bi bi-heart" viewBox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 
+                     2.514.878 1.4 3.053c-.523 1.023-.641 
+                     2.5.314 4.385.92 1.815 2.834 
+                     3.989 6.286 6.357 3.452-2.368 
+                     5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385
+                     C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 
+                     3.279-3.04 7.824 1.143q.09.083.176.171a3 
+                     3 0 0 1 .176-.17C12.72-3.042 23.333 
+                     4.867 8 15"/>`;
+        notyf.error('Removed from wishlist');
+      }
+    })
+    .catch(err => console.error(err));
+}
+
+// remove wishlist
+
+function removeFromWishlist(el) {
+  const productId = el.getAttribute("data-product-id");
+  const notyf = new Notyf({
+    duration: 2000,
+    position: { x: 'right', y: 'bottom' }
+  });
+
+  fetch("/delete-wishlist/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "X-CSRFToken": getCookie("csrftoken")
+    },
+    body: `product_id=${productId}`
+  })
+    .then(res => {
+      if (res.status === 401) {
+        notyf.error("Please login to manage your wishlist.");
+        return null;
+      }
+      return res.json();
+    })
+    .then(data => {
+      if (!data) return;
+
+      if (data.status === "deleted") {
+        notyf.error("Removed from wishlist");
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+      }
+    })
+    .catch(() => {
+      notyf.error("Something went wrong!");
+    });
+}
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
   }
+  return cookieValue;
 }
 
 // add to cart

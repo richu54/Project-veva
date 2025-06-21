@@ -4,6 +4,14 @@
 
 <h1 class="text-center forest-green">User Account</h1>
 
+<center>
+
+  <div class="d-block d-xl-none d-lg-none d-md-none">
+    <a href="#wishlist" class="btn bg-success text-white border-1 rounded p-1">Whishlist</a>
+  </div>
+
+</center>
+
 {% if request.session.uid %}
 
 <main class="container py-4">
@@ -34,6 +42,57 @@
               <a href="{% url 'user_profile_update' id=res.id %}" class="btn w-100 user-btn text-decoration-none text-white mb-2">Update Profile</a>
           </form>
         </div>
+
+        <!-- additional info -->
+
+        <div class="col-lg-4 w-100 mt-3">
+          <div class="card shadow-sm p-3">
+            <h3 class="mb-3 forest-green">Additional Info</h3>
+            <form method="POST">
+              <div class="mb-3">
+                  <label class="form-label">Address</label>
+                    {% if reg %}
+                      <address class="ps-3 border rounded-3 pt-2 pb-2">{{ reg.user_address }}</address>
+                    {% else %}
+                      <p class="user-p ps-3">N/A</p>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">State</label>
+                    {% if reg %}
+                      <p class="user-p ps-3">{{ reg.user_state }}</p>
+                    {% else %}
+                      <p class="user-p ps-3">N/A</p>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Postal Code</label>
+                    {% if reg %}
+                      <p class="user-p ps-3">{{ reg.user_pincode }}</p>
+                    {% else %}
+                      <p class="user-p ps-3">N/A</p>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Date of Birth</label>
+                    {% if reg %}
+                      <p class="user-p ps-3">{{ reg.user_dob }}</p>
+                    {% else %}
+                      <p class="user-p ps-3">N/A</p>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Gender</label>
+                    {% if reg %}
+                      <p class="user-p ps-3">{{ reg.gender }}</p>
+                    {% else %}
+                      <p class="user-p ps-3">N/A</p>
+                    {% endif %}
+                </div>
+                <a href="additional_info" class="btn w-100 user-btn text-decoration-none text-white">Update Profile</a>
+            </form>
+          </div>
+        </div>
       </div>
 
 
@@ -42,11 +101,11 @@
       <div class="col-lg-8">
         <div class="card shadow-sm p-3">
           <ul class="nav nav-tabs mb-3" id="profileTabs" role="tablist">
-            <li class="nav-item" role="presentation">
+            <!-- <li class="nav-item" role="presentation">
               <button class="nav-link active user_acc_options" data-bs-toggle="tab" data-bs-target="#cart" type="button" role="tab">Cart</button>
-            </li>
+            </li> -->
             <li class="nav-item" role="presentation">
-              <button class="nav-link user_acc_options" data-bs-toggle="tab" data-bs-target="#wishlist" type="button" role="tab">Wishlist</button>
+              <button class="nav-link active user_acc_options" data-bs-toggle="tab" data-bs-target="#wishlist" type="button" role="tab">Wishlist</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link user_acc_options" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">Order History</button>
@@ -60,7 +119,7 @@
 
             <!-- Cart -->
 
-            <div class="tab-pane fade show active" id="cart" role="tabpanel">
+            <!-- <div class="tab-pane fade show active" id="cart" role="tabpanel">
               <p class="text-muted">Items currently in your cart:</p>
               <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -70,16 +129,52 @@
                   Milk (1 L) <span class="badge bg-success">$1.20</span>
                 </li>
               </ul>
-            </div>
+            </div> -->
   
             <!-- Wishlist -->
+            
+            <div class="tab-pane fade show active" id="wishlist" role="tabpanel">
+              <p class="text-muted ms-2">My wishlist:</p>
+              <ul class="list-unstyled row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> 
 
-            <div class="tab-pane fade" id="wishlist" role="tabpanel">
-              <p class="text-muted">Your wishlist:</p>
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between">
-                  Organic Bananas <button class="btn btn-sm btn-outline-danger">Remove</button>
-                </li>
+                {% for p in wishlist_products %}
+                
+                  <li class="col">
+                      <div class="card wishlist-card border-1 shadow-sm h-100 position-relative mt-2">
+
+                        <!-- Product image -->
+                        <div class="wishlist-img-wrapper d-flex justify-content-center mt-1">
+                          <img src="../media/{{p.product_image}}" class="card-img-top" alt="Product" >
+                        </div>
+                    
+                        <!-- Card body -->
+                        <div class="card-body pb-1">
+                          <h6 class="mb-1">{{ p.product_name }}</h6>
+                          <p class="text-success fw-semibold mb-2">₹{{p.product_offer_price}}.00</p>
+                    
+                          <!-- Move‑to‑cart button -->
+                          <div id="cart-btn-container-1">
+                            <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
+                              <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                              <span class="add-to-cart-span" style="margin-top: 2px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                </svg>
+                              </span>
+                            </a>
+                          </div>
+                          <!-- Remove button -->
+                          <center>
+                            <div>
+                              <button class="btn btn-sm btn-outline-danger mt-3" onclick="removeFromWishlist(this)" data-product-id="{{ p.id }}">Remove</button>
+                            </div>
+                          </center>
+                        </div>
+                      </div>
+                  </li>
+                {% empty %}
+                  <li class="col text-muted">No items in wishlist.</li>
+                {% endfor %}
               </ul>
             </div>
   
@@ -126,56 +221,8 @@
         </div>
       </div>
 
-      <!-- additional info -->
-
-      <div class="col-lg-4">
-        <div class="card shadow-sm p-3">
-          <h3 class="mb-3 forest-green">Additional Info</h3>
-          <form method="POST">
-            <div class="mb-3">
-                <label class="form-label">Address</label>
-                  {% if reg %}
-                    <p class="user-p ps-3">{{ reg.user_address }}</p>
-                  {% else %}
-                    <p class="user-p ps-3">N/A</p>
-                  {% endif %}
-              </div>
-              <div class="mb-3">
-                <label class="form-label">State</label>
-                  {% if reg %}
-                    <p class="user-p ps-3">{{ reg.user_state }}</p>
-                  {% else %}
-                    <p class="user-p ps-3">N/A</p>
-                  {% endif %}
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Postal Code</label>
-                  {% if reg %}
-                    <p class="user-p ps-3">{{ reg.user_pincode }}</p>
-                  {% else %}
-                    <p class="user-p ps-3">N/A</p>
-                  {% endif %}
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Date of Birth</label>
-                  {% if reg %}
-                    <p class="user-p ps-3">{{ reg.user_dob }}</p>
-                  {% else %}
-                    <p class="user-p ps-3">N/A</p>
-                  {% endif %}
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Gender</label>
-                  {% if reg %}
-                    <p class="user-p ps-3">{{ reg.gender }}</p>
-                  {% else %}
-                    <p class="user-p ps-3">N/A</p>
-                  {% endif %}
-              </div>
-              <a href="additional_info" class="btn w-100 user-btn text-decoration-none text-white">Update Profile</a>
-          </form>
-        </div>
-      </div>
+      <!-- old additional info space -->
+      
 
     </div>
   </main>
