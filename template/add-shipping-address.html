@@ -1,0 +1,62 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="s-address-card-header text-white">
+            <h5 class="mb-0 text-center">Add Shipping Address</h5>
+          </div>
+          <div class="card-body">
+            <form id="shippingAddressForm" action="" method="POST">
+                {% csrf_token %}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="Full Name" name="full_name" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="tel" class="form-control" placeholder="Mobile Number" name="mobile" required>
+                </div>
+                <div class="col-md-4">
+                  <input type="number" class="form-control" placeholder="Pincode" name="pincode" required>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" placeholder="Locality" name="locality" required>
+                </div>
+                <div class="col-12">
+                  <input type="text" class="form-control" placeholder="Address (Street, Area, etc.)" name="address_line" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="City/District/Town" name="city" required>
+                </div>
+                <div class="col-md-6">
+                  <select class="form-select" name="state" required>
+                    <option value="" selected disabled>Select State</option>
+                    <option value="KL">Kerala</option>
+                    <option value="KA">Karnataka</option>
+                    <option value="TN">Tamil Nadu</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="Landmark (Optional)" name="landmark">
+                </div>
+                <div class="col-md-6">
+                  <input type="tel" class="form-control" placeholder="Alternate Phone (Optional)" name="alt_phone">
+                </div>
+              </div>
+              
+              <div class="mt-4 text-end">
+                <a href="/add_to_cart" class="btn bg-success text-white">Back</a>
+                <input type="submit" value="Submit" class="btn btn-success px-4">
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% include 'footer.html' %}

@@ -29,29 +29,15 @@ body{
 .img_navbar {
     padding: 10px 0px 0px 20px;
 }
-.span_search {
-    border: 1px solid silver;
-    background-color: white;
-    height: 40px;
-    width: 350px;
-    padding: 6px;
-    border-radius: 20px;
-    margin-top: 19px;
-    overflow: hidden;
+.nav-cart {
+    filter: drop-shadow(3px 1px 1px black);
+    rotate: 10deg;
 }
-.span_search input{
-    border: none;
-    outline: none;
-    background: transparent;
-    color: black;
-    overflow: hidden;
-
+.nav-cart-svg{
+    color: white;
 }
-.span_search button{
-    border: none;
-    background: transparent;
-    float: right;
-    overflow: hidden;
+.nav-cart-svg:hover {
+    color: red;
 }
 .div_category {
     margin-top: 24px;
@@ -891,9 +877,9 @@ button:active {
 }
 
 .add-to-cart-btn-2 {
+    width: 300px;
     border: 2px solid #182d09;
     border-radius: 10px;
-    height: 50px;
     text-decoration: none;
     color: white;
     background-color: #182d09;
@@ -903,25 +889,116 @@ button:active {
 
 /* Wishlist page start ------------------------------------------------------------------------------------------ */
 
-.wishlist-card {
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-.wishlist-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,.08);
-}
-  
-.wishlist-img-wrapper {
-    overflow: hidden;
-    border-radius: 8px 8px 0 0;
-}
-.wishlist-img-wrapper img {
-    transition: transform .3s ease;
-    width: 100px;
-    height: 110px;
-}
-  .wishlist-card:hover img {
-    transform: scale(1.06);
+.cart-step-wrapper {
+    background-color: #182d09;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    max-width: 700px;
 }
 
-/* Wishlist page end -------------------------------------------------------------------------------------------- */
+.cart-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 500;
+    color: #444;
+}
+
+.cart-step .circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.cart-step.active .circle {
+    background-color: orange;
+    color: black;
+    border-color: orange;
+}
+
+.cart-section {
+    display: none;
+}
+
+.cart-section.active {
+    display: block;
+}
+
+.cart-product-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    /* padding: 15px; */
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.cart-price-summary {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.quantity-wrapper button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ccc;
+    background-color: #182d09;
+    color: white;
+}
+
+.quantity-wrapper input {
+    max-width: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.address-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+  
+.address-card.selected {
+    border-color: #0d6efd;
+    background-color: #e9f2ff;
+}
+
+
+.sticky-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+/* add shipping address start -------------------------------------------------------------------------------------- */
+
+.s-address-card-header {
+    background-color: #182d09;
+    padding: 10px;
+}
+
+.payment-options .form-check {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: 0.2s;
+    background-color: #f9f9f9;
+}
+  
+.payment-options .form-check:hover {
+    background-color: #f1f1f1;
+    border-color: #bbb;
+}
+

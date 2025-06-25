@@ -1,0 +1,231 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+<div class="container my-4">
+
+    <!-- Step Progress -->
+
+    <center>
+    <div class="cart-step-wrapper">
+        <div class="cart-step step1 active">
+          <div class="circle">1</div>
+          <div class="text-white cart-step-text">Your Cart</div>
+        </div>
+        <div class="cart-step step2">
+          <div class="circle">2</div>
+          <div class="text-white cart-step-text">Order Review</div>
+        </div>
+        <div class="cart-step step3">
+          <div class="circle">3</div>
+          <div class="text-white cart-step-text">Payment</div>
+        </div>
+      </div>
+    </center>
+
+    <!-- Step 1: Cart Items -->
+     
+    <div class="cart-section section1 active">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row gy-3">
+            {% for item in cart_items %}
+            <div class="col-12">
+              <div class="cart-product-item bg-white p-3 rounded">
+                <div class="row align-items-center">
+    
+                  <!-- Image -->
+                  <div class="col-12 col-md-auto text-center">
+                    <img src="../media/{{ item.product.product_image }}" width="130" height="100" class="rounded" alt="product image">
+                  </div>
+    
+                  <!-- Product Info -->
+                  <div class="col-12 col-md">
+                    <h6 class="mb-1 fw-bold">{{ item.product.product_name }}</h6>
+                    <p class="mb-1 text-muted">Qty: {{ item.quantity }}</p>
+                    <p class="mb-1 text-success fw-bold">₹{{ item.product.product_offer_price }}</p>
+                  </div>
+    
+                  <!-- Quantity -->
+                   
+                  <div class="col-6 col-md-auto text-center">
+                    <div class="quantity-wrapper d-inline-flex align-items-center">
+                      <form action="{% url 'update_cart_quantity' item.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="quantity-wrapper d-inline-flex align-items-center">
+                          <button type="submit" name="action" value="decrease">-</button>
+                          <input type="text" value="{{ item.quantity }}" readonly>
+                          <button type="submit" name="action" value="increase">+</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+    
+                  <!-- Remove Button -->
+                  <div class="col-6 col-md-auto text-center">
+                    <a href="{% url 'remove_cart_item' item.id %}" class="btn btn-outline-danger btn-sm">Remove</a>
+                  </div>
+    
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="text-muted text-center">Cart is empty.</div>
+            {% endfor %}
+          </div>
+        </div>
+        
+    
+        <div class="col-md-4 mt-3 mt-md-0">
+          <div class="cart-price-summary bg-white">
+            <h5 class="text-center fw-bold">Price Details</h5>
+            <hr>
+            <p class="d-flex justify-content-between"><span class="text-secondary">MRP Total:</span> <span class="fw-bold">₹{{ total_mrp }}.00</span></p>
+            <p class="d-flex justify-content-between"><span class="text-secondary">Discount:</span> <span class="fw-bold text-success">-₹{{ total_discount }}.00</span></p>
+            <p class="d-flex justify-content-between"><span class="text-secondary">Delivery Fee:</span> <span class="fw-bold text-success">FREE</span></p>
+            <hr>
+            <p class="d-flex justify-content-between" id="total-price"><span class="fw-bold">Total:</span> <span class="fw-bold">₹{{ total_amount|floatformat:0 }}.00</span></p>
+            <hr>
+
+            <div class="sticky-mobile bg-white d-flex justify-content-between">
+              <p class="d-block d-xl-none d-lg-none d-md-none"><strong>Total: ₹<span id="total-price">₹{{ total_amount|floatformat:0 }}.00</span></strong></p>
+              <button class="btn btn-success w-50 me-2" onclick="gotoStep(2)">Checkout</button>
+              <a href="{% url 'product_browsing' %}" class="btn bg-danger text-white">Back</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+   
+   
+
+    <!-- Step 2: Address -->
+     
+    <div class="cart-section section2" id="cart-address">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="mb-3">
+            <h4 class="mb-3 text-center">Shipping Address</h4>
+
+            <center>
+            <a href="{% url 'add_shipping_address' %}" class="btn bg-success text-white mb-3">Add Address</a>
+            </center>
+                 
+            <form method="POST">
+              {% csrf_token %}
+            {% if request.session.uid %}
+              <div class="row g-3">
+                {% for i in res %}
+                <div class="col-12">
+                  <label for="address{{ forloop.counter }}" class="card address-card p-3 d-flex flex-md-row flex-column align-items-start gap-3 {% if i.is_selected %}selected{% endif %}" style="cursor: pointer;">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="selected_address" id="address{{ forloop.counter }}" value="{{ i.id }}" {% if i.is_selected %}checked{% endif %}>                    </div>
+                    <div class="address-details w-100">
+                      <h6 class="mb-1">{{ i.full_name }}</h6>
+                      <p class="mb-1">{{ i.mobile }}</p>
+                      <p class="mb-1">{{ i.address_line }}, {{ i.locality }}</p>
+                      <p class="mb-1">{{ i.city }}, {{ i.state }} - {{ i.pincode }}</p>
+                      {% if i.landmark %}<p class="mb-1 text-muted">Landmark: {{ i.landmark }}</p>{% endif %}
+                      {% if i.alt_phone %}<p class="mb-0 text-muted">Alternate Phone: {{ i.alt_phone }}</p>{% endif %}
+                    </div>
+                    <div class="">
+                      <a href="{% url 'update_shipping_address' id=i.id %}" class="btn bg-success mb-2"><i class="bi bi-pencil-fill text-white"></i></a>
+                      <a href="{% url 'delete_shipping_address' id=i.id %}" class="btn bg-danger mb-2"><i class="bi bi-trash-fill text-white"></i></a>
+                    </div>
+                  </label>
+                </div>
+                
+                {% empty %}
+                <div class="text-center text-muted">No shipping addresses found.</div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </form>
+            
+          </div>
+        </div>
+    
+        <div class="col-md-4">
+          <div class="cart-price-summary bg-white">
+            <h5 class="text-center fw-bold">Price Details</h5>
+            <hr>
+            <p class="d-flex justify-content-between"><span class="text-secondary">MRP Total:</span> <span class="fw-bold">₹{{ total_mrp }}.00</span></p>
+            <p class="d-flex justify-content-between"><span class="text-secondary">Discount:</span> <span class="fw-bold text-success">-₹{{ total_discount }}.00</span></p>
+            <p class="d-flex justify-content-between"><span class="text-secondary">Delivery Fee:</span> <span class="fw-bold text-success">FREE</span></p>
+            <hr>
+            <p class="d-flex justify-content-between" id="total-price"><span class="fw-bold">Total:</span> <span class="fw-bold">₹{{ total_amount|floatformat:0 }}.00</span></p>
+            <hr>
+
+            <div class="sticky-mobile bg-white d-flex justify-content-between">
+              <p class="d-block d-xl-none d-lg-none d-md-none"><strong>Total: ₹<span id="total-price">₹{{ total_amount|floatformat:0 }}.00</span></strong></p>
+              <button class="btn btn-success w-50 me-2" onclick="gotoStep(3)">Place Order</button>
+              <button class="btn bg-danger text-white" onclick="gotoStep(1)">Back</button>
+            </div>
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+   
+
+
+    <!-- Step 3: Payment -->
+     
+    <div class="cart-section section3">
+      <div class="row">
+        <!-- Payment Options -->
+        <div class="col-md-8 d-flex justify-content-center mb-3">
+          <div class="payment-options w-100" style="max-width: 500px;">
+            <h5 class="mb-4 text-center">Payment Options</h5>
+    
+            <div class="form-check mb-3 d-flex align-items-center gap-2">
+              <input class="form-check-input" type="radio" name="payment" id="cod" checked>
+              <label class="form-check-label d-flex align-items-center w-100" for="cod">
+                <i class="bi bi-truck fs-5 me-2 text-primary"></i>
+                Cash on Delivery
+              </label>
+            </div>
+    
+            <div class="form-check d-flex align-items-center gap-2">
+              <input class="form-check-input" type="radio" name="payment" id="upi">
+              <label class="form-check-label d-flex align-items-center w-100" for="upi">
+                <i class="bi bi-phone fs-5 me-2 text-success"></i>
+                UPI / Wallet
+              </label>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Price Summary -->
+         
+        <div class="col-md-4">
+          <div class="cart-price-summary bg-white">
+            <h5 class="text-center fw-bold">Price Details</h5>
+            <hr>
+            <p class="d-flex justify-content-between"><span class="text-secondary">MRP Total:</span> <span class="fw-bold">₹{{ total_mrp }}.00</span></p>
+            <p class="d-flex justify-content-between"><span class="text-secondary">Discount:</span> <span class="fw-bold text-success">-₹{{ total_discount }}.00</span></p>
+            <p class="d-flex justify-content-between"><span class="text-secondary">Delivery Fee:</span> <span class="fw-bold text-success">FREE</span></p>
+            <hr>
+            <p class="d-flex justify-content-between" id="total-price"><span class="fw-bold">Total:</span> <span class="fw-bold">₹{{ total_amount|floatformat:0 }}.00</span></p>
+            <hr>
+
+            <div class="sticky-mobile bg-white d-flex justify-content-between">
+              <p class="d-block d-xl-none d-lg-none d-md-none"><strong>Total: ₹<span id="total-price">₹{{ total_amount|floatformat:0 }}.00</span></strong></p>
+              <button class="btn btn-success w-50 me-2" onclick="alert('Order placed!')">Buy</button>
+              <button class="btn bg-danger text-white" onclick="gotoStep(2)">Back</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+{% include 'footer.html' %}

@@ -134,7 +134,6 @@
             <!-- Wishlist -->
             
             <div class="tab-pane fade show active" id="wishlist" role="tabpanel">
-              <p class="text-muted ms-2">My wishlist:</p>
               <ul class="list-unstyled row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> 
 
                 {% for p in wishlist_products %}
@@ -143,38 +142,55 @@
                       <div class="card wishlist-card border-1 shadow-sm h-100 position-relative mt-2">
 
                         <!-- Product image -->
+                         
                         <div class="wishlist-img-wrapper d-flex justify-content-center mt-1">
                           <img src="../media/{{p.product_image}}" class="card-img-top" alt="Product" >
                         </div>
                     
                         <!-- Card body -->
+
                         <div class="card-body pb-1">
                           <h6 class="mb-1">{{ p.product_name }}</h6>
                           <p class="text-success fw-semibold mb-2">₹{{p.product_offer_price}}.00</p>
                     
-                          <!-- Move‑to‑cart button -->
-                          <div id="cart-btn-container-1">
-                            <a href="#" class="w-100 add-to-cart-btn d-flex justify-content-between" onclick="addToCart(1)">
-                              <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
-                              <span class="add-to-cart-span" style="margin-top: 2px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-                                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                                </svg>
-                              </span>
-                            </a>
-                          </div>
-                          <!-- Remove button -->
-                          <center>
-                            <div>
-                              <button class="btn btn-sm btn-outline-danger mt-3" onclick="removeFromWishlist(this)" data-product-id="{{ p.id }}">Remove</button>
+                          <!-- cart button -->
+
+                          <form action="{% url 'add_to_cart' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ p.id }}">
+                            <input type="hidden" name="quantity" value="1">
+                          
+                            <div class="wishlist-cart-btn-container">
+                              <button type="submit" class="w-100 add-to-cart-btn d-flex justify-content-between">
+                                <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                                <span class="add-to-cart-span" style="margin-top: 2px;">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                  </svg>
+                                </span>
+                              </button>
                             </div>
+                          </form>
+
+                          <!-- Remove button -->
+
+                          <center>
+
+                            <form method="POST" action="{% url 'delete_wishlist' %}" style="display:inline;">
+                              {% csrf_token %}
+                              <input type="hidden" name="product_id" value="{{ p.id }}">
+                              <button type="submit" class="btn btn-sm btn-outline-danger mt-3">Remove</button>
+                            </form>
+
                           </center>
                         </div>
                       </div>
+
                   </li>
-                {% empty %}
-                  <li class="col text-muted">No items in wishlist.</li>
-                {% endfor %}
+                  {% empty %}
+                    <li class="col text-muted ms-3">No items in wishlist.</li>
+                  {% endfor %}
+
               </ul>
             </div>
   

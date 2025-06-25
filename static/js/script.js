@@ -371,43 +371,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //whishlist
 
-// function toggleWishlist(el) {
-//   const svg = el.querySelector('svg');
-//   const isFilled = svg.classList.contains('bi-heart-fill');
-
-//   if (isFilled) {
-
-//     // unfilled heart with default color
-    
-//     el.innerHTML = `
-//       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-//            class="bi bi-heart" viewBox="0 0 16 16">
-//         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 
-//                  1.4 3.053c-.523 1.023-.641 2.5.314 
-//                  4.385.92 1.815 2.834 3.989 6.286 
-//                  6.357 3.452-2.368 5.365-4.542 
-//                  6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 
-//                  10.4.28 8.717 2.01zM8 15C-7.333 4.868 
-//                  3.279-3.04 7.824 1.143q.09.083.176.171a3 
-//                  3 0 0 1 .176-.17C12.72-3.042 23.333 
-//                  4.867 8 15"/>
-//       </svg>
-//     `;
-//   } else {
-
-//     // red filled heart
-
-//     el.innerHTML = `
-//       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red"
-//            class="bi bi-heart-fill" viewBox="0 0 16 16">
-//         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 
-//                  23.534 4.735 8 15-7.534 4.736 
-//                  3.562-3.248 8 1.314"/>
-//       </svg>
-//     `;
-//   }
-// }
-
 function toggleWishlist(el) {
   const productId = el.getAttribute("data-product-id");
   const url = el.getAttribute("data-url");
@@ -454,106 +417,21 @@ function toggleWishlist(el) {
     .catch(err => console.error(err));
 }
 
-// remove wishlist
+// product refresh position
 
-function removeFromWishlist(el) {
-  const productId = el.getAttribute("data-product-id");
-  const notyf = new Notyf({
-    duration: 2000,
-    position: { x: 'right', y: 'bottom' }
+document.querySelectorAll("form").forEach(form => {
+  form.addEventListener("submit", () => {
+    localStorage.setItem("scrollPos", window.scrollY);
   });
+});
 
-  fetch("/delete-wishlist/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "X-CSRFToken": getCookie("csrftoken")
-    },
-    body: `product_id=${productId}`
-  })
-    .then(res => {
-      if (res.status === 401) {
-        notyf.error("Please login to manage your wishlist.");
-        return null;
-      }
-      return res.json();
-    })
-    .then(data => {
-      if (!data) return;
-
-      if (data.status === "deleted") {
-        notyf.error("Removed from wishlist");
-        setTimeout(() => {
-          location.reload();
-        }, 1000);
-      }
-    })
-    .catch(() => {
-      notyf.error("Something went wrong!");
-    });
-}
-
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
+window.addEventListener("load", () => {
+  const scrollPos = localStorage.getItem("scrollPos");
+  if (scrollPos) {
+    window.scrollTo(0, parseInt(scrollPos));
+    localStorage.removeItem("scrollPos");
   }
-  return cookieValue;
-}
-
-// add to cart
-
-function addToCart(productId) {
-  const container = document.getElementById(`cart-btn-container-${productId}`);
-  let count = 1;
-
-  container.innerHTML = `
-    <div style="border: 1px solid #182d09;" class="d-flex align-items-center justify-content-between rounded  w-100">
-      <button style="background-color: #182d09; color: white;" class="btn btn-sm btn-light fw-bold" onclick="decreaseCount(${productId})">-</button>
-      <span id="cart-count-${productId}" class="fw-bold">${count}</span>
-      <button style="background-color: #182d09; color: white;" class="btn btn-sm btn-light fw-bold" onclick="increaseCount(${productId})">+</button>
-    </div>
-  `;
-}
-
-function increaseCount(productId) {
-  const countSpan = document.getElementById(`cart-count-${productId}`);
-  let count = parseInt(countSpan.textContent);
-  count++;
-  countSpan.textContent = count;
-}
-
-function decreaseCount(productId) {
-  const countSpan = document.getElementById(`cart-count-${productId}`);
-  let count = parseInt(countSpan.textContent);
-
-  if (count > 1) {
-    count--;
-    countSpan.textContent = count;
-  } else {
-
-    // change to orginal add button goes count 0
-
-    const container = document.getElementById(`cart-btn-container-${productId}`);
-    container.innerHTML = `
-      <a href="javascript:void(0)" class="w-100 add-to-cart-btn d-flex justify-content-between align-items-center" onclick="addToCart(${productId})">
-        <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
-        <span class="add-to-cart-span">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-          </svg>
-        </span>
-      </a>
-    `;
-  }
-}
+});
 
 // clear products from search
 
@@ -572,54 +450,7 @@ $(document).ready(function () {
 
 // product detailes start ----------------------------------------------------------------------------------
 
-// add-to-cart
-
-function addToCart2(productId) {
-  const container = document.getElementById(`cart-btn-container-${productId}`);
-  let count = 1;
-
-  container.innerHTML = `
-    <div style="border: 1px solid #182d09; height: 50px;" class="d-flex align-items-center justify-content-between rounded-3 cart w-75">
-      <button style="background-color: #182d09; color: white;" class="btn btn-sm btn-light rounded-3 fw-bold h-100 w-25 fs-5" onclick="decreaseCount2(${productId})">-</button>
-      <span id="cart-count-${productId}" class="fw-bold fs-5">${count}</span>
-      <button style="background-color: #182d09; color: white;" class="btn btn-sm btn-light rounded-3 fw-bold h-100 w-25 fs-5" onclick="increaseCount2(${productId})">+</button>
-    </div>
-  `;
-}
-
-function increaseCount2(productId) {
-  const countSpan = document.getElementById(`cart-count-${productId}`);
-  let count = parseInt(countSpan.textContent);
-  count++;
-  countSpan.textContent = count;
-}
-
-function decreaseCount2(productId) {
-  const countSpan = document.getElementById(`cart-count-${productId}`);
-  let count = parseInt(countSpan.textContent);
-
-  if (count > 1) {
-    count--;
-    countSpan.textContent = count;
-  } else {
-
-    // change to orginal add button goes count 0
-
-    const container = document.getElementById(`cart-btn-container-${productId}`);
-    container.innerHTML = `
-      <a href="javascript:void(0)" class="w-75 add-to-cart-btn-2 d-flex justify-content-between align-items-center cart" onclick="addToCart2(${productId})">
-        <span class="ms-2 fs-4" style="margin-top: 0px;">Add</span>
-        <span class="" style="margin-top: 0px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-          </svg>
-        </span>
-      </a>
-    `;
-  }
-}
-
-//whishlist in cart
+//whishlist
 
 function toggleWishlist_cart(el) {
   const svg = el.querySelector('svg');
@@ -660,4 +491,26 @@ function toggleWishlist_cart(el) {
 }
 
 // product detailes end ------------------------------------------------------------------------------------
+
+// cart page start -----------------------------------------------------------------------------------------
+
+// next section
+
+function gotoStep(step) {
+  document.querySelectorAll('.cart-section').forEach(el => el.classList.remove('active'));
+  document.querySelector('.section' + step).classList.add('active');
+
+  document.querySelectorAll('.cart-step').forEach(el => el.classList.remove('active'));
+  document.querySelector('.step' + step).classList.add('active');
+}
+
+// previous section
+ 
+function gotoStep(step) {
+  document.querySelectorAll('.cart-section').forEach(el => el.classList.remove('active'));
+  document.querySelector('.section' + step).classList.add('active');
+
+  document.querySelectorAll('.cart-step').forEach(el => el.classList.remove('active'));
+  document.querySelector('.step' + step).classList.add('active');
+}
 
