@@ -10,10 +10,9 @@
   </div>
 {% endif %}
 
-<h2 class="mb-0 mt-4 text-center fw-bold heading">Manage Orders</h2>
+<h2 class="mb-0 mt-4 text-center fw-bold heading">Manage Order History</h2>
 
-<main class="container py-5" style="margin-bottom: 385px;">
-
+<main class="container py-5" style="margin-bottom: 100px;">
   <div class="table-responsive">
     <table class="table table-bordered table-hover align-middle">
       <thead class="table-light text-center">
@@ -53,24 +52,18 @@
             {% endif %}
           </td>
           <td>
-            <span class="badge bg-warning text-dark">{{ order.status }}</span>
+            <span class="badge bg-success">Delivered</span>
           </td>
           <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
           <td>
-            <form method="POST" action="{% url 'mark_order_complete' id=order.id %}" class="d-inline">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-outline-success">Delivered</button>
-            </form>          
-            
-            <form method="POST" action="{% url 'delete_order' id=order.id %}" class="d-inline">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            <form method="POST" action="{% url 'delete_order_history' id=order.id %}" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
             </form>
-
           </td>
         </tr>
         {% empty %}
-        <tr><td colspan="10" class="text-center text-muted">No pending orders.</td></tr>
+        <tr><td colspan="10" class="text-center text-muted">No completed orders.</td></tr>
         {% endfor %}
       </tbody>
     </table>

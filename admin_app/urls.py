@@ -26,4 +26,6 @@ urlpatterns = [
     path('admin_order_tracking/', views.admin_order_tracking, name='admin_order_tracking'),
     path('admin_order_complete/<int:id>/', views.mark_order_complete, name='mark_order_complete'),
     path('admin_order_delete/<int:id>/', views.delete_order, name='delete_order'),
+    path('admin_order_history/', views.admin_order_history, name='admin_order_history'),
+    path('delete_order_history/<int:id>/', views.delete_order_history, name='delete_order_history'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

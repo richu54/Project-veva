@@ -40,12 +40,21 @@ def user_account(request):
             except Exception:
                 order.product_data = []
 
+        completed_orders = Order_details.objects.filter(user=data, status="Delivered").order_by('-created_at')
+
+        for order in completed_orders:
+            try:
+                order.product_data = json.loads(order.product)
+            except Exception:
+                order.product_data = []
+
         return render(request, 'user-account.html', {
             'res': data,
             'reg': data_2,
             'wishlist_products': wishlist_products,
             'wished_ids': wished_ids,
-            'orders': pending_orders  
+            'orders': pending_orders,
+            'order_history': completed_orders,
         })
         
     except user_register.DoesNotExist:
@@ -221,7 +230,13 @@ def add_to_cart(request):
 
     total_amount = (total_mrp - total_discount) + delivery_fee
 
-    return render(request, 'add-to-cart.html', {'res':data, 'cart_items': cart_items, 'total_mrp': total_mrp, 'total_discount': total_discount, 'delivery_fee': delivery_fee, 'total_amount': total_amount})
+    return render(request, 'add-to-cart.html', {
+        'res':data, 
+        'cart_items': cart_items, 
+        'total_mrp': total_mrp, 
+        'total_discount': total_discount, 
+        'delivery_fee': delivery_fee, 
+        'total_amount': total_amount })
 
 def add_shipping_address(request):
     if 'uid' not in request.session:

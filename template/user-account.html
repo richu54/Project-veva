@@ -82,25 +82,55 @@
             <!-- Order History -->
 
             <div class="tab-pane fade" id="history" role="tabpanel">
-              <p class="text-muted">Past orders:</p>
-              <table class="table table-bordered table-sm">
-                <thead>
-                  <tr>
-                    <th>#Order</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>#1023</td>
-                    <td>2024-12-01</td>
-                    <td>$15.80</td>
-                    <td><span class="badge bg-success">Delivered</span></td>
-                  </tr>
-                </tbody>
-              </table>
+              
+              {% for order in order_history %}
+              <div class="card mb-4 overflow-hidden border-1 shadow-sm">
+                <div class="card-header text-white py-2" style="background-color: #182d09;">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold">Order #{{ order.id }}</h6>
+                    <span class="badge bg-white text-success">{{ order.status }}</span>
+                  </div>
+                </div>
+                
+                <div class="card-body p-3">
+                  <div class="row g-2 mb-2">
+                    <div class="col-6">
+                      <p class="mb-1 small"><strong>Payment:</strong> {{ order.payment_method }}</p>
+                      <p class="mb-1 small"><strong>Total:</strong> ₹{{ order.total_amount }}</p>
+                    </div>
+                    <div class="col-6 text-end">
+                      <p class="mb-1 small"><strong>Date:</strong> {{ order.created_at|date:"d M Y" }}</p>
+                      <p class="mb-1 small"><strong>City:</strong> {{ order.address.city }}</p>
+                    </div>
+                  </div>
+              
+                  <div class="border-top pt-2">
+                    <h6 class="fw-bold small">Products</h6>
+                    <ul class="list-group list-group-flush">
+                      {% for product in order.product_data %}
+                      <li class="list-group-item px-0 py-1 small d-flex justify-content-between">
+                        <span>{{ product.name }} ×{{ product.qty }}</span>
+                        <span>₹{{ product.final }}</span>
+                      </li>
+                      {% empty %}
+                      <li class="list-group-item px-0 py-1 small text-muted">No products</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="card-footer bg-light p-2">
+                  <div class="d-flex justify-content-end gap-2">
+                  </div>
+                </div>
+              </div>
+              {% empty %}
+              <div class="text-center py-4">
+                <p class="text-muted mb-2">No order history found</p>
+                <a href="{% url 'products' %}" class="btn btn-sm btn-success">Shop Now</a>
+              </div>
+              {% endfor %}
+
             </div>
   
             <!-- Order Tracking -->
@@ -110,7 +140,7 @@
               <div class="border p-3 rounded">
 
                 {% for order in orders %}
-                <div class="card mb-4 border-0 shadow-hover" style="border-radius: 12px; overflow: hidden;">
+                <div class="card mb-4 border-1 shadow-hover" style="border-radius: 12px; overflow: hidden;">
                   <div class="card-header d-flex justify-content-between align-items-center py-3">
                     <h6 class="fw-bold mb-0">Order #{{ order.id }}</h6>
                     <span class="badge rounded-pill 

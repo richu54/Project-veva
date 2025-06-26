@@ -8,6 +8,7 @@ from django.contrib import messages
 from .models import add_product
 from user_app.models import Order_details
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -238,3 +239,29 @@ def delete_order(request, id):
     except Order_details.DoesNotExist:
         messages.error(request, f"Order #{id} not found.")
     return redirect(admin_order_tracking)
+
+def admin_order_history(request):
+
+    delivered_orders = Order_details.objects.filter(status='Delivered').order_by('-created_at')
+
+    for order in delivered_orders:
+        try:
+            order.product_data = json.loads(order.product)
+        except Exception:
+            order.product_data = []
+
+    return render(request, 'manage-order-history.html', {'orders': delivered_orders})
+
+@csrf_exempt
+def delete_order_history(request, id):
+    if request.method == "POST":
+        try:
+            order = Order_details.objects.get(id=id, status="Delivered")
+            order.delete()
+            messages.success(request, "Order history deleted successfully.")
+        except Order_details.DoesNotExist:
+            messages.error(request, "Order not found or not completed.")
+        return redirect(admin_order_history)
+    else:
+        messages.error(request, "Invalid method.")
+        return redirect(admin_order_history)

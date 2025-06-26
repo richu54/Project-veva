@@ -185,3 +185,34 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Order tracking end -------------------------------------------------------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', function () {
+  const messageContainer = document.getElementById('django-messages');
+  const notifyContainer = document.getElementById('notify-container');
+
+  if (messageContainer) {
+    const messages = messageContainer.querySelectorAll('.django-message');
+    messages.forEach(function (msg) {
+      const type = msg.dataset.type || 'info';
+      const text = msg.textContent;
+      showNotify(text, type);
+    });
+  }
+
+  function showNotify(message, type) {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} alert-dismissible fade show shadow`;
+    alert.role = 'alert';
+    alert.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    notifyContainer.appendChild(alert);
+
+    setTimeout(() => {
+      alert.classList.remove('show');
+      alert.classList.add('hide');
+      setTimeout(() => notifyContainer.removeChild(alert), 400);
+    }, 4000);
+  }
+});
