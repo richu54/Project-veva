@@ -1,0 +1,24 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+<center>
+<div class="spinner-border text-success fs-1 p-5 mt-5 mb-5" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+</center>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+Swal.fire({
+  icon: 'success',
+  title: 'Order Placed!',
+  text: 'Your order was placed successfully with Cash on Delivery.',
+  confirmButtonText: 'Continue'
+}).then(() => {
+  window.location.href = "{% url 'index' %}";
+});
+</script>
+
+{% include 'footer.html' %}

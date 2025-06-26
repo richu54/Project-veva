@@ -513,4 +513,3 @@ function gotoStep(step) {
   document.querySelectorAll('.cart-step').forEach(el => el.classList.remove('active'));
   document.querySelector('.step' + step).classList.add('active');
 }
-

@@ -1,0 +1,72 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+<center>
+<div class="spinner-border text-success fs-1 p-5 mt-5 mb-5" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+</center>
+<center>
+  <a href="/home" class="btn bg-danger text-white mb-3">Back</a>
+</center>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+  const options = {
+    key: "{{ key_id }}",
+    amount: "{{ amount }}",
+    currency: "INR",
+    name: "Veva Grocery",
+    description: "Order Payment",
+    order_id: "{{ payment.id }}",
+    handler: function (response) {
+      Swal.fire({
+        icon: "success",
+        title: "Payment Successful!",
+        text: "Thank you for your purchase.",
+        confirmButtonText: "Go to Home"
+      }).then(() => {
+        fetch("{% url 'upi_order_success' %}", {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === "success") {
+            fetch("{% url 'clear_cart_after_payment' %}", {
+              method: "POST",
+              headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "Content-Type": "application/json"
+              }
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.status === "success") {
+                window.location.href = "{% url 'product_browsing' %}";
+              } else {
+                Swal.fire("Error", "Cart not cleared", "error");
+              }
+            });
+          } else {
+            Swal.fire("Error", "Order not saved", "error");
+          }
+        });
+      });
+    },
+    theme: {
+      color: "#28a745"
+    }
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.open();
+</script>
+
+{% include 'footer.html' %}

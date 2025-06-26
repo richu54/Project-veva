@@ -47,3 +47,14 @@ class Cart(models.Model):
     product = models.ForeignKey(add_product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     added_at = models.DateTimeField(auto_now_add=True)
+
+
+class Order_details(models.Model):
+    user = models.ForeignKey(user_register, on_delete=models.CASCADE)
+    product = models.TextField()  # You can store JSON string of product name, qty, price
+    address = models.ForeignKey(Shipping_address, on_delete=models.CASCADE)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_method = models.CharField(max_length=20)  # COD or UPI
+    payment_status = models.CharField(max_length=20)  # Paid or Unpaid
+    status = models.CharField(max_length=20, default='Pending')  # Pending / Completed
+    created_at = models.DateTimeField(auto_now_add=True)

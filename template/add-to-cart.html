@@ -2,6 +2,46 @@
 
 {% include 'header.html' %}
 
+{% if error %}
+  <div class="alert alert-danger text-center">{{ error }}</div>
+{% endif %}
+
+<!-- alert for select delivery address -->
+
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops!',
+        text: '{{ message }}',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        window.location.replace(window.location.pathname);
+      });
+    </script>
+  {% endfor %}
+{% endif %}
+
+<!-- alert for get back from address section -->
+
+{% if messages %}
+  {% for message in messages %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      Swal.fire({
+        icon: 'warning',
+        title: 'Heads up!',
+        text: '{{ message }}',
+        toast: true,
+        position: 'bottom-end',
+        timer: 3000,
+        showConfirmButton: false
+      });
+    </script>
+  {% endfor %}
+{% endif %}
+
 <div class="container my-4">
 
     <!-- Step Progress -->
@@ -102,6 +142,9 @@
    
 
     <!-- Step 2: Address -->
+
+    <form id="paymentForm" method="POST" action="{% url 'razorpay_payment' %}">
+      {% csrf_token %}
      
     <div class="cart-section section2" id="cart-address">
       <div class="row">
@@ -113,15 +156,14 @@
             <a href="{% url 'add_shipping_address' %}" class="btn bg-success text-white mb-3">Add Address</a>
             </center>
                  
-            <form method="POST">
-              {% csrf_token %}
+
             {% if request.session.uid %}
               <div class="row g-3">
                 {% for i in res %}
                 <div class="col-12">
                   <label for="address{{ forloop.counter }}" class="card address-card p-3 d-flex flex-md-row flex-column align-items-start gap-3 {% if i.is_selected %}selected{% endif %}" style="cursor: pointer;">
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="selected_address" id="address{{ forloop.counter }}" value="{{ i.id }}" {% if i.is_selected %}checked{% endif %}>                    </div>
+                      <input class="form-check-input" type="radio" name="selected_address" id="address{{ forloop.counter }}" value="{{ i.id }}" {% if i.id|stringformat:"s" == request.session.selected_address_id|stringformat:"s" %}checked{% endif %}> </div>
                     <div class="address-details w-100">
                       <h6 class="mb-1">{{ i.full_name }}</h6>
                       <p class="mb-1">{{ i.mobile }}</p>
@@ -142,7 +184,7 @@
                 {% endfor %}
               </div>
             {% endif %}
-          </form>
+
             
           </div>
         </div>
@@ -160,7 +202,7 @@
 
             <div class="sticky-mobile bg-white d-flex justify-content-between">
               <p class="d-block d-xl-none d-lg-none d-md-none"><strong>Total: ₹<span id="total-price">₹{{ total_amount|floatformat:0 }}.00</span></strong></p>
-              <button class="btn btn-success w-50 me-2" onclick="gotoStep(3)">Place Order</button>
+              <button type="button" class="btn btn-success w-50 me-2" onclick="gotoStep(3)">Place Order</button>
               <button class="btn bg-danger text-white" onclick="gotoStep(1)">Back</button>
             </div>
 
@@ -184,20 +226,15 @@
             <h5 class="mb-4 text-center">Payment Options</h5>
     
             <div class="form-check mb-3 d-flex align-items-center gap-2">
-              <input class="form-check-input" type="radio" name="payment" id="cod" checked>
-              <label class="form-check-label d-flex align-items-center w-100" for="cod">
-                <i class="bi bi-truck fs-5 me-2 text-primary"></i>
-                Cash on Delivery
-              </label>
+              <input class="form-check-input" type="radio" name="selected_payment_method" id="cod" value="COD" checked>
+              <label for="cod">Cash on Delivery</label>
             </div>
-    
+            
             <div class="form-check d-flex align-items-center gap-2">
-              <input class="form-check-input" type="radio" name="payment" id="upi">
-              <label class="form-check-label d-flex align-items-center w-100" for="upi">
-                <i class="bi bi-phone fs-5 me-2 text-success"></i>
-                UPI / Wallet
-              </label>
+              <input class="form-check-input" type="radio" name="selected_payment_method" id="upi" value="UPI">
+              <label for="upi">UPI / Wallet</label>
             </div>
+
           </div>
         </div>
     
@@ -214,18 +251,32 @@
             <p class="d-flex justify-content-between" id="total-price"><span class="fw-bold">Total:</span> <span class="fw-bold">₹{{ total_amount|floatformat:0 }}.00</span></p>
             <hr>
 
-            <div class="sticky-mobile bg-white d-flex justify-content-between">
-              <p class="d-block d-xl-none d-lg-none d-md-none"><strong>Total: ₹<span id="total-price">₹{{ total_amount|floatformat:0 }}.00</span></strong></p>
-              <button class="btn btn-success w-50 me-2" onclick="alert('Order placed!')">Buy</button>
-              <button class="btn bg-danger text-white" onclick="gotoStep(2)">Back</button>
-            </div>
+
+            <input type="hidden" name="selected_payment_method" id="selected_payment_method">
+            
+              <div class="sticky-mobile bg-white d-flex justify-content-between mt-3">
+                <p class="d-block d-xl-none d-lg-none d-md-none">
+                  <strong>Total: ₹<span id="total-price">{{ total_amount|floatformat:0 }}</span>.00</strong>
+                </p>
+                <button type="submit" class="btn btn-success w-50 me-2" onclick="setPaymentMethod()">Buy</button>
+                <button type="button" class="btn bg-danger text-white" onclick="gotoStep(2)">Back</button>
+              </div>
+            
 
           </div>
         </div>
       </div>
     </div>
+  </form>
 
   </div>
+
+  <script>
+    function setPaymentMethod() {
+      let selected = document.getElementById("upi").checked ? "UPI" : "COD";
+      document.getElementById("selected_payment_method").value = selected;
+    }
+    </script>
 
 
 {% include 'footer.html' %}

@@ -20,4 +20,7 @@ urlpatterns = [
     path('show_cart', views.show_cart, name='show_cart'),
     path('update-cart/<int:cart_id>/', views.update_cart_quantity, name='update_cart_quantity'),
     path('remove_cart_item/<int:id>/',views.remove_cart_item,name='remove_cart_item'),
+    path('razorpay_payment/', views.razorpay_payment, name='razorpay_payment'),
+    path('clear_cart_after_payment/', views.clear_cart_after_payment, name='clear_cart_after_payment'),
+    path('upi_order_success/', views.upi_order_success, name='upi_order_success'),
 ]

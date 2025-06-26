@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from veva.models import user_register
 from .models import additional_info
 from django.contrib import messages
@@ -11,6 +11,11 @@ from .models import Shipping_address
 from user_app.models import Cart
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.conf import settings
+import razorpay
+from django.views.decorators.csrf import csrf_exempt
+from .models import Order_details
+import json
 
 # Create your views here.
 
@@ -306,3 +311,149 @@ def remove_cart_item(request,id):
         pass
 
     return redirect(add_to_cart)
+
+def razorpay_payment(request):
+    if 'uid' not in request.session:
+        return redirect('login')
+
+    user_id = request.session['uid']
+    user = user_register.objects.get(id=user_id)
+    cart_items = Cart.objects.filter(user=user)
+
+    if not cart_items.exists():
+        return redirect('add_to_cart')
+
+    address_id = request.POST.get('selected_address')
+    if not address_id:
+        messages.error(request, "Please select a delivery address.")
+        return redirect('add_to_cart')  # or your cart page
+    
+    request.session['selected_address_id'] = address_id
+
+    address = Shipping_address.objects.get(id=address_id, user=user)
+
+    total_mrp = 0
+    total_discount = 0
+    delivery_fee = 0
+    product_data = []
+
+    for item in cart_items:
+        price = item.product.product_price
+        offer = item.product.product_offer
+        quantity = item.quantity
+        discount = (price * offer) / 100
+        final_price = (price - discount) * quantity
+
+        total_mrp += price * quantity
+        total_discount += discount * quantity
+
+        product_data.append({
+            'name': item.product.product_name,
+            'qty': quantity,
+            'price': price,
+            'final': final_price
+        })
+
+    total_amount = int(round(total_mrp - total_discount + delivery_fee))
+
+    if request.method == "POST":
+        payment_method = request.POST.get('selected_payment_method')
+
+        if payment_method == "COD":
+            # Save directly to Order_details
+            Order_details.objects.create(
+                user=user,
+                product=json.dumps(product_data),
+                address=address,
+                total_amount=total_amount,
+                payment_method="COD",
+                payment_status="Unpaid",
+                status="Pending"
+            )
+            cart_items.delete()
+            return render(request, 'cod-order-success.html')
+
+        elif payment_method == "UPI":
+            # Proceed with Razorpay
+            client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+            payment = client.order.create({
+                'amount': int(total_amount * 100),
+                'currency': 'INR',
+                'payment_capture': '1'
+            })
+
+            return render(request, 'razorpay-popup.html', {
+                'key_id': settings.RAZORPAY_KEY_ID,
+                'payment': payment,
+                'amount': int(total_amount * 100),
+                'cart_items': cart_items,
+                'total_mrp': total_mrp,
+                'total_discount': total_discount,
+                'delivery_fee': delivery_fee,
+                'total_amount': total_amount
+            })
+
+    messages.error(request, "delivery address session removed !.")
+    return redirect('add_to_cart')
+
+
+@csrf_exempt
+def clear_cart_after_payment(request):
+    if request.method == "POST":
+        if 'uid' not in request.session:
+            return JsonResponse({'status': 'unauthorized'}, status=401)
+        user_id = request.session['uid']
+        user = user_register.objects.get(id=user_id)
+        Cart.objects.filter(user=user).delete()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'invalid_method'}, status=405)
+
+@csrf_exempt
+def upi_order_success(request):
+    if request.method == "POST":
+        if 'uid' not in request.session:
+            return JsonResponse({'status': 'unauthorized'}, status=401)
+
+        user_id = request.session['uid']
+        user = user_register.objects.get(id=user_id)
+        cart_items = Cart.objects.filter(user=user)
+
+        address = Shipping_address.objects.filter(user=user).first()
+
+        product_data = []
+        total_mrp = 0
+        total_discount = 0
+        delivery_fee = 0
+
+        for item in cart_items:
+            price = item.product.product_price
+            offer = item.product.product_offer
+            quantity = item.quantity
+            discount = (price * offer) / 100
+            final_price = (price - discount) * quantity
+
+            total_mrp += price * quantity
+            total_discount += discount * quantity
+
+            product_data.append({
+                'name': item.product.product_name,
+                'qty': quantity,
+                'price': price,
+                'final': final_price
+            })
+
+        total_amount = total_mrp - total_discount + delivery_fee
+
+        Order_details.objects.create(
+            user=user,
+            product=json.dumps(product_data),
+            address=address,
+            total_amount=total_amount,
+            payment_method="UPI",
+            payment_status="Paid",
+            status="Pending"
+        )
+
+        return JsonResponse({'status': 'success'})
+
+    return JsonResponse({'status': 'invalid method'}, status=405)
