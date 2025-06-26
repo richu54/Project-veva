@@ -4,22 +4,193 @@
 
 <h1 class="text-center forest-green">User Account</h1>
 
-<center>
-
-  <div class="d-block d-xl-none d-lg-none d-md-none">
-    <a href="#wishlist" class="btn bg-success text-white border-1 rounded p-1">Whishlist</a>
-  </div>
-
-</center>
-
 {% if request.session.uid %}
 
 <main class="container py-4">
     <div class="row g-4">
       
-      <!-- Left: Profile -->
+      <!-- Right: Tabs for Cart/Wishlist/Orders (will appear first on mobile) -->
+      <div class="col-lg-8 order-1 order-lg-2">
+        <div class="card shadow-sm p-3">
+          <ul class="nav nav-tabs mb-3" id="profileTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active user_acc_options" data-bs-toggle="tab" data-bs-target="#wishlist" type="button" role="tab">Wishlist</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link user_acc_options" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">Order History</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link user_acc_options" data-bs-toggle="tab" data-bs-target="#tracking" type="button" role="tab">Order Tracking</button>
+            </li>
+          </ul>
+  
+          <div class="tab-content">
 
-      <div class="col-lg-4">
+            <!-- Wishlist -->
+
+            <div class="tab-pane fade show active" id="wishlist" role="tabpanel">
+              <ul class="list-unstyled row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> 
+                {% for p in wishlist_products %}
+                  <li class="col">
+                      <div class="card wishlist-card border-1 shadow-sm h-100 position-relative mt-2">
+                        <!-- Product image -->
+                        <div class="wishlist-img-wrapper d-flex justify-content-center mt-1">
+                          <img src="../media/{{p.product_image}}" class="card-img-top" alt="Product" >
+                        </div>
+                    
+                        <!-- Card body -->
+                        <div class="card-body pb-1">
+                          <h6 class="mb-1">{{ p.product_name }}</h6>
+                          <p class="text-success fw-semibold mb-2">₹{{p.product_offer_price}}.00</p>
+                    
+                          <!-- cart button -->
+                          <form action="{% url 'add_to_cart' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ p.id }}">
+                            <input type="hidden" name="quantity" value="1">
+                          
+                            <div class="wishlist-cart-btn-container">
+                              <button type="submit" class="w-100 add-to-cart-btn d-flex justify-content-between">
+                                <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
+                                <span class="add-to-cart-span" style="margin-top: 2px;">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                  </svg>
+                                </span>
+                              </button>
+                            </div>
+                          </form>
+
+                          <!-- Remove button -->
+
+                          <center>
+                            <form method="POST" action="{% url 'delete_wishlist' %}" style="display:inline;">
+                              {% csrf_token %}
+                              <input type="hidden" name="product_id" value="{{ p.id }}">
+                              <button type="submit" class="btn btn-sm btn-outline-danger mt-3">Remove</button>
+                            </form>
+                          </center>
+                        </div>
+                      </div>
+                  </li>
+                  {% empty %}
+                    <li class="col text-muted ms-3">No items in wishlist.</li>
+                  {% endfor %}
+              </ul>
+            </div>
+  
+            <!-- Order History -->
+
+            <div class="tab-pane fade" id="history" role="tabpanel">
+              <p class="text-muted">Past orders:</p>
+              <table class="table table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>#Order</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#1023</td>
+                    <td>2024-12-01</td>
+                    <td>$15.80</td>
+                    <td><span class="badge bg-success">Delivered</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  
+            <!-- Order Tracking -->
+
+            <div class="tab-pane fade" id="tracking" role="tabpanel">
+              <p class="text-muted">Track your recent order:</p>
+              <div class="border p-3 rounded">
+
+                {% for order in orders %}
+                <div class="card mb-4 border-0 shadow-hover" style="border-radius: 12px; overflow: hidden;">
+                  <div class="card-header d-flex justify-content-between align-items-center py-3">
+                    <h6 class="fw-bold mb-0">Order #{{ order.id }}</h6>
+                    <span class="badge rounded-pill 
+                      {% if order.status == 'Completed' %}bg-success
+                      {% elif order.status == 'Pending' %}bg-warning text-dark
+                      {% elif order.status == 'Cancelled' %}bg-danger
+                      {% else %}bg-secondary{% endif %}">
+                      {{ order.status }}
+                    </span>
+                  </div>
+                  
+                  <div class="card-body">
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <p class="mb-1"><strong><i class="bi bi-credit-card me-2"></i>Payment:</strong> 
+                          <span class="text-capitalize">{{ order.payment_method }}</span>
+                          <span class="badge ms-2 
+                            {% if order.payment_status == 'Paid' %}bg-success
+                            {% else %}bg-warning text-dark{% endif %}">
+                            {{ order.payment_status }}
+                          </span>
+                        </p>
+                        <p class="mb-1"><strong><i class="bi bi-calendar me-2"></i>Date:</strong> 
+                          {{ order.created_at|date:"d M Y" }}
+                        </p>
+                      </div>
+                      <div class="col-md-6">
+                        <p class="mb-1"><strong><i class="bi bi-currency-rupee me-2"></i>Total:</strong> 
+                          ₹{{ order.total_amount }}
+                        </p>
+                        <p class="mb-1"><strong><i class="bi bi-geo-alt me-2"></i>Address:</strong> 
+                          {{ order.address.address_line|truncatechars:30 }}, {{ order.address.city }}
+                        </p>
+                      </div>
+                    </div>
+                
+                    <div class="order-products mt-3">
+                      <h6 class="fw-bold border-bottom pb-2"><i class="bi bi-box-seam me-2"></i>Products</h6>
+                      <ul class="list-group list-group-flush">
+                        {% for product in order.product_data %}
+                        <li class="list-group-item px-0 py-2 d-flex justify-content-between align-items-center">
+                          <div>
+                            <span class="d-block fw-medium">{{ product.name }}</span>
+                            <small class="text-muted">Qty: {{ product.qty }}</small>
+                          </div>
+                          <span class="fw-bold">₹{{ product.final }}</span>
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item text-muted">No products found.</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div class="card-footer bg-light py-2">
+                    <div class="d-flex justify-content-end">
+                      {% if order.status == 'Pending' %}
+                      <button class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-x-circle"></i> Cancel
+                      </button>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-5">
+                  <i class="bi bi-box-seam display-5 text-muted mb-3"></i>
+                  <p class="fs-5 text-muted">No orders found</p>
+                  <a href="{% url 'product_browsing' %}" class="btn btn-primary mt-2">Continue Shopping</a>
+                </div>
+                {% endfor %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left: Profile (will appear second on mobile) -->
+      <div class="col-lg-4 order-2 order-lg-1">
         <div class="card shadow-sm p-3" style="background-color: ghostwhite;">
           <h3 class="mb-3 forest-green">User Profile</h3>
           <form>
@@ -44,7 +215,6 @@
         </div>
 
         <!-- additional info -->
-
         <div class="col-lg-4 w-100 mt-3">
           <div class="card shadow-sm p-3">
             <h3 class="mb-3 forest-green">Additional Info</h3>
@@ -94,157 +264,9 @@
           </div>
         </div>
       </div>
-
-
-      <!-- Right: Tabs for Cart/Wishlist/Orders -->
-       
-      <div class="col-lg-8">
-        <div class="card shadow-sm p-3">
-          <ul class="nav nav-tabs mb-3" id="profileTabs" role="tablist">
-            <!-- <li class="nav-item" role="presentation">
-              <button class="nav-link active user_acc_options" data-bs-toggle="tab" data-bs-target="#cart" type="button" role="tab">Cart</button>
-            </li> -->
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active user_acc_options" data-bs-toggle="tab" data-bs-target="#wishlist" type="button" role="tab">Wishlist</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link user_acc_options" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">Order History</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link user_acc_options" data-bs-toggle="tab" data-bs-target="#tracking" type="button" role="tab">Order Tracking</button>
-            </li>
-          </ul>
-  
-          <div class="tab-content">
-
-            <!-- Cart -->
-
-            <!-- <div class="tab-pane fade show active" id="cart" role="tabpanel">
-              <p class="text-muted">Items currently in your cart:</p>
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Apples (1 kg) <span class="badge bg-success">$3.00</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Milk (1 L) <span class="badge bg-success">$1.20</span>
-                </li>
-              </ul>
-            </div> -->
-  
-            <!-- Wishlist -->
-            
-            <div class="tab-pane fade show active" id="wishlist" role="tabpanel">
-              <ul class="list-unstyled row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3"> 
-
-                {% for p in wishlist_products %}
-                
-                  <li class="col">
-                      <div class="card wishlist-card border-1 shadow-sm h-100 position-relative mt-2">
-
-                        <!-- Product image -->
-                         
-                        <div class="wishlist-img-wrapper d-flex justify-content-center mt-1">
-                          <img src="../media/{{p.product_image}}" class="card-img-top" alt="Product" >
-                        </div>
-                    
-                        <!-- Card body -->
-
-                        <div class="card-body pb-1">
-                          <h6 class="mb-1">{{ p.product_name }}</h6>
-                          <p class="text-success fw-semibold mb-2">₹{{p.product_offer_price}}.00</p>
-                    
-                          <!-- cart button -->
-
-                          <form action="{% url 'add_to_cart' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="product_id" value="{{ p.id }}">
-                            <input type="hidden" name="quantity" value="1">
-                          
-                            <div class="wishlist-cart-btn-container">
-                              <button type="submit" class="w-100 add-to-cart-btn d-flex justify-content-between">
-                                <span class="ms-2 add-to-cart-span" style="margin-top: 2px;">Add</span>
-                                <span class="add-to-cart-span" style="margin-top: 2px;">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-2" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                                  </svg>
-                                </span>
-                              </button>
-                            </div>
-                          </form>
-
-                          <!-- Remove button -->
-
-                          <center>
-
-                            <form method="POST" action="{% url 'delete_wishlist' %}" style="display:inline;">
-                              {% csrf_token %}
-                              <input type="hidden" name="product_id" value="{{ p.id }}">
-                              <button type="submit" class="btn btn-sm btn-outline-danger mt-3">Remove</button>
-                            </form>
-
-                          </center>
-                        </div>
-                      </div>
-
-                  </li>
-                  {% empty %}
-                    <li class="col text-muted ms-3">No items in wishlist.</li>
-                  {% endfor %}
-
-              </ul>
-            </div>
-  
-            <!-- Order History -->
-
-            <div class="tab-pane fade" id="history" role="tabpanel">
-              <p class="text-muted">Past orders:</p>
-              <table class="table table-bordered table-sm">
-                <thead>
-                  <tr>
-                    <th>#Order</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>#1023</td>
-                    <td>2024-12-01</td>
-                    <td>$15.80</td>
-                    <td><span class="badge bg-success">Delivered</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-  
-            <!-- Order Tracking -->
-
-            <div class="tab-pane fade" id="tracking" role="tabpanel">
-              <p class="text-muted">Track your recent order:</p>
-              <div class="border p-3 rounded">
-                <p><strong>Order ID:</strong> #1055</p>
-                <p><strong>Status:</strong> <span class="badge bg-info">Out for Delivery</span></p>
-                <div class="progress" style="height: 20px;">
-                  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                    75%
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-
-      <!-- old additional info space -->
-      
-
     </div>
-  </main>
-
+</main>
 
 {% endif %}
-
 
 {% include 'footer.html' %}

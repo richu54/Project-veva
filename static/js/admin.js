@@ -161,3 +161,27 @@ const searchInput = document.querySelector('input[name="query"]');
   });
 
 // manage Product end -------------------------------------------------------------------------------------------------
+
+// Order tracking start -----------------------------------------------------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', function () {
+  const container = document.getElementById('django-messages');
+  if (container) {
+    const messages = container.querySelectorAll('.django-message');
+    messages.forEach(msg => {
+      const text = msg.textContent.trim();
+      const type = msg.dataset.type || 'success';
+
+      const toast = document.createElement('div');
+      toast.classList.add('notify-toast', type);
+      toast.textContent = text;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 4000); // 4 seconds
+    });
+  }
+});
+
+// Order tracking end -------------------------------------------------------------------------------------------------

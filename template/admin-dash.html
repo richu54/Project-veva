@@ -41,7 +41,7 @@
   
     <!-- Main Content -->
     <main id="mainContent" class="main-content p-4">
-      <h2 id="dashboard" class="mb-4">Company Dashboard</h2>
+      <h2 id="dashboard" class="mb-4 fw-bold">Veva Dashboard</h2>
   
       <div class="row g-4">
         <div class="col-md-6 col-xl-3">
@@ -128,8 +128,18 @@
       </section>
   
       <section id="sales" class="mt-5">
-        <h4>Sales Overview</h4>
-        <p>Analyze sales trends and targets.</p>
+        <div class="card shadow-sm border-0">
+          <div class="card-body manageuser-card d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+              <i class="bi bi-pencil-square fs-1 text-white"></i>
+              <div>
+                <h5 class="mb-1 text-white">Manage Order</h5>
+                <p class="mb-0 text-secondary">Verify Delivery Status and delete by user request</p>
+              </div>
+            </div>
+            <a href="/admin_order_tracking"  class="btn btn-outlines">Go to Manage Order</a>
+          </div>
+        </div>
       </section>
   
       <section id="finance" class="mt-5">

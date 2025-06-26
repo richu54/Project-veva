@@ -1002,3 +1002,32 @@ button:active {
     border-color: #bbb;
 }
 
+/* add shipping address end ---------------------------------------------------------------------------------------- */
+
+/* order tracking start ---------------------------------------------------------------------------------------------*/
+
+.shadow-hover:hover {
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease;
+}
+.order-products {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 0;
+}
+.list-group-item {
+    border-left: 0;
+    border-right: 0;
+}
+.list-group-item:first-child {
+    border-top: 0;
+}
+.list-group-item:last-child {
+    border-bottom: 0;
+}
+.card-header {
+    background-color: #182d09;
+    color: white;
+}
+
+/* order tracking end -----------------------------------------------------------------------------------------------*/

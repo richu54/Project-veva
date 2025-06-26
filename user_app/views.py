@@ -12,10 +12,10 @@ from user_app.models import Cart
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.conf import settings
-import razorpay
 from django.views.decorators.csrf import csrf_exempt
 from .models import Order_details
 import json
+import razorpay
 
 # Create your views here.
 
@@ -29,11 +29,24 @@ def user_account(request):
         data = user_register.objects.get(pk=user_id)
         data_2 = additional_info.objects.filter(id=user_id).first()
 
-        wished_ids = Wishlist.objects.filter(user_id=user_id) \
-                                 .values_list('product_id', flat=True)
+        wished_ids = Wishlist.objects.filter(user_id=user_id).values_list('product_id', flat=True)
         wishlist_products = add_product.objects.filter(id__in=wished_ids)
-        
-        return render(request, 'user-account.html', {'res': data,'reg': data_2, 'wishlist_products': wishlist_products, 'wished_ids': wished_ids,})
+
+        pending_orders = Order_details.objects.filter(user=data, status="Pending").order_by('-created_at')
+
+        for order in pending_orders:
+            try:
+                order.product_data = json.loads(order.product)
+            except Exception:
+                order.product_data = []
+
+        return render(request, 'user-account.html', {
+            'res': data,
+            'reg': data_2,
+            'wishlist_products': wishlist_products,
+            'wished_ids': wished_ids,
+            'orders': pending_orders  
+        })
         
     except user_register.DoesNotExist:
         messages.error(request, "User account not found")
@@ -41,7 +54,7 @@ def user_account(request):
     
     except Exception as e:
         messages.error(request, "An error occurred while loading your account")
-        return redirect('home')  
+        return redirect('home')
 
 
 def user_profile_update(request,id):
@@ -457,3 +470,4 @@ def upi_order_success(request):
         return JsonResponse({'status': 'success'})
 
     return JsonResponse({'status': 'invalid method'}, status=405)
+

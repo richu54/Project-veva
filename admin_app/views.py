@@ -6,6 +6,8 @@ from django.utils.dateparse import parse_date
 from datetime import datetime, time
 from django.contrib import messages
 from .models import add_product
+from user_app.models import Order_details
+import json
 
 # Create your views here.
 
@@ -205,3 +207,34 @@ def delete_product(request,id):
     data.delete()
 
     return redirect(manage_products)
+
+def admin_order_tracking(request):
+    
+    pending_orders = Order_details.objects.filter(status="Pending").order_by('-created_at')
+
+    for order in pending_orders:
+        try:
+            order.product_data = json.loads(order.product)
+        except Exception:
+            order.product_data = []
+
+    return render(request, 'manage-order-tracking.html', {'orders': pending_orders})
+
+def mark_order_complete(request, id):
+    try:
+        order = Order_details.objects.get(pk=id)
+        order.status = "Delivered"
+        order.save()
+        messages.success(request, f"Order #{id} marked as Delivered.")
+    except Order_details.DoesNotExist:
+        messages.error(request, f"Order #{id} not found.")
+    return redirect(admin_order_tracking)
+
+def delete_order(request, id):
+    try:
+        order = Order_details.objects.get(pk=id)
+        order.delete()
+        messages.success(request, f"Order #{id} deleted.")
+    except Order_details.DoesNotExist:
+        messages.error(request, f"Order #{id} not found.")
+    return redirect(admin_order_tracking)

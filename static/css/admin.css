@@ -239,3 +239,34 @@ table th, table td {
 }
 
 /* add products end --------------------------------------------------------------------------------------------- */
+
+/* order tracking start ------------------------------------------------------------------------------------------*/
+
+.notify-toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 15px 20px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: fadein 0.5s, fadeout 0.5s 3.5s;
+}
+
+.notify-toast.error { background-color: #dc3545; }
+.notify-toast.info { background-color: #17a2b8; }
+
+@keyframes fadein {
+    from { opacity: 0; bottom: 0; }
+    to { opacity: 1; bottom: 20px; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; bottom: 20px; }
+    to { opacity: 0; bottom: 0; }
+}
+
+/* order tracking end ---------------------------------------------------------------------------------------------*/
