@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import user_register
 import random
 from django.contrib import messages
+from .models import send_message
 
 # Create your views here.
 
@@ -156,6 +157,29 @@ def reset_pass_step3(request):
 
     return redirect('reset_pass_step1')
 
+def contact(request):
 
+    if 'uid' not in request.session:
+        messages.error(request, "Please login to access the contact form.")
+        return redirect('login')
+    
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+
+        data = send_message(name=name,email=email,subject=subject,message=message)
+        data.save()
+
+    return render(request,'contact.html')
+
+def terms_and_condition(request):
+
+    return render(request,'terms-and-condition.html')
+
+def privacy_and_policy(request):
+
+    return render(request,'privacy-and-policy.html')
 
 

@@ -457,7 +457,8 @@ button:active {
 }
 
 .text-content p {
-    font-family: "Playwrite AU SA", cursive;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
 }
 
 .about-btn {
@@ -848,6 +849,7 @@ button:active {
     height: 33px;
     text-decoration: none;
     color: #182d09;
+    background-color: #bbbbbbb4;
 }
 
 .add-to-cart-btn:hover {
@@ -1031,3 +1033,26 @@ button:active {
 }
 
 /* order tracking end -----------------------------------------------------------------------------------------------*/
+
+.contact-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+.contact-card {
+    transition: transform 0.3s ease;
+    border: none;
+    border-radius: 10px;
+}
+.contact-card:hover {
+    transform: translateY(-5px);
+}
+#contactForm {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.primary-bg {
+    color: #182d09;
+}
+.veva-primary-text {
+    color: #182d09;
+}

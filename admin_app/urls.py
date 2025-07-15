@@ -28,4 +28,6 @@ urlpatterns = [
     path('admin_order_delete/<int:id>/', views.delete_order, name='delete_order'),
     path('admin_order_history/', views.admin_order_history, name='admin_order_history'),
     path('delete_order_history/<int:id>/', views.delete_order_history, name='delete_order_history'),
+    path('manage_user_request',views.manage_user_request,name='manage_user_request'),
+    path('delete_user_request/<int:id>',views.delete_user_request,name='delete_user_request'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

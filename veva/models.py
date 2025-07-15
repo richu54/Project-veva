@@ -11,3 +11,9 @@ class user_register(models.Model):
 
     def __str__(self):
         return self.user_email
+    
+class send_message(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=80)
+    subject = models.CharField(max_length=150)
+    message = models.CharField(max_length=500)

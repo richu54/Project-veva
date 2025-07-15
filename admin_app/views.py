@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from veva.models import user_register
+from veva.models import user_register, send_message
 from user_app.models import additional_info
 from django.db.models import Q
 from django.utils.dateparse import parse_date
@@ -9,6 +9,8 @@ from .models import add_product
 from user_app.models import Order_details
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Sum
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -265,3 +267,13 @@ def delete_order_history(request, id):
     else:
         messages.error(request, "Invalid method.")
         return redirect(admin_order_history)
+    
+def manage_user_request(request):
+
+    requests = send_message.objects.all()
+    return render(request,'manage-user-request.html',{'res':requests})
+
+def delete_user_request(request,id):
+    data = send_message.objects.get(pk=id)
+    data.delete()
+    return redirect(manage_user_request)

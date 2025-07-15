@@ -18,4 +18,7 @@ urlpatterns = [
     path('reset_pass_step1',views.reset_pass_step1,name='reset_pass_step1'),
     path('reset_pass_step2',views.reset_pass_step2,name='reset_pass_step2'),
     path('reset_pass_step3',views.reset_pass_step3,name='reset_pass_step3'),
+    path('contact',views.contact,name='contact'),
+    path('terms_and_condition',views.terms_and_condition,name='terms_and_condition'),
+    path('privacy_and_policy',views.privacy_and_policy,name='privacy_and_policy'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

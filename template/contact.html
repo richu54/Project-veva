@@ -1,0 +1,116 @@
+{% load static %}
+{% include 'header.html' %}
+
+    <!-- Header Section -->
+    <div class="py-5 text-white">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold" style="color: #182d09;">Contact Veva</h1>
+            <p class="lead" style="color: #182d09;">We'd love to hear from you</p>
+        </div>
+    </div>
+    
+    <!-- Contact Info Cards -->
+    <div class="container py-1">
+        <div class="row justify-content-center text-center g-4">
+            <!-- Phone -->
+            <div class="col-12 col-md-4">
+                <div class="card border-0 shadow-sm h-100 py-4">
+                    <div class="card-body">
+                        <h6 class="text-uppercase text-muted mb-2">Phone</h6>
+                        <h5 class="mb-2">
+                            <a href="tel:+919876543210" class="text-decoration-none text-primary fw-semibold">
+                                +91 98765 43210
+                            </a>
+                        </h5>
+                        <small class="text-muted">Available: Mon-Sat, 9 AM - 6 PM</small>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Email -->
+            <div class="col-12 col-md-4">
+                <div class="card border-0 shadow-sm h-100 py-4">
+                    <div class="card-body">
+                        <h6 class="text-uppercase text-muted mb-2">Email</h6>
+                        <h5 class="mb-2">
+                            <a href="mailto:support@veva.com" class="text-decoration-none text-primary fw-semibold">
+                                support@veva.com
+                            </a>
+                        </h5>
+                        <small class="text-muted">Usually replies within 24 hours</small>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Address -->
+            <div class="col-12 col-md-4">
+                <div class="card border-0 shadow-sm h-100 py-4">
+                    <div class="card-body">
+                        <h6 class="text-uppercase text-muted mb-2">Visit Us</h6>
+                        <h5 class="mb-2">
+                            <a href="https://maps.google.com/?q=123 Business Park, Kochi" target="_blank" class="text-decoration-none text-primary fw-semibold">
+                                123 Business Park, Kochi
+                            </a>
+                        </h5>
+                        <small class="text-muted">Kerala, India</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contact Form -->
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 text-center veva-primary-text">Send us a message</h3>
+                        <form id="contactForm" method="POST" action="#">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                                </div>
+                                <div class="col-12 bg-success text-center mt-4">
+                                    <button type="submit" class="btn veva-primary-bg text-white px-4 py-2">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <center>
+    <!-- Google Map -->
+    <div class="container-fluid px-0 mt-5" id="map">
+        <div class="ratio ratio-16x9 w-75">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.982511423414!2d76.29939431528791!3d9.93140587652079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0873e6d8b5a0a9%3A0x2a7b3d7e1b0e3b1a!2sKochi%2C%20Kerala!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+    </center>
+    
+    <!-- Footer Links -->
+    <div class="container mt-4 text-center">
+        <a href="#" class="text-decoration-none text-muted">Privacy Policy</a>
+    </div>
+
+{% include 'footer.html' %}

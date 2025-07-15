@@ -94,13 +94,44 @@
 
     <!-- mobile view dropdown menu start -->
                 
-               <div id="drop-down-mob-view" class="me-3 ms-4 d-xl-none d-lg-none">
-                <svg class="svg_drop_nav" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                  </svg>
-               </div>
+               <div id="drop-down-mob-view" class="me-2 ms-3 d-xl-none d-lg-none">
+                <button class="btn pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <svg class="svg_drop_nav " xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                      </svg>
+                </button>
 
-    <!-- mobile view dropdown menu end  -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                  <div class="offcanvas-header text-light" style="background-color: #182d09;">
+                    <h5 id="offcanvasRightLabel">Veva</h5>
+                    <button type="button" class="btn-close text-reset bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="drop-sm-body">
+                            
+                            <li class="pt-2 drop-menu-mob-2">
+                                <a class="dropdown-item text-white" href="{% url 'user_account' %}#user-profile">My Profile</a>
+                            </li>
+                            <li class="pt-2 drop-menu-mob-2">
+                                <a class="dropdown-item text-white" href="signup">Signup</a>
+                            </li>
+                            <li class="pt-2 drop-menu-mob-2">
+                                <a class="dropdown-item text-white" href="login">Login</a>
+                            </li>
+                            <li class="pt-2 drop-menu-mob-2">
+                                <a class="dropdown-item text-white" href="{% url 'product_browsing' %}">Catagories</a>
+                            </li>
+                            <li class="pt-2 drop-menu-mob-2">
+                                <a class="dropdown-item text-white" href="{% url 'user_account' %}">Wishlist</a>
+                            </li>
+                            <li class="pt-2 drop-menu-mob-2">
+                                <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="logout">Logout</a>
+                            </div>
+                            </li>
+
+                  </div>
+                </div>
+               </div>
 
             </div>
         </div>
@@ -147,33 +178,6 @@
             </ul>
         </div>
     </div>
-
-
-    <!-- mobile view drop-down menu -->
-
-    <div class="drop-down-sm-view d-xl-none d-lg-none">
-        <ul class="p-0 m-0 ul-mob-drop" id="mob-view-drop">
-            
-            <li class="pt-2 drop-menu-mob-2">
-                <a class="dropdown-item text-white" href="#">My Profile</a>
-            </li>
-            <li class="pt-2 drop-menu-mob-2">
-                <a class="dropdown-item text-white" href="signup">Signup</a>
-            </li>
-            <li class="pt-2 drop-menu-mob-2">
-                <a class="dropdown-item text-white" href="login">Login</a>
-            </li>
-            <li class="pt-2 drop-menu-mob-2">
-                <a class="dropdown-item text-white" href="#">Catagories</a>
-            </li>
-            <li class="pt-2 drop-menu-mob-2">
-                <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" href="#">Logout</a>
-            </div>
-            </li>
-        </ul>
-    </div>
-            
       
 
     <!-- navigation bar end -------------------------------------------------------------------------------------------- -->

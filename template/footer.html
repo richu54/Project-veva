@@ -20,43 +20,42 @@
             <div class="col-lg-2 col-md-6">
                 <h5 class="footer-heading">Quick Links</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Home</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Shop</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> About Us</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Contact</a></li>
+                    <li class="mb-2"><a href="home"><i class="fas fa-chevron-right me-2"></i> Home</a></li>
+                    <li class="mb-2"><a href="#about-us"><i class="fas fa-chevron-right me-2"></i> About Us</a></li>
+                    <li class="mb-2"><a href="{% url 'contact' %}"><i class="fas fa-chevron-right me-2"></i> Contact</a></li>
                     <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> FAQ</a></li>
                 </ul>
             </div>
             
             <!-- Categories Column -->
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-2 col-md-6 d-none d-lg-block d-md-block d-sm-none">
                 <h5 class="footer-heading">Categories</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Fresh Products</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Dairy & Eggs</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Meat & Seafood</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Pantry</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Frozen Products</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Snacks & Bakery</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Drinks</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Homeware</a></li>
+                    <li class="mb-2"><a href="{% url 'product_browsing' %}#section-fresh"><i class="fas fa-chevron-right me-2"></i> Fresh Products</a></li>
+                    <li class="mb-2"><a href="{% url 'product_browsing' %}#section-dairy"><i class="fas fa-chevron-right me-2"></i> Dairy & Eggs</a></li>
+                    <li class="mb-2"><a href="{% url 'product_browsing' %}#section-meat"><i class="fas fa-chevron-right me-2"></i> Meat & Seafood</a></li>
+                    <li class="mb-2"><a href="{% url 'product_browsing' %}#section-pantry"><i class="fas fa-chevron-right me-2"></i> Pantry</a></li>
+                    <li class="mb-2"><a href="{% url 'product_browsing' %}#section-frozen"><i class="fas fa-chevron-right me-2"></i> Frozen Products</a></li>
+                    <li class="mb-2"><a href="{% url 'product_browsing' %}#section-snacks"><i class="fas fa-chevron-right me-2"></i> Snacks & Bakery</a></li>
+                    <li class="mb-2"><a href="{% url 'product_browsing' %}#section-drinks"><i class="fas fa-chevron-right me-2"></i> Drinks</a></li>
+                    <li class="mb-2"><a href="{% url 'product_browsing' %}#section-homeware"><i class="fas fa-chevron-right me-2"></i> Homeware</a></li>
                 </ul>
             </div>
             
             <!-- Customer Service Column -->
-            <div class="col-lg-2 col-md-6">
+
+            <div class="col-lg-2 col-md-6 d-none d-lg-block d-md-block d-sm-none">
                 <h5 class="footer-heading">Customer Service</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> My Account</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Order Tracking</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Wishlist</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Terms & Conditions</a></li>
-                    <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i> Privacy Policy</a></li>
+                    <li class="mb-2"><a href="{% url 'user_account' %}"><i class="fas fa-chevron-right me-2"></i> My Account</a></li>
+                    <li class="mb-2"><a href="{% url 'terms_and_condition' %}"><i class="fas fa-chevron-right me-2"></i> Terms & Conditions</a></li>
+                    <li class="mb-2"><a href="{% url 'privacy_and_policy' %}"><i class="fas fa-chevron-right me-2"></i> Privacy Policy</a></li>
                 </ul>
             </div>
             
             <!-- Newsletter Column -->
-            <div class="col-lg-3 col-md-6">
+
+            <div class="col-lg-3 col-md-6 d-none d-lg-block d-md-block d-sm-none">
                 <h5 class="footer-heading">Newsletter</h5>
                 <p>Subscribe to our newsletter for the latest deals and offers.</p>
                 <form class="mb-4">
