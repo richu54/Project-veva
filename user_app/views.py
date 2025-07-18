@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
 from veva.models import user_register
-from .models import additional_info
 from django.contrib import messages
 from admin_app.models import add_product
 from django.db.models import Q
@@ -27,13 +26,11 @@ def user_account(request):
     try:
         user_id = request.session['uid']
         data = user_register.objects.get(pk=user_id)
-        data_2 = additional_info.objects.filter(id=user_id).first()
 
         wished_ids = Wishlist.objects.filter(user_id=user_id).values_list('product_id', flat=True)
         wishlist_products = add_product.objects.filter(id__in=wished_ids)
 
         pending_orders = Order_details.objects.filter(user=data, status="Pending").order_by('-created_at')
-
         for order in pending_orders:
             try:
                 order.product_data = json.loads(order.product)
@@ -41,7 +38,6 @@ def user_account(request):
                 order.product_data = []
 
         completed_orders = Order_details.objects.filter(user=data, status="Delivered").order_by('-created_at')
-
         for order in completed_orders:
             try:
                 order.product_data = json.loads(order.product)
@@ -50,7 +46,6 @@ def user_account(request):
 
         return render(request, 'user-account.html', {
             'res': data,
-            'reg': data_2,
             'wishlist_products': wishlist_products,
             'wished_ids': wished_ids,
             'orders': pending_orders,
@@ -81,22 +76,6 @@ def user_profile_updates(request,id):
         return redirect(user_account)
     
     return render(request,'user-profile-update.html')
-
-def addi_info(request):
-    user_id = request.session['uid']
-    if request.method == "POST":
-        address = request.POST.get("address")
-        state = request.POST.get("state")
-        postal_code = request.POST.get("postal_code")
-        dob = request.POST.get("dob")
-        gender = request.POST.get("usergender")
-
-        data = additional_info(id=user_id,user_address=address,user_state=state,user_pincode=postal_code,user_dob=dob,gender=gender)
-        data.save()
-        return redirect(user_account)
-    
-    return render(request,'user-additional-info.html')
-
 
 def product_browsing(request):
 
@@ -179,8 +158,7 @@ def delete_wishlist(request):
 
     if request.method == "POST":
         if 'uid' not in request.session:
-            # redirect to login if not logged in
-            return redirect('login')
+            return redirect('login')  
 
         user_id = request.session['uid']
         product_id = request.POST.get('product_id')
@@ -354,7 +332,7 @@ def razorpay_payment(request):
     address_id = request.POST.get('selected_address')
     if not address_id:
         messages.error(request, "Please select a delivery address.")
-        return redirect('add_to_cart')  # or your cart page
+        return redirect('add_to_cart')  
     
     request.session['selected_address_id'] = address_id
 
@@ -388,7 +366,7 @@ def razorpay_payment(request):
         payment_method = request.POST.get('selected_payment_method')
 
         if payment_method == "COD":
-            # Save directly to Order_details
+            
             Order_details.objects.create(
                 user=user,
                 product=json.dumps(product_data),
@@ -402,7 +380,7 @@ def razorpay_payment(request):
             return render(request, 'cod-order-success.html')
 
         elif payment_method == "UPI":
-            # Proceed with Razorpay
+            
             client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
             payment = client.order.create({
                 'amount': int(total_amount * 100),

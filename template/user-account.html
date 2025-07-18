@@ -127,7 +127,7 @@
               {% empty %}
               <div class="text-center py-4">
                 <p class="text-muted mb-2">No order history found</p>
-                <a href="{% url 'products' %}" class="btn btn-sm btn-success">Shop Now</a>
+                <a href="{% url 'product_browsing' %}" class="btn btn-sm btn-success">Shop Now</a>
               </div>
               {% endfor %}
 
@@ -245,55 +245,7 @@
           </form>
         </div>
 
-        <!-- additional info -->
-        <div class="col-lg-4 w-100 mt-3">
-          <div class="card shadow-sm p-3">
-            <h3 class="mb-3 forest-green">Additional Info</h3>
-            <form method="POST">
-              <div class="mb-3">
-                  <label class="form-label">Address</label>
-                    {% if reg %}
-                      <address class="ps-3 border rounded-3 pt-2 pb-2">{{ reg.user_address }}</address>
-                    {% else %}
-                      <p class="user-p ps-3">N/A</p>
-                    {% endif %}
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">State</label>
-                    {% if reg %}
-                      <p class="user-p ps-3">{{ reg.user_state }}</p>
-                    {% else %}
-                      <p class="user-p ps-3">N/A</p>
-                    {% endif %}
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Postal Code</label>
-                    {% if reg %}
-                      <p class="user-p ps-3">{{ reg.user_pincode }}</p>
-                    {% else %}
-                      <p class="user-p ps-3">N/A</p>
-                    {% endif %}
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Date of Birth</label>
-                    {% if reg %}
-                      <p class="user-p ps-3">{{ reg.user_dob }}</p>
-                    {% else %}
-                      <p class="user-p ps-3">N/A</p>
-                    {% endif %}
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Gender</label>
-                    {% if reg %}
-                      <p class="user-p ps-3">{{ reg.gender }}</p>
-                    {% else %}
-                      <p class="user-p ps-3">N/A</p>
-                    {% endif %}
-                </div>
-                <a href="additional_info" class="btn w-100 user-btn text-decoration-none text-white">Update Profile</a>
-            </form>
-          </div>
-        </div>
+        
       </div>
     </div>
 </main>

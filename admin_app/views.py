@@ -76,23 +76,6 @@ def filter_user(request):
 
     return render(request, 'manage_user.html', {'res': users})
 
-def manage_u_addi_info(request,id):
-    try:
-        data = additional_info.objects.get(pk=id)
-    except additional_info.DoesNotExist:
-        data = None
-
-    return render(request, 'manage-u-additional-info.html', {'res': data})
-
-def delete_addi_info(request,id):
-    try:
-        data = additional_info.objects.get(pk=id)
-        data.delete()
-        return redirect('manage_user') 
-    except additional_info.DoesNotExist:
-        messages.error(request, "Additional information not found.")
-        return redirect('manage_user') 
-
 
 def manage_u_info_update(request,id):
     data = additional_info.objects.get(pk=id)

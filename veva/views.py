@@ -47,14 +47,22 @@ def signup_otp(request):
 
         if user_otp == session_data.get('otp'):
             try:
-                user_register.objects.create(
+                user = user_register.objects.create(
                     user_email=session_data['email'],
                     user_password=session_data['password'],
                     user_name=session_data['name'],
                     user_mobile=session_data['mobile']
                 )
+                request.session['uid'] = user.id
+                request.session['uname'] = user.user_name
+                request.session['uemail'] = user.user_email
+                request.session['utel'] = user.user_mobile
+                request.session['user'] = 'user'
+
                 del request.session['signup_data']
-                return render(request, 'index.html', {'signup_success': True})
+
+                return redirect('user_account')
+
             except Exception as e:
                 return render(request, 'signup_otp.html', {
                     'error': f"Error saving user: {str(e)}",
@@ -128,7 +136,7 @@ def reset_pass_step2(request):
 
         return render(request, 'reset-pass-step2.html', {
             'error': 'Invalid OTP',
-            'otp': session_data.get('otp')  # Show OTP again for demo
+            'otp': session_data.get('otp')  # demo otp
         })
 
     return redirect('reset_pass_step1')
@@ -146,7 +154,7 @@ def reset_pass_step3(request):
 
         try:
             user = user_register.objects.get(user_email=session_data['email'])
-            user.user_password = new_password  # No hashing, as per your setup
+            user.user_password = new_password 
             user.save()
             del request.session['reset_data']
             messages.success(request, "Password reset successful.")
