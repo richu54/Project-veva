@@ -21,4 +21,5 @@ urlpatterns = [
     path('contact',views.contact,name='contact'),
     path('terms_and_condition',views.terms_and_condition,name='terms_and_condition'),
     path('privacy_and_policy',views.privacy_and_policy,name='privacy_and_policy'),
+    path('faq',views.faq,name='faq'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

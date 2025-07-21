@@ -190,4 +190,7 @@ def privacy_and_policy(request):
 
     return render(request,'privacy-and-policy.html')
 
+def faq(request):
+    return render(request,'faq.html')
+
 
