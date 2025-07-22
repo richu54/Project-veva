@@ -22,4 +22,5 @@ urlpatterns = [
     path('razorpay_payment/', views.razorpay_payment, name='razorpay_payment'),
     path('clear_cart_after_payment/', views.clear_cart_after_payment, name='clear_cart_after_payment'),
     path('upi_order_success/', views.upi_order_success, name='upi_order_success'),
+    path('cancel_order/<int:id>/', views.cancel_order, name='cancel_order'),
 ]

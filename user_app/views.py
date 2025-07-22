@@ -37,7 +37,7 @@ def user_account(request):
             except Exception:
                 order.product_data = []
 
-        completed_orders = Order_details.objects.filter(user=data, status="Delivered").order_by('-created_at')
+        completed_orders = Order_details.objects.filter(user=data, status__in=["Delivered", "Cancelled"]).order_by('-created_at')
         for order in completed_orders:
             try:
                 order.product_data = json.loads(order.product)
@@ -464,3 +464,30 @@ def upi_order_success(request):
 
     return JsonResponse({'status': 'invalid method'}, status=405)
 
+
+@csrf_exempt
+def cancel_order(request, id):
+    if request.method == "POST":
+        if 'uid' not in request.session:
+            messages.warning(request, "Please login first")
+            return redirect('login')
+
+        try:
+            user_id = request.session['uid']
+            order = Order_details.objects.get(id=id, user_id=user_id)
+
+            if order.status != "Pending":
+                messages.warning(request, "Only pending orders can be cancelled.")
+                return redirect('user_account')
+
+            order.status = "Cancelled"
+            order.save()
+            messages.success(request, "Order cancelled successfully.")
+            return redirect('user_account')
+
+        except Order_details.DoesNotExist:
+            messages.error(request, "Order not found.")
+            return redirect('user_account')
+    else:
+        messages.error(request, "Invalid request method.")
+        return redirect('user_account')

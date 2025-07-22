@@ -227,15 +227,17 @@ def delete_order(request, id):
 
 def admin_order_history(request):
 
-    delivered_orders = Order_details.objects.filter(status='Delivered').order_by('-created_at')
+    delivered_or_cancelled_orders = Order_details.objects.filter(
+        status__in=['Delivered', 'Cancelled']
+    ).order_by('-created_at')
 
-    for order in delivered_orders:
+    for order in delivered_or_cancelled_orders:
         try:
             order.product_data = json.loads(order.product)
         except Exception:
             order.product_data = []
 
-    return render(request, 'manage-order-history.html', {'orders': delivered_orders})
+    return render(request, 'manage-order-history.html', {'orders': delivered_or_cancelled_orders})
 
 @csrf_exempt
 def delete_order_history(request, id):
