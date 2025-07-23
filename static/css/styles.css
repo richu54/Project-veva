@@ -887,6 +887,102 @@ button:active {
     background-color: #182d09;
 }
 
+/* product recommendation */
+
+.recommendation-section {
+    background: rgba(255, 255, 255, 0.587);
+    padding: 1rem;
+    margin: 1rem 0;
+    position: relative;
+}
+  
+.carousel-track-container {
+    overflow: hidden;
+    width: 100%;
+}
+  
+.carousel-track {
+    transition: transform 0.4s ease-in-out;
+    will-change: transform;
+}
+  
+.carousel-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0;
+}
+  
+.card-body-wrapper {
+    display: block;
+    padding: 0.5rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+    height: 100%;
+}
+  
+.card-body-wrapper img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+  
+.product-title {
+    font-size: 14px;
+    font-weight: 600;
+    overflow: hidden;
+}
+  
+.price-box {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.price-box .original-price {
+    color: red;
+    text-decoration: line-through;
+    font-size: 13px;
+}
+
+.price-box .offer-price {
+    color: green;
+    font-weight: bold;
+    font-size: 14px;
+}
+  
+.carousel-nav {
+    position: absolute;
+    top: 40%;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+  
+.left-nav {
+    left: -10px;
+}
+  
+.right-nav {
+    right: -10px;
+}
+  
+
 /* product detailes end ----------------------------------------------------------------------------------------- */
 
 /* Wishlist page start ------------------------------------------------------------------------------------------ */

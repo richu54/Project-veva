@@ -414,3 +414,26 @@
         padding-top: 12px;
     }
  }  
+
+ /* product detailes similar product recomandation */
+
+@media (min-width: 576px) {
+    .carousel-card {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+}
+  
+@media (min-width: 768px) {
+    .carousel-card {
+      flex: 0 0 33.33%;
+      max-width: 33.33%;
+    }
+}
+  
+@media (min-width: 992px) {
+    .carousel-card {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+}

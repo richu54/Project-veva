@@ -62,16 +62,16 @@
 
                     {% if request.session.admin %}
 
-                    <a href="logout"><button  class="btn_nav2 bg-danger">Logout</button></a>
+                    <a href="/logout"><button  class="btn_nav2 bg-danger">Logout</button></a>
 
                     {% elif request.session.uid %}
 
-                    <a href="logout"><button  class="btn_nav2 bg-danger">Logout</button></a>
+                    <a href="/logout"><button  class="btn_nav2 bg-danger">Logout</button></a>
 
                     {% else %}
 
-                    <a href="login"><button  class="btn-nav">Login</button></a>
-                    <a href="signup"><button  class="btn_nav2">Sign Up</button></a>
+                    <a href="/login"><button  class="btn-nav">Login</button></a>
+                    <a href="/signup"><button  class="btn_nav2">Sign Up</button></a>
 
                     {% endif %}
                     

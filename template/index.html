@@ -10,8 +10,10 @@
 
 <!-- login alert -->
 
-{% if status %}
-  <div id="login-success" data-success="{{ status }}"></div>
+{% if messages %}
+  {% for message in messages %}
+    <div class="django-message" data-type="{{ message.tags }}" data-msg="{{ message }}"></div>
+  {% endfor %}
 {% endif %}
 
 <!-- carousal start --------------------------------------------------------------------------------------------------------->

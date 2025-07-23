@@ -6,7 +6,7 @@
   <div class="row g-3">
     
     <div class="col-md-5 mb-3">
-      <div class="product-image-2 p-2 p-md-3 text-center bg-white rounded-4 shadow-sm">
+      <div class="product-image-2 p-2 p-md-3 mt-3 text-center bg-white rounded-4 shadow-sm">
         <img src="../media/{{res.product_image}}" class="img-fluid rounded-3" alt="Product" style="max-height: 400px; object-fit: contain;">
       </div>
     </div>
@@ -37,7 +37,7 @@
         <span class="badge bg-success ms-2">{{res.product_offer}}% OFF</span>
       </div>
 
-      <!-- Add to Cart -->
+      <!-- Add to cart -->
 
       <form action="{% url 'add_to_cart' %}" method="POST" class="mb-4">
         {% csrf_token %}
@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <!-- Product Info -->
+  <!-- Product info -->
   <div class="row mt-4 mt-md-5 mb-3">
     <div class="col-12">
       <div class="card border-0 shadow-sm">
@@ -96,6 +96,42 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Suggest -->
+
+<h4 class="text-center">Products also you like</h4>
+
+<div class="recommendation-section position-relative">
+  <!-- Left Arrow -->
+  <button class="carousel-nav left-nav">&#10094;</button>
+
+  <!-- Right Arrow -->
+  <button class="carousel-nav right-nav">&#10095;</button>
+
+  <div class="carousel-track-container overflow-hidden">
+    <div class="carousel-track d-flex">
+      {% for product in recommendations %}
+      <div class="carousel-card">
+        <a href="{% url 'product_detailes' id=product.id %}" class="card-body-wrapper text-decoration-none text-dark">
+          <img src="{{ product.image_url }}" alt="{{ product.name }}">
+          <div class="text-wrap">
+            <h6 class="product-title">{{ product.name }}</h6>
+            {% if product.size %}
+            <p class="text-muted small">{{ product.size }}</p>
+            {% endif %}
+            <div class="price-box">
+              {% if product.original_price and product.original_price != product.price %}
+                <span class="original-price me-5">₹{{ product.original_price }}</span>
+              {% endif %}
+              <span class="offer-price">₹{{ product.price }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </div>

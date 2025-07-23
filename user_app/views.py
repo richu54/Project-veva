@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Order_details
 import json
 import razorpay
+import requests
 
 # Create your views here.
 
@@ -128,6 +129,14 @@ def product_browsing(request):
 def product_detailes(request,id):
     data = add_product.objects.get(pk=id)
 
+    recommendations = []
+    try:
+        response = requests.get(f"http://127.0.0.1:8001/recommend/product/{id}")
+        if response.status_code == 200:
+            recommendations = response.json().get('recommendations', [])
+    except Exception as e:
+        print("FastAPI error:", e)
+
     wished_ids = []
     wishlist_products = []
     if request.session.get('uid'):
@@ -135,7 +144,7 @@ def product_detailes(request,id):
                                      .values_list('product_id', flat=True)
         wishlist_products = add_product.objects.filter(id__in=wished_ids)
 
-    return render(request,'product-detailes.html',{'res':data, 'wished_ids': wished_ids,'wishlist_products': wishlist_products})
+    return render(request,'product-detailes.html',{'res':data, 'wished_ids': wished_ids,'wishlist_products': wishlist_products, 'recommendations': recommendations})
 
 def wishlist(request):
     if request.method == "GET":

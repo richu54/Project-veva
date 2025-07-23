@@ -247,27 +247,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Login start ---------------------------------------------------------------------------------------------
 
-
 // login alert
 
 document.addEventListener('DOMContentLoaded', function () {
   const notyf = new Notyf();
 
-  const errorDiv = document.getElementById('login-error');
-  if (errorDiv) {
-      const errorMessage = errorDiv.getAttribute('data-error');
-      if (errorMessage) {
-          notyf.error(errorMessage);
-      }
-  }
+  document.querySelectorAll('.django-message').forEach(function (msgDiv) {
+      const type = msgDiv.getAttribute('data-type');
+      const message = msgDiv.getAttribute('data-msg');
 
-  const successDiv = document.getElementById('login-success');
-  if (successDiv) {
-      const successMessage = successDiv.getAttribute('data-success');
-      if (successMessage) {
-          notyf.success(successMessage);
+      if (type === 'success') {
+          notyf.success(message);
+      } else if (type === 'error' || type === 'warning') {
+          notyf.error(message);
       }
-  }
+  });
 });
 
 // Reset password email not valid

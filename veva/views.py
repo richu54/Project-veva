@@ -84,7 +84,7 @@ def login(request):
         if useremail == 'rinshad@gmail.com' and userpass == '7654321':
             request.session['email'] = useremail
             request.session['admin'] = 'admin'
-            return render(request, 'admin-dash.html', {'status': 'Admin login Successful'})
+            return render(request, 'admin-dash.html')
 
         elif user_register.objects.filter(user_email=useremail, user_password=userpass).exists():
             userdetails = user_register.objects.get(user_email=useremail, user_password=userpass)
@@ -94,7 +94,8 @@ def login(request):
                 request.session['uemail'] = userdetails.user_email
                 request.session['utel'] = userdetails.user_mobile
                 request.session['user'] = 'user'
-                return render(request, 'index.html', {'status': 'User login Successful'})
+                messages.success(request, "Login successful")
+                return redirect(index)
             else:
                 return render(request, 'login.html', {'error': 'Incorrect password'})
 
