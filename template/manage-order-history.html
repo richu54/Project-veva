@@ -13,6 +13,7 @@
 <h2 class="mb-0 mt-4 text-center fw-bold heading">Manage Order History</h2>
 
 <main class="container py-5" style="margin-bottom: 100px;">
+  <a href="/admin_dash" class="btn-admin btn btn-success mb-3">Back</a>
   <div class="table-responsive">
     <table class="table table-bordered table-hover align-middle">
       <thead class="table-light text-center">
@@ -23,7 +24,6 @@
           <th>Address</th>
           <th>Total</th>
           <th>Payment</th>
-          <th>Pay Status</th>
           <th>Status</th>
           <th>Date</th>
           <th>Actions</th>
@@ -44,13 +44,7 @@
           <td>{{ order.address.address_line }}, {{ order.address.city }}</td>
           <td>₹{{ order.total_amount }}</td>
           <td>{{ order.payment_method }}</td>
-          <td>
-            {% if order.payment_status == 'Paid' %}
-              <span class="badge bg-success">Paid</span>
-            {% else %}
-              <span class="badge bg-danger">Unpaid</span>
-            {% endif %}
-          </td>
+         
           <td>
             <span class="badge bg-success">Delivered</span>
           </td>

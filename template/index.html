@@ -82,6 +82,57 @@
 
 <!-- carousal end ----------------------------------------------------------------------------------------------------------->
 
+
+<!-- offer Suggest start ---------------------------------------------------------------------------------------------------->
+
+<div class="fade-in mt-5">
+
+    <h2 class="fw-bold mb-3 ctgry-card-heading text-center">Best Offers</h2>
+  
+    <div class="recommendation-section position-relative">
+  
+      <!-- next and preview -->
+      <button class="carousel-nav left-nav">&#10094;</button>
+      <button class="carousel-nav right-nav">&#10095;</button>
+  
+      <div class="carousel-track-container overflow-hidden">
+        <div class="carousel-track d-flex">
+          {% for product in offer_recommendations %}
+          <div class="carousel-card">
+            <a href="{% url 'product_detailes' id=product.id %}" class="card-body-wrapper text-decoration-none text-dark">
+              
+                <div class="position-relative">
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="w-100">
+                    {% if product.offer_percent and product.offer_percent > 0 %}
+                        <div class="offer-badge position-absolute top-0 start-0 bg-success text-white px-2 py-1 small">
+                    {{ product.offer_percent }}% OFF
+                        </div>
+                    {% endif %}
+                  </div>
+  
+              <div class="text-wrap">
+                <h6 class="product-title">{{ product.name }}</h6>
+                {% if product.size %}
+                <p class="text-muted small">{{ product.size }}</p>
+                {% endif %}
+                <div class="price-box">
+                  {% if product.original_price and product.original_price != product.price %}
+                    <span class="original-price me-5">₹{{ product.original_price }}</span>
+                  {% endif %}
+                  <span class="offer-price">₹{{ product.price }}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<!-- offer Suggest end ------------------------------------------------------------------------------------------------------>
+
 <!-- card start ------------------------------------------------------------------------------------------------------------->
 
 

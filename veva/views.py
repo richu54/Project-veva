@@ -3,14 +3,57 @@ from .models import user_register
 import random
 from django.contrib import messages
 from .models import send_message
+import requests
+from admin_app.models import add_product
+from django.utils.timezone import now
+from django.db.models import Sum
+from user_app.models import Order_details
 
 # Create your views here.
 
 def index(request):
-    return render(request,'index.html')
+    all_products = list(add_product.objects.filter(product_offer__gte=15))
+    random.shuffle(all_products)
+    selected_products = all_products[:12]
+
+    offer_recommendations = []
+    for p in selected_products:
+        if p.product_price and p.product_offer_price and p.product_price > p.product_offer_price:
+            discount = round(((p.product_price - p.product_offer_price) / p.product_price) * 100)
+        else:
+            discount = 0
+        offer_recommendations.append({
+            "id": p.id,
+            "name": p.product_name,
+            "price": p.product_offer_price,
+            "original_price": p.product_price,
+            "image_url": p.product_image.url,
+            "size": p.product_size,
+            "offer_percent": discount,
+        })
+    return render(request,'index.html', {"offer_recommendations": offer_recommendations})
 
 def home(request):
-    return render(request,'index.html')
+    all_products = list(add_product.objects.filter(product_offer__gte=15))
+    random.shuffle(all_products)
+    selected_products = all_products[:12]
+
+    offer_recommendations = []
+    for p in selected_products:
+        if p.product_price and p.product_offer_price and p.product_price > p.product_offer_price:
+            discount = round(((p.product_price - p.product_offer_price) / p.product_price) * 100)
+        else:
+            discount = 0
+        offer_recommendations.append({
+            "id": p.id,
+            "name": p.product_name,
+            "price": p.product_offer_price,
+            "original_price": p.product_price,
+            "image_url": p.product_image.url,
+            "size": p.product_size,
+            "offer_percent": discount,
+        })
+    return render(request,'index.html', {"offer_recommendations": offer_recommendations})
 
 def signup(request):
     if request.method == "POST":
@@ -81,10 +124,21 @@ def login(request):
         useremail = request.POST.get('Email')
         userpass = request.POST.get('Password')
 
+        total_users = user_register.objects.count() 
+        total_products = add_product.objects.count()
+        pending_requests = send_message.objects.count()
+        today = now().date()
+        first_day = today.replace(day=1)
+
+        monthly_sales = Order_details.objects.filter(
+        created_at__date__gte=first_day,
+        status="Delivered"
+        ).aggregate(total=Sum('total_amount'))['total'] or 0
+
         if useremail == 'rinshad@gmail.com' and userpass == '7654321':
             request.session['email'] = useremail
             request.session['admin'] = 'admin'
-            return render(request, 'admin-dash.html')
+            return render(request, 'admin-dash.html',{'total_users': total_users, 'total_products':total_products, 'pending_requests':pending_requests, 'monthly_sales':monthly_sales})
 
         elif user_register.objects.filter(user_email=useremail, user_password=userpass).exists():
             userdetails = user_register.objects.get(user_email=useremail, user_password=userpass)

@@ -4,7 +4,6 @@
 
 {% csrf_token %}
 
-
 <div class="d-flex"> 
     <!-- Sidebar -->
     <aside id="sidebar" class="text-white sidebar collapsed">
@@ -57,8 +56,8 @@
         <div class="col-md-6 col-xl-3">
           <div class="card text-bg-primary">
             <div class="card-body">
-              <h5 class="card-title">Active Users</h5>
-              <p class="card-text fs-4">2,345</p>
+              <h5 class="card-title">Total Users</h5>
+              <p class="card-text fs-4">{{ total_users }}</p>
             </div>
           </div>
         </div>
@@ -66,7 +65,7 @@
           <div class="card text-bg-success">
             <div class="card-body">
               <h5 class="card-title">Total Products</h5>
-              <p class="card-text fs-4">1,024</p>
+              <p class="card-text fs-4">{{ total_products }}</p>
             </div>
           </div>
         </div>
@@ -74,15 +73,15 @@
           <div class="card text-bg-warning">
             <div class="card-body">
               <h5 class="card-title">Sales This Month</h5>
-              <p class="card-text fs-4">₹1.2M</p>
+              <p class="card-text fs-4">{{ monthly_sales }}</p>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-xl-3">
           <div class="card text-bg-danger">
             <div class="card-body">
-              <h5 class="card-title">Pending Reports</h5>
-              <p class="card-text fs-4">12</p>
+              <h5 class="card-title">Pending Requests</h5>
+              <p class="card-text fs-4">{{ pending_requests }}</p>
             </div>
           </div>
         </div>
@@ -90,7 +89,7 @@
   
    
       <section id="users_mgt" class="mt-5">
-        <!-- <h4 class="mb-3">Manage Users</h4> -->
+        
         <div class="card shadow-sm border-0">
           <div class="card-body manageuser-card d-flex align-items-center justify-content-between flex-wrap gap-3">
             <div class="d-flex align-items-center gap-3">
@@ -106,7 +105,7 @@
       </section>
 
       <section id="add_product" class="mt-5">
-        <!-- <h4 class="mb-3">Add Products</h4> -->
+        
         <div class="card shadow-sm border-0">
           <div class="card-body manageuser-card d-flex align-items-center justify-content-between flex-wrap gap-3">
             <div class="d-flex align-items-center gap-3">
@@ -126,7 +125,7 @@
         <div class="card shadow-sm border-0">
           <div class="card-body manageuser-card d-flex align-items-center justify-content-between flex-wrap gap-3">
             <div class="d-flex align-items-center gap-3">
-              <i class="bi bi-pencil-square fs-1 text-white"></i>
+              <i class="bi bi-box fs-1 text-white"></i>
               <div>
                 <h5 class="mb-1 text-white">Product Management</h5>
                 <p class="mb-0 text-secondary">View, edit, delete, or search Products in the system.</p>
@@ -141,7 +140,7 @@
         <div class="card shadow-sm border-0">
           <div class="card-body manageuser-card d-flex align-items-center justify-content-between flex-wrap gap-3">
             <div class="d-flex align-items-center gap-3">
-              <i class="bi bi-pencil-square fs-1 text-white"></i>
+              <i class="bi bi-bag-check fs-1 text-white"></i>
               <div>
                 <h5 class="mb-1 text-white">Manage Order</h5>
                 <p class="mb-0 text-secondary">Verify Delivery Status and delete by user request</p>
@@ -156,7 +155,7 @@
         <div class="card shadow-sm border-0">
           <div class="card-body manageuser-card d-flex align-items-center justify-content-between flex-wrap gap-3">
             <div class="d-flex align-items-center gap-3">
-              <i class="bi bi-pencil-square fs-1 text-white"></i>
+              <i class="bi bi-hourglass-split fs-1 text-white"></i>
               <div>
                 <h5 class="mb-1 text-white">Manage Order History</h5>
                 <p class="mb-0 text-secondary">View and Delete Order History</p>
@@ -171,7 +170,7 @@
         <div class="card shadow-sm border-0">
           <div class="card-body manageuser-card d-flex align-items-center justify-content-between flex-wrap gap-3">
             <div class="d-flex align-items-center gap-3">
-              <i class="bi bi-pencil-square fs-1 text-white"></i>
+              <i class="bi bi-people fs-1 text-white"></i>
               <div>
                 <h5 class="mb-1 text-white">Manage User Requests</h5>
                 <p class="mb-0 text-secondary">View and Analays User request</p>

@@ -11,12 +11,22 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
 from datetime import datetime, timedelta
+from django.utils.timezone import now
 
 # Create your views here.
 
 def admin_dash(request):
-    return render(request,'admin-dash.html')
+    total_users = user_register.objects.count()  
+    total_products = add_product.objects.count()
+    pending_requests = send_message.objects.count()
+    today = now().date()
+    first_day = today.replace(day=1)
 
+    monthly_sales = Order_details.objects.filter(
+    created_at__date__gte=first_day,
+    status="Delivered" 
+    ).aggregate(total=Sum('total_amount'))['total'] or 0
+    return render(request, 'admin-dash.html', {'total_users': total_users, 'total_products':total_products, 'pending_requests':pending_requests, 'monthly_sales':monthly_sales})
 
 def manage_user(request):
     data = user_register.objects.all()

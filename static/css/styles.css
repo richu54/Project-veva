@@ -1167,3 +1167,15 @@ button:active {
 }  
 
 /* FAQ end ----------------------------------------------------------------------------------------------------------*/
+
+/* index page best offer products suggest start ---------------------------------------------------------------------*/
+
+.offer-badge {
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 0 0.5rem 0.5rem 0;
+    z-index: 10;
+  }
+
+
+/* index page best offer products suggest end -----------------------------------------------------------------------*/
