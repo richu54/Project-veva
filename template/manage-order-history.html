@@ -13,7 +13,54 @@
 <h2 class="mb-0 mt-4 text-center fw-bold heading">Manage Order History</h2>
 
 <main class="container py-5" style="margin-bottom: 100px;">
-  <a href="/admin_dash" class="btn-admin btn btn-success mb-3">Back</a>
+
+<!-- search -->
+
+  <form action="{% url 'admin_order_history' %}" class="d-flex" role="search" method="GET">
+    <a href="/admin_dash" class="btn-admin btn btn-success">Back</a>
+    <input class="form-control me-2 manage-user-search" type="search" name="query" placeholder="Search by name/email..." aria-label="Search" value="{{ request.GET.query }}">
+    <button class="btn search-btn" type="submit"><i class="bi bi-search"></i></button>
+  </form>
+  </div>
+
+<!-- Slide-in Filter Sidebar -->
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+  <a href="#" id="openFilterBtn" class="btn filter-btn ms-auto">
+    <i class="bi bi-funnel"></i> Show Filters
+  </a>
+  </div>
+  
+  <div id="filterSidebar" class="filter-sidebar shadow">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="mb-0">Filter Users</h5>
+    <button id="closeFilterBtn" class="btn btn-sm btn-light" style="background: transparent;">
+      <i class="bi bi-x-lg fs-6 text-white"></i>
+    </button>
+  </div>
+  
+  <form method="GET" action="{% url 'admin_order_history' %}" class="row g-3">
+    <div class="col-12">
+      <label for="start_id" class="form-label">Start ID</label>
+      <input type="number" name="start_id" id="start_id" class="form-control" placeholder="e.g. 10">
+    </div>
+    <div class="col-12">
+      <label for="end_id" class="form-label">End ID</label>
+      <input type="number" name="end_id" id="end_id" class="form-control" placeholder="e.g. 20">
+    </div>
+    <div class="col-12">
+      <label for="reg_date" class="form-label">Registered Date</label>
+      <input type="date" name="reg_date" id="reg_date" class="form-control">
+    </div>
+    <div class="col-12 mt-3">
+      <button type="submit" class="btn w-100 mb-3" style="background-color: orange;">Apply Filters</button>
+      <a href="{% url 'admin_order_history' %}" type="submit" class="btn w-100 bg-danger text-white">Reset</a>
+    </div>
+  </form>
+  </div>
+
+  <!------>
+
   <div class="table-responsive">
     <table class="table table-bordered table-hover align-middle">
       <thead class="table-light text-center">
@@ -37,7 +84,7 @@
           <td class="text-start ps-2">
             <ul class="list-unstyled mb-0">
               {% for p in order.product_data %}
-              <li>{{ p.name }} (x{{ p.qty }}) - ₹{{ p.final }}</li>
+              <li>{{ p.name }} (x{{ p.qty }})</li>
               {% endfor %}
             </ul>
           </td>
@@ -60,6 +107,14 @@
         <tr><td colspan="10" class="text-center text-muted">No completed orders.</td></tr>
         {% endfor %}
       </tbody>
+      <tfoot class="table-light text-center">
+        <tr>
+          <th  class="text-center">{{ total_id }}</th>
+          <th colspan="4" class="text-end">Grand Total</th>
+          <th>₹{{ total_amount }}</th>
+          <th colspan="4"></th>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </main>

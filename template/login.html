@@ -5,7 +5,7 @@
 <!-- email not exist -->
 
 {% if error %}
-  <div id="login-error" data-error="{{ error }}"></div>
+    <div class="django-message" data-type="error" data-msg="{{ error }}"></div>
 {% endif %}
 
 <!-- Reset password successful -->

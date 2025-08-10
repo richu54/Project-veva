@@ -12,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
 from datetime import datetime, timedelta
 from django.utils.timezone import now
+from django.db.models import Avg, Count, Min, Max
 
 # Create your views here.
 
@@ -236,18 +237,51 @@ def delete_order(request, id):
     return redirect(admin_order_tracking)
 
 def admin_order_history(request):
-
     delivered_or_cancelled_orders = Order_details.objects.filter(
         status__in=['Delivered', 'Cancelled']
     ).order_by('-created_at')
+
+    query = request.GET.get('query', '')
+    if query:
+        delivered_or_cancelled_orders = delivered_or_cancelled_orders.filter(
+            Q(id__icontains=query) |
+            Q(user__user_name__icontains=query) |
+            Q(payment_method__icontains=query) |
+            Q(created_at__icontains=query) |
+            Q(product__icontains=query) |
+            Q(address__address_line__icontains=query) |
+            Q(address__city__icontains=query)
+        )
+
+    start_id = request.GET.get('start_id')
+    end_id = request.GET.get('end_id')
+    reg_date = request.GET.get('reg_date')
+    
+    if start_id and end_id:
+        delivered_or_cancelled_orders = delivered_or_cancelled_orders.filter(id__range=(start_id, end_id))
+    elif start_id:
+        delivered_or_cancelled_orders = delivered_or_cancelled_orders.filter(id__gte=start_id)
+    elif end_id:
+        delivered_or_cancelled_orders = delivered_or_cancelled_orders.filter(id__lte=end_id)
+
+    if reg_date:
+        try:
+            reg_date_obj = datetime.strptime(reg_date, "%Y-%m-%d").date()
+            delivered_or_cancelled_orders = delivered_or_cancelled_orders.filter(created_at__date=reg_date_obj)
+        except ValueError:
+            pass
+
+    total_amount = sum(order.total_amount for order in delivered_or_cancelled_orders)
+    total_id = delivered_or_cancelled_orders.count()
 
     for order in delivered_or_cancelled_orders:
         try:
             order.product_data = json.loads(order.product)
         except Exception:
             order.product_data = []
-
-    return render(request, 'manage-order-history.html', {'orders': delivered_or_cancelled_orders})
+        
+    return render(request, 'manage-order-history.html', {'orders': delivered_or_cancelled_orders, 'total_amount':total_amount, 'search_query': query,
+            'start_id': start_id,'end_id': end_id,'reg_date': reg_date, 'total_id':total_id })
 
 @csrf_exempt
 def delete_order_history(request, id):
@@ -272,3 +306,57 @@ def delete_user_request(request,id):
     data = send_message.objects.get(pk=id)
     data.delete()
     return redirect(manage_user_request)
+
+# def search_order_history(request):
+#     query = request.GET.get('query', '')
+#     if query:
+#         orders = Order_details.objects.filter(
+#             Q(id__icontains=query) |
+#             Q(user__user_name__icontains=query) |
+#             Q(payment_method__icontains=query) |
+#             Q(created_at__icontains=query) |
+#             Q(product__icontains=query)|
+#             Q(address__address_line__icontains=query) |
+#             Q(address__city__icontains=query)
+#         ).order_by('-created_at')
+#     else:
+#         orders = Order_details.objects.all().order_by('-created_at')
+
+#     for order in orders:
+#         try:
+#             order.product_data = json.loads(order.product)
+#         except:
+#             order.product_data = []
+        
+#     return render(request, 'manage-order-history.html', {'orders': orders})
+
+# def filter_order_history(request):
+#     start_id = request.GET.get('start_id')
+#     end_id = request.GET.get('end_id')
+#     reg_date = request.GET.get('reg_date')
+
+#     filters = Q(status='Delivered')  
+
+#     if start_id and end_id:
+#         filters &= Q(id__range=(start_id, end_id))
+#     elif start_id:
+#         filters &= Q(id__gte=start_id)
+#     elif end_id:
+#         filters &= Q(id__lte=end_id)
+
+#     if reg_date:
+#         try:
+#             reg_date_obj = datetime.strptime(reg_date, "%Y-%m-%d").date()
+#             filters &= Q(created_at__date=reg_date_obj)
+#         except ValueError:
+#             pass 
+
+#     orders = Order_details.objects.filter(filters).order_by('-created_at')
+
+#     for order in orders:
+#         try:
+#             order.product_data = json.loads(order.product)
+#         except:
+#             order.product_data = []
+
+#     return render(request, 'manage-order-history.html', {'orders': orders})

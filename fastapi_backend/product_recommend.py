@@ -6,7 +6,7 @@ from random import shuffle
 def recommend_similar_products(product_id: int):
     try:
         product = add_product.objects.get(id=product_id)
-        print("Product Category:", product.product_category)  # DEBUG
+        print("Product Category:", product.product_category)  
 
         similar = (
             add_product.objects
